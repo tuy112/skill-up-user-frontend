@@ -8,15 +8,20 @@ Next.js 기반 웹 프론트엔드 프로젝트 🚀
 - Linting: ESLint + Prettier
 
 ## 📂 프로젝트 구조
-src/
- ┣ app/               # 페이지 및 레이아웃
- ┃ ┣ components/      # 재사용 컴포넌트
- ┃ ┣ styles/          # CSS/SCSS/Tailwind
- ┃ ┣ layout.tsx       # 공통 레이아웃
- ┃ ┗ page.tsx         # 메인 페이지
- ┣ public/            # 정적 파일
+📦src
+ ┗ 📂app
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📜Footer.tsx
+ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┣ 📂login
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂signup
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂styles
+ ┃ ┃ ┗ 📜global.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┗ 📜page.tsx
 
 ## 🚀 실행 방법
 ```bash
-npm install
 npm run dev
