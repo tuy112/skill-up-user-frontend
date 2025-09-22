@@ -1,28 +1,31 @@
 /* 
   작성자 : 김재혁
   작성일 : 2025-08-21
-  최종 수정일 : 2025-08-21
+  최종 수정일 : 2025-09-22
 */
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+"use client";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import LoginContent from "@/components/login/LoginContent";
+import { useState } from "react";
+import Modal from "@/components/common/Modal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div id="wrap">
-      <Header/>
-
+      <Header />
       <main id="container">
-        <section className="content">
-          <div className="home one">
-            <p>작업 중 입니다.</p>
-          </div>
-          <div className="home two"></div>
-          <div className="home three"></div>
-        </section>
+        <p>Login Button</p>
+        <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
       </main>
+      <Footer />
 
-      <Footer/>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <LoginContent />
+      </Modal>
     </div>
   );
 }

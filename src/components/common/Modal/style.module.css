@@ -1,0 +1,27 @@
+/* src/components/common/Modal/style.module.css */
+
+/* 
+  작성자 : 김은혜
+  작성일 : 2025-09-22
+  최종 수정일 : 2025-09-22
+*/
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  border-radius: 0.75rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}

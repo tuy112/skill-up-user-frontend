@@ -1,0 +1,30 @@
+/* src/components/login/socialLoginButton/style.module.css */
+
+/* 
+  작성자 : 김은혜
+  작성일 : 2025-09-22
+  최종 수정일 : 2025-09-22
+*/
+
+.socialLoginButton {
+  display: flex;
+  width: 24.75rem;
+  height: 3.375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 0.25rem;
+  border: 1px solid var(--Line-neutral);
+  background: var(--Common-white);
+}
+
+.socialLoginButtonText {
+  color: var(--Neutral-30);
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.02rem;
+}
