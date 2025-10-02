@@ -1,0 +1,73 @@
+/* 
+  작성자 : 김재혁
+  최초 작성일 : 2025-08-21
+  최종 수정일 : 2025-09-30
+*/
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: none;
+}
+
+.header .inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+/* header - topMenu */
+.topMenu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchWrap {
+  width: 340px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #9b9b9b;
+}
+
+.searchBox {
+  padding: 10px 12px;
+  background: none;
+  border: none;
+}
+
+.searchBox::placeholder {
+  color: #c4c4c4;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -4%;
+  vertical-align: middle;
+}
+
+.searchBtn {
+  background: none;
+  border: none;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.loginBtn {
+  padding: 10px 16px 10px 16px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-left: 6px;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: -4%;
+}

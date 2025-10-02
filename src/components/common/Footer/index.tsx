@@ -8,7 +8,7 @@
 
 import React from "react";
 import Link from "next/link";
-import styles from "./footer.module.css";
+import styles from "./style.module.css";
 
 export default function Footer() {
   return (
