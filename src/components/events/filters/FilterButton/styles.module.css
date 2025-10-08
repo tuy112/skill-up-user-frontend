@@ -1,0 +1,32 @@
+/* src/components/events/filters/FilterButton/styles.module.css */
+
+.filterButtonContainer {
+  position: relative;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--Line-normal);
+  background: var(--Common-white);
+  padding: 0.5rem 1rem;
+
+  span {
+    color: var(--Neutral-20);
+
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.04rem;
+  }
+}
+
+.filterModal {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 100;
+}

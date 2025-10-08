@@ -16,6 +16,12 @@
   gap: 1.5rem;
 }
 
+.eventHeaderFilterSortContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .eventCardList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
