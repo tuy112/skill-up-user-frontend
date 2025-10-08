@@ -48,6 +48,9 @@
   padding: 10px 12px;
   background: none;
   border: none;
+  box-sizing: border-box;
+  outline: none;
+  width: 100%;
 }
 
 .searchBox::placeholder {
