@@ -10,17 +10,34 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background: none;
+}
+
+.mainHeader {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.subHeader {
+  background: var(--Common-white);
 }
 
 .header .inner {
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+}
+
+.logoNavMenu {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 /* header - topMenu */
@@ -42,6 +59,9 @@
   padding: 10px 12px;
   background: none;
   border: none;
+  box-sizing: border-box;
+  outline: none;
+  width: 100%;
 }
 
 .searchBox::placeholder {

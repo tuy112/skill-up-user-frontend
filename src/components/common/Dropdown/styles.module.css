@@ -1,0 +1,60 @@
+/* src/components/common/Dropdown/styles.module.css */
+.dropdown {
+  width: fit-content;
+
+  position: relative;
+}
+
+.dropdownButton {
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--Line-normal);
+  border-radius: 0.25rem;
+  background: var(--Common-white);
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  span {
+    color: var(--Neutral-20);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.04rem;
+  }
+}
+
+.dropdownList {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 100;
+  background: var(--Common-white);
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid var(--Line-normal);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+}
+
+.dropdownItem {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--Neutral-20);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.dropdownItem:hover {
+  background-color: var(--Primary-normal);
+  color: var(--Common-white);
+}
+
+.active {
+  background-color: var(--Primary-normal);
+  color: var(--Common-white);
+}

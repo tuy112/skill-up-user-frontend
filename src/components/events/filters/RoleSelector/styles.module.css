@@ -1,0 +1,36 @@
+/* src/components/events/filters/RoleSelector/styles.module.css */
+
+.roleSelector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.roleSelectorButton {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  background: var(--Neutral-99);
+  color: var(--Neutral-30);
+
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.active {
+  background: var(--Fill-strong);
+  color: var(--Common-white);
+}
+
+.icon {
+  color: var(--Neutral-30);
+  transition: color 0.2s ease;
+}
+
+.iconActive {
+  color: var(--Common-white);
+}

@@ -1,0 +1,36 @@
+/* src/app/bootcamp/styles.module.css */
+
+.bootcampPageLayout {
+  display: flex;
+  max-width: 77.5rem;
+  margin: 0 auto;
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.pageHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.eventHeaderFilterSortContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eventCardList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.75rem 0.75rem;
+}

@@ -1,0 +1,48 @@
+/* src/components/events/filters/filterElements/FreeFilter/styles.module.css */
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.labelText {
+  color: var(--Neutral-30);
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.toggle {
+  width: 48px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: var(--Neutral-90);
+  position: relative;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.circle {
+  width: 22px;
+  height: 22px;
+  background-color: var(--Common-white);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: left 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.toggle.active {
+  background-color: var(--Primary-strong);
+}
+
+.toggle.active .circle {
+  left: 23px;
+}

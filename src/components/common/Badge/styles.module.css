@@ -1,0 +1,28 @@
+/* src/components/common/Badge/styles.module.css */
+
+.badge {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.125rem 0.375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.125rem;
+  background: var(--Primary-ExtraLight);
+}
+
+.badge span {
+  color: var(--Primary-strong);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 160%;
+}
+
+.badge.secondary {
+  background: #8e8e8e;
+}
+
+.badge.secondary span {
+  color: var(--Common-white);
+}

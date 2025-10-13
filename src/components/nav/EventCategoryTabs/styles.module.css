@@ -1,0 +1,32 @@
+/* src/components/nav/EventCategoryTabs/styles.module.css */
+
+.tabNav {
+  display: flex;
+  align-items: center;
+}
+
+.tabItem {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--Neutral-40);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.035rem;
+  transition: color 0.3s ease;
+  box-sizing: border-box;
+  border-bottom: 2px solid transparent;
+}
+
+.tabItem:hover {
+  color: var(--Common-black);
+  border-bottom: 2px solid var(--Common-black);
+}
+
+.active {
+  color: var(--Common-black);
+  border-bottom: 2px solid var(--Common-black);
+}

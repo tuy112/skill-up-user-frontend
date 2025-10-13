@@ -3,5 +3,9 @@
 import ConferencePageLayout from "./ConferencePageLayout";
 
 export default function page() {
-  return <ConferencePageLayout />;
+  return (
+    <div style={{ marginTop: "6rem" }}>
+      <ConferencePageLayout />
+    </div>
+  );
 }

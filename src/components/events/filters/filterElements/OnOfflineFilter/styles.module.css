@@ -1,0 +1,42 @@
+/* src/components/events/filters/filterElements/OnOfflineFilter/styles.module.css */
+
+.onOfflineFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.onOfflineFilterTitle {
+  color: var(--Neutral-30);
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.onOfflineFilterButtonContainer {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.onOfflineFilterButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background: var(--Neutral-99);
+  color: var(--Neutral-30);
+  span {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.04rem;
+  }
+}
+
+.active {
+  background: var(--Fill-strong);
+  color: var(--Common-white);
+}

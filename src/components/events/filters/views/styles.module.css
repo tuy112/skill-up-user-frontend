@@ -1,0 +1,7 @@
+/* src/components/events/filters/views/styles.module.css */
+
+.conferenceFilterView {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

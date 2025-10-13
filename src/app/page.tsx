@@ -3,7 +3,7 @@
   작성일 : 2025-08-21
   최종 수정일 : 2025-10-02
 */
-'use client';
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Header from "@/components/common/Header";
@@ -27,23 +27,23 @@ export default function Home() {
         <Link href="#main">본문 바로가기</Link>
       </p>
 
-      <Header />
+      <Header variant="main" />
       <MainVisual />
       <IconMenu />
 
       {/* main */}
       <main id="container">
         {/* 추천 행사 */}
-        <RecommendEvent/>
+        <RecommendEvent />
 
         {/* 관심있어할 행사 */}
-        <Interest/>
+        <Interest />
 
         {/* 동아리, 해커톤, 공모전 */}
-        <Club/>
+        <Club />
 
         {/* 추천 컨텐츠 */}
-        <RecommendContents/>
+        <RecommendContents />
       </main>
 
       <Footer />

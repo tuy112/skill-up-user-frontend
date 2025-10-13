@@ -1,4 +1,4 @@
-// src/app/conference/ConferencePageLayout.tsx
+// src/app/bootcamp/BootcampPageLayout.tsx
 
 "use client";
 
@@ -12,12 +12,12 @@ import ConferenceFilterView from "@/components/events/filters/views/ConferenceFi
 import RoleSelector from "@/components/events/filters/RoleSelector";
 import { RoleOption } from "@/components/events/filters/types/role";
 
-export default function ConferencePageLayout() {
+export default function BootcampPageLayout() {
   const [selectedRoles, setSelectedRoles] = useState<RoleOption[]>(["전체"]);
   return (
-    <div className={styles.conferencePageLayout}>
+    <div className={styles.bootcampPageLayout}>
       <div className={styles.pageHeader}>
-        <EventHeader title="컨퍼런스 · 세미나" count={10} />
+        <EventHeader title="부트캠프" count={10} />
         <div className={styles.eventHeaderFilterSortContainer}>
           <RoleSelector selected={selectedRoles} onSelect={setSelectedRoles} />
           <div className={styles.filterButtonContainer}>
