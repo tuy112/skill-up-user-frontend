@@ -29,6 +29,10 @@
   gap: 0.5rem;
 }
 
+.eventCardListContainer {
+  width: 100%;
+}
+
 .eventCardList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

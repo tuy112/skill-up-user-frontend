@@ -1,0 +1,35 @@
+/* src/components/events/EventEmpty/styles.module.css */
+
+.eventCardListEmpty {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  padding: 12.5rem 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.eventCardListEmptyTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  p {
+    color: var(--Neutral-30);
+
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.045rem;
+  }
+}
+
+.eventCardListEmptyDescription {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

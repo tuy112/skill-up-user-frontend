@@ -21,6 +21,8 @@ import {
 } from "@/components/events/filters/atoms/filterAtoms";
 import { DropdownOption } from "@/components/common/Dropdown";
 
+import EventEmpty from "@/components/events/EventEmpty";
+
 const sortOptions: DropdownOption[] = [
   { label: "인기순", value: "popular" },
   { label: "최신등록순", value: "recent" },
@@ -74,18 +76,24 @@ export default function ConferencePageLayout({
           </div>
         </div>
       </div>
-      <div className={styles.eventCardList}>
-        {eventList.map((item) => (
-          // 목업 데이터
-          <EventCard
-            key={item.id}
-            title={item.title}
-            date={item.date}
-            place={item.place}
-            price={item.price}
-            category={item.category}
-          />
-        ))}
+      <div className={styles.eventCardListContainer}>
+        {eventList.length !== 0 ? (
+          <EventEmpty title="컨퍼런스 · 세미나" url="/conference/create" />
+        ) : (
+          <div className={styles.eventCardList}>
+            {eventList.map((item) => (
+              // 목업 데이터
+              <EventCard
+                key={item.id}
+                title={item.title}
+                date={item.date}
+                place={item.place}
+                price={item.price}
+                category={item.category}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

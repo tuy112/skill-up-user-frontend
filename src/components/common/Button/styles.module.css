@@ -1,0 +1,56 @@
+/* src/components/common/Button/styles.module.css */
+
+.button {
+  display: inline-flex;
+  padding: 0.5rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.25rem;
+
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.primary {
+  background: var(--Primary-strong);
+  color: var(--Common-white);
+}
+
+.secondary {
+  background: var(--Common-black);
+  color: var(--Common-white);
+}
+
+.tertiary {
+  background: var(--Primary-light);
+  color: var(--Primary-strong);
+}
+
+.small {
+  font-size: 0.75rem;
+  letter-spacing: -0.03rem;
+}
+
+.medium {
+  font-size: 1rem;
+  letter-spacing: -0.04rem;
+}
+
+.large {
+  font-size: 1.125rem;
+  letter-spacing: -0.045rem;
+}
+
+.extraLarge {
+  font-size: 1.25rem;
+  letter-spacing: -0.05rem;
+}
+
+.icon {
+  padding-left: 0.12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
