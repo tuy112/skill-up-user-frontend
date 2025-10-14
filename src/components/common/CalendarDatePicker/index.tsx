@@ -1,7 +1,7 @@
 // src/components/common/CalendarDatePicker/index.tsx
 
 import styles from "./styles.module.css";
-import { DayPicker, labelWeekday, Weekday } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import { ko } from "react-day-picker/locale";
 
