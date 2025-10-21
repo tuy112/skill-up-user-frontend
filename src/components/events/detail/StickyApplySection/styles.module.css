@@ -1,0 +1,144 @@
+/* src/components/events/detail/StickyApplySection/styles.module.css */
+
+.stickyApplySection {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 15.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 0.5rem;
+  background: var(--Common-white);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+}
+
+.stickyApplySectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stickyApplySectionContentHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stickyApplySectionContentHeaderTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  span {
+    color: var(--Primary-strong);
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.035rem;
+  }
+
+  h3 {
+    color: var(--Common-black);
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.06rem;
+  }
+}
+
+.stickyApplySectionContentHeaderImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.stickyApplySectionContentBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stickyApplySectionContentBodyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+.stickyApplySectionContentBodyItemDate {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    overflow: hidden;
+    color: var(--Neutral-60);
+    text-overflow: ellipsis;
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.035rem;
+  }
+
+  p {
+    color: var(--Common-black);
+
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.04rem;
+  }
+}
+
+.stickyApplyButtonList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stickyApplySectionFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.25rem;
+  background: var(--Neutral-99);
+  padding: 0.75rem 1rem;
+}
+
+.stickyApplySectionFooterItem {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+
+  span {
+    color: var(--Neutral-60);
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.035rem;
+  }
+}
+
+.circle {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--Primary-normal);
+}
+
+.stickyApplySectionFooterPhoneNumber {
+  color: var(--Common-black);
+
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.035rem;
+}

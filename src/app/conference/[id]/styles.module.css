@@ -1,0 +1,9 @@
+/* src/app/conference/[id]/styles.module.css */
+
+.conferenceDetailLayout {
+  display: flex;
+  gap: 1rem;
+  padding-top: 6rem;
+  max-width: 77.5rem;
+  margin: 0 auto;
+}
