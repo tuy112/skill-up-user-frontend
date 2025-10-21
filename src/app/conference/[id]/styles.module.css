@@ -26,15 +26,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-
-  p {
-    color: var(--Neutral-20);
-
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.04rem;
-  }
 }
 
 .eventInfoCardContentPlaceList {
@@ -47,30 +38,12 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-
-  p {
-    color: var(--Neutral-20);
-
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.04rem;
-  }
 }
 
 .conferenceOtherEvent {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  h3 {
-    color: var(--Common-black);
-
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: -0.06rem;
-  }
 }
 
 .conferenceOtherEventTitle {

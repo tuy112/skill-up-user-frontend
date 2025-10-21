@@ -46,7 +46,8 @@ interface TextProps {
     | "primary-normal"
     | "primary-extra-light"
     | "fill-strong"
-    | "error-normal";
+    | "error-normal"
+    | "gray-scale-900";
 }
 
 export default function Text({

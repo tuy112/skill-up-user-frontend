@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
+import Text from "@/components/common/Text";
 
 interface EventEmptyProps {
   title: string;
@@ -19,7 +20,9 @@ export default function EventEmpty({ title, url }: EventEmptyProps) {
     <div className={styles.eventCardListEmpty}>
       <div className={styles.eventCardListEmptyTitle}>
         <Image src={CautionIcon} alt="Caution Icon" />
-        <p>{title}에 등록된 행사가 없어요</p>
+        <Text typography="sub2_m_18" color="neutral-30">
+          {title}에 등록된 행사가 없어요
+        </Text>
       </div>
       <Button
         variant="secondary"

@@ -9,6 +9,7 @@ import LocationIcon from "@/assets/svg/locationIcon.svg";
 import { BookmarkIcon } from "./icons";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Text from "@/components/common/Text";
 
 interface EventCardProps {
   id: string;
@@ -63,22 +64,43 @@ export default function EventCard({
         <div className={styles.eventCardContentBody}>
           <div className={styles.eventCardContentBodyItem}>
             <Badge label={category} />
-            <h3>{title}</h3>
+            <Text
+              typography="sub1_m_20"
+              color="black"
+              as="h3"
+              className={styles.eventCardContentBodyItemTitle}
+            >
+              {title}
+            </Text>
           </div>
           <div className={styles.eventCardContentBodyDatePlace}>
             <div className={styles.eventCardContentBodyDatePlaceItem}>
               <Image src={CalendarIcon} alt="Calendar Icon" />
-              <p>{date}</p>
+              <Text
+                typography="body2_r_14"
+                color="neutral-40"
+                className={styles.eventCardContentBodyDatePlaceItemText}
+              >
+                {date}
+              </Text>
             </div>
             <div className={styles.eventCardContentBodyDatePlaceItem}>
               <Image src={LocationIcon} alt="Location Icon" />
-              <p>{place}</p>
+              <Text
+                typography="body2_r_14"
+                color="neutral-40"
+                className={styles.eventCardContentBodyDatePlaceItemText}
+              >
+                {place}
+              </Text>
             </div>
           </div>
         </div>
         <div className={styles.eventCardContentFooter}>
           <div className={styles.eventCardContentFooterItem}>
-            <span>{price}</span>
+            <Text typography="sub2_m_18" color="black">
+              {price}
+            </Text>
             <Badge label="무료" />
           </div>
         </div>

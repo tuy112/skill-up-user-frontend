@@ -3,6 +3,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import CalendarIcon from "@/assets/svg/calendarIcon.svg";
+import Text from "@/components/common/Text";
 
 export default function EventInfoCard({
   children,
@@ -18,7 +19,9 @@ export default function EventInfoCard({
       <div className={styles.eventInfoCardHeader}>
         <div className={styles.eventInfoCardTitle}>
           <div className={styles.eventInfoDivider} />
-          <h3>{title}</h3>
+          <Text typography="sub1_m_20" color="gray-scale-900" as="h3">
+            {title}
+          </Text>
         </div>
         {isDate && (
           <Image src={CalendarIcon} alt={title} width={24} height={24} />

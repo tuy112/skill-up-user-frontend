@@ -20,6 +20,7 @@ import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
 import FilterBadges from "@/components/events/filters/FilterBadges";
 import Pagination from "@/components/common/Pagination";
 import { useState } from "react";
+import Text from "@/components/common/Text";
 
 const sortOptions: DropdownOption[] = [
   { label: "인기순", value: "popular" },
@@ -96,8 +97,14 @@ export default function ConferencePageLayout({
             <EventEmpty title="컨퍼런스 · 세미나" url="/conference/create" />
             <div className={styles.eventRecommendCardList}>
               <div className={styles.eventRecommendCardListTitle}>
-                <h3>이런 행사는 어떠세요?</h3>
-                <Button variant="textOnly" icon={<ChevronRightIcon />} size="medium">
+                <Text typography="head3_m_24" color="black">
+                  이런 행사는 어떠세요?
+                </Text>
+                <Button
+                  variant="textOnly"
+                  icon={<ChevronRightIcon />}
+                  size="medium"
+                >
                   IT 행사 더보기
                 </Button>
               </div>

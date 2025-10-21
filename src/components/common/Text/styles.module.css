@@ -189,3 +189,7 @@
 .error-normal {
   color: var(--Error-normal);
 }
+
+.gray-scale-900 {
+  color: var(--GrayScale-900);
+}

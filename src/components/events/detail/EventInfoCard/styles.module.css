@@ -23,15 +23,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
-  h3 {
-    color: var(--GrayScale-900);
-
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: -0.05rem;
-  }
 }
 
 .eventInfoDivider {

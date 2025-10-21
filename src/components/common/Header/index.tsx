@@ -1,8 +1,3 @@
-/* 
-  작성자 : 김재혁
-  최초 작성일 : 2025-08-21
-  최종 수정일 : 2025-10-08
-*/
 "use client";
 
 import React, { useState } from "react";
@@ -11,10 +6,11 @@ import SkillUpWhiteLogo from "@/assets/svg/skillUp_white.svg";
 import SkillUpBlackLogo from "@/assets/svg/skillUp_black.svg";
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 import Modal from "../Modal";
 import LoginContent from "@/components/login/LoginContent";
 import EventCategoryTabs from "@/components/nav/EventCategoryTabs";
+import Button from "../Button";
 
 interface HeaderProps {
   variant: "main" | "sub";
@@ -75,9 +71,9 @@ export default function Header({ variant }: HeaderProps) {
               <FiSearch size={18} color={"c4c4c4"} />
             </button>
           </div>
-          <button onClick={openModal} className={styles.loginBtn}>
+          <Button variant="secondary" size="medium" onClick={openModal}>
             로그인 · 회원가입
-          </button>
+          </Button>
         </div>
       </div>
 

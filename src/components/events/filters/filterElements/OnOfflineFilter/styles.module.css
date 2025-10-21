@@ -6,16 +6,6 @@
   gap: 0.5rem;
 }
 
-.onOfflineFilterTitle {
-  color: var(--Neutral-30);
-
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
-  letter-spacing: -0.04rem;
-}
-
 .onOfflineFilterButtonContainer {
   display: flex;
   gap: 0.25rem;

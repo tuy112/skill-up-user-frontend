@@ -7,6 +7,8 @@ import CalendarIcon from "@/assets/svg/calendarIcon.svg";
 import LocationIcon from "@/assets/svg/locationIcon.svg";
 import DollarIcon from "@/assets/svg/dollarIcon.svg";
 import Image from "next/image";
+import Text from "@/components/common/Text";
+import Badge from "@/components/common/Badge";
 
 export default function StickyApplySection() {
   return (
@@ -14,8 +16,12 @@ export default function StickyApplySection() {
       <div className={styles.stickyApplySectionContent}>
         <div className={styles.stickyApplySectionContentHeader}>
           <div className={styles.stickyApplySectionContentHeaderTitle}>
-            <span>컨퍼런스 · 세미나</span>
-            <h3>2025 제1회 AI 테크 컨퍼런스 AI 테크 컨퍼런스</h3>
+            <Text typography="label3_m_14" color="primary-strong">
+              컨퍼런스 · 세미나
+            </Text>
+            <Text typography="head3_m_24" color="black">
+              2025 제1회 AI 테크 컨퍼런스 AI 테크 컨퍼런스
+            </Text>
           </div>
           <div className={styles.stickyApplySectionContentHeaderImage}>
             <Image
@@ -30,23 +36,41 @@ export default function StickyApplySection() {
           <div className={styles.stickyApplySectionContentBodyItem}>
             <Image src={CalendarIcon} alt="Calendar Icon" />
             <div className={styles.stickyApplySectionContentBodyItemDate}>
-              <span>행사 기간</span>
-              <p>2025.01.01 ~ 2025.01.01</p>
+              <Text typography="label3_m_14" color="neutral-60">
+                행사 기간
+              </Text>
+              <Text typography="body1_r_16" color="neutral-20">
+                2025.01.01 ~ 2025.01.01
+              </Text>
             </div>
           </div>
           <div className={styles.stickyApplySectionContentBodyItem}>
             <Image src={LocationIcon} alt="Location Icon" />
             <div className={styles.stickyApplySectionContentBodyItemDate}>
-              <span>장소</span>
-              <p>서울특별시 강남구 테헤란로 22길</p>
+              <Text typography="label3_m_14" color="neutral-60">
+                장소
+              </Text>
+              <Text typography="body1_r_16" color="neutral-20">
+                서울특별시 강남구 테헤란로 22길
+              </Text>
             </div>
           </div>
           <div className={styles.stickyApplySectionContentBodyItem}>
             <Image src={DollarIcon} alt="Dollar Icon" />
             <div className={styles.stickyApplySectionContentBodyItemDate}>
-              <span>참가비</span>
-              <p>50,000원 ~</p>
+              <Text typography="label3_m_14" color="neutral-60">
+                참가비
+              </Text>
+              <Text typography="body1_r_16" color="neutral-20">
+                50,000원 ~
+              </Text>
             </div>
+          </div>
+          <div className={styles.stickyApplySectionContentBodyItemDivider} />
+          <div className={styles.stickyApplySectionContentBodyItem}>
+            {/* TODO : 뱃지 컴포넌트 나오면 수정 */}
+            <Badge label="#기획자" />
+            <Badge label="#AI개발" />
           </div>
         </div>
       </div>
@@ -61,11 +85,13 @@ export default function StickyApplySection() {
       <div className={styles.stickyApplySectionFooter}>
         <div className={styles.stickyApplySectionFooterItem}>
           <div className={styles.circle} />
-          <span>문의</span>
+          <Text typography="label3_m_14" color="neutral-60">
+            문의
+          </Text>
         </div>
-        <p className={styles.stickyApplySectionFooterPhoneNumber}>
+        <Text typography="body2_r_14" color="neutral-20">
           010-1234-1234
-        </p>
+        </Text>
       </div>
     </div>
   );
