@@ -95,7 +95,11 @@ export default function BootcampPageLayout({
             <div className={styles.eventRecommendCardList}>
               <div className={styles.eventRecommendCardListTitle}>
                 <h3>이런 행사는 어떠세요?</h3>
-                <Button textOnly icon={<ChevronRightIcon />} size="medium">
+                <Button
+                  variant="textOnly"
+                  icon={<ChevronRightIcon />}
+                  size="medium"
+                >
                   IT 행사 더보기
                 </Button>
               </div>
@@ -104,6 +108,7 @@ export default function BootcampPageLayout({
                   // 목업 데이터
                   <EventCard
                     key={item.id}
+                    id={item.id.toString()}
                     title={item.title}
                     date={item.date}
                     place={item.place}
@@ -121,6 +126,7 @@ export default function BootcampPageLayout({
                 // 목업 데이터
                 <EventCard
                   key={item.id}
+                  id={item.id.toString()}
                   title={item.title}
                   date={item.date}
                   place={item.place}

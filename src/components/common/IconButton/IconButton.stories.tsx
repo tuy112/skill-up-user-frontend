@@ -1,6 +1,6 @@
 // src/components/common/IconButton/IconButton.stories.tsx
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import IconButton from "./index";
 import { BookmarkIcon } from "@/components/events/EventCard/icons";
 

@@ -1,6 +1,6 @@
 // src/components/common/Text/Text.stories.tsx
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import Text from "./index";
 
 const meta: Meta<typeof Text> = {

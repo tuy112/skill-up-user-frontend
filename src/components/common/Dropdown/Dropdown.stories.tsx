@@ -1,6 +1,6 @@
 // src/components/common/Dropdown/Dropdown.stories.tsx
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import Dropdown, { DropdownOption } from "./index";
 import { useState } from "react";
 
