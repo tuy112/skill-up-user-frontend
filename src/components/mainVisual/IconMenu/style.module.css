@@ -18,14 +18,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-size: 14px;
   color: #333;
   cursor: pointer;
   background: #fff;
-  transition: all 0.25s ease;
+  transition: all 0.25s ease; /* 호버 확인용입니다. 최종에서는 변경 예정 */
 }
 
+/* 호버 확인용입니다. 최종에서는 삭제 예정 */
 .iconMenu li:hover {
   border-color: #007aff;
   background: #f0f6ff;
@@ -37,4 +38,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon {
+  width: 33.37px;
+  height: 29.94px;
 }
