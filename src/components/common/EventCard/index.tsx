@@ -30,7 +30,16 @@ export default function EventCard({ size, event }: EventCardProps) {
   };
 
   return (
-    <div onClick={() => router.push(url || "/")} className={styles.eventCard}>
+    <div
+      onClick={() => router.push(url || "/")}
+      className={`${styles.eventCard} ${
+        size === "large"
+          ? styles.large
+          : size === "medium"
+          ? styles.medium
+          : styles.small
+      }`}
+    >
       <div className={styles.eventCardImage}>
         {/* 목업 이미지 */}
         <Image src={image} alt="Event Card Image" fill priority />
@@ -100,9 +109,19 @@ export default function EventCard({ size, event }: EventCardProps) {
               </Text>
               {price === "0원" && <Badge label="무료" />}
             </div>
-            <Button variant="secondary" size="medium">
-              자세히 보기
-            </Button>
+            {size === "large" && (
+              <Button
+                variant="secondary"
+                size="medium"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  router.push(url || "/");
+                }}
+              >
+                자세히 보기
+              </Button>
+            )}
           </div>
         )}
       </div>

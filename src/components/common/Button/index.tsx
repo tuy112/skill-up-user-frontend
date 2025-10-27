@@ -15,7 +15,7 @@ interface ButtonProps {
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
 }
 

@@ -17,6 +17,18 @@
   }
 }
 
+.large {
+  width: 21.875rem;
+}
+
+.medium {
+  width: 18.8125rem;
+}
+
+.small {
+  width: 18.4625rem;
+}
+
 .eventCardImage {
   position: relative;
   width: 100%;
