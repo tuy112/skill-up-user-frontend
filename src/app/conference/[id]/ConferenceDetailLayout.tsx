@@ -8,6 +8,8 @@ import GlobeIcon from "@/assets/svg/globeIcon.svg";
 import CursorIcon from "@/assets/svg/cursorIcon.svg";
 import Image from "next/image";
 import Text from "@/components/common/Text";
+import EventCard from "@/components/common/EventCard";
+import { eventListMock } from "@/mocks/eventListMock";
 
 export default function ConferenceDetailLayout() {
   return (
@@ -54,7 +56,12 @@ export default function ConferenceDetailLayout() {
           <Text typography="head3_m_24" color="black" as="h3">
             이런 행사는 어떠세요?
           </Text>
-          <div className={styles.conferenceOtherEventList}></div>
+          {/* 목업데이터 */}
+          <div className={styles.conferenceOtherEventList}>
+            <EventCard size="small" event={eventListMock[0]} block />
+            <EventCard size="small" event={eventListMock[1]} block />
+            <EventCard size="small" event={eventListMock[2]} block />
+          </div>
         </div>
       </div>
     </div>

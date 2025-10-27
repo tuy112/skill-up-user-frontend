@@ -1,4 +1,5 @@
 // src/components/common/EventCard/index.tsx
+"use client";
 
 import styles from "./styles.module.css";
 import Image from "next/image";
@@ -14,11 +15,12 @@ import Button from "@/components/common/Button";
 import { Event } from "./event.types";
 
 interface EventCardProps {
-  size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large" | "block";
   event: Event;
+  block?: boolean;
 }
 
-export default function EventCard({ size, event }: EventCardProps) {
+export default function EventCard({ size, event, block }: EventCardProps) {
   const { id, title, date, place, price, category, url, image, badgeLabel } =
     event;
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -37,8 +39,8 @@ export default function EventCard({ size, event }: EventCardProps) {
           ? styles.large
           : size === "medium"
           ? styles.medium
-          : styles.small
-      }`}
+          : size === "small"
+      } ${block ? styles.block : ""}`}
     >
       <div className={styles.eventCardImage}>
         {/* 목업 이미지 */}

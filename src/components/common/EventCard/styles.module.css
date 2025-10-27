@@ -29,6 +29,10 @@
   width: 18.4625rem;
 }
 
+.block {
+  flex: 1;
+}
+
 .eventCardImage {
   position: relative;
   width: 100%;
