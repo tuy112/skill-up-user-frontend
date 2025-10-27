@@ -2,7 +2,6 @@
 
 import Button from "@/components/common/Button";
 import styles from "./styles.module.css";
-import LoginImage from "@/assets/images/loginImg.png";
 import CalendarIcon from "@/assets/svg/calendarIcon.svg";
 import LocationIcon from "@/assets/svg/locationIcon.svg";
 import DollarIcon from "@/assets/svg/dollarIcon.svg";

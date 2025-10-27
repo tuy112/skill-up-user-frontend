@@ -9,7 +9,7 @@
   height: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
   padding: 1.5rem 1.25rem;
   border-radius: 0.5rem;
   background: var(--Common-white);
