@@ -23,13 +23,10 @@ interface HeaderProps {
 
 export default function Header({ variant }: HeaderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const toggleModal = () => setIsModalOpen((prev) => !prev);
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
-  const closeProfileModal = () => setIsProfileModalOpen(false);
 
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const toggleAlert = () => setIsAlertOpen((prev) => !prev);
@@ -104,7 +101,7 @@ export default function Header({ variant }: HeaderProps) {
               <div className={styles.profileBtnContent}>
                 <ProfileModal
                   isOpen={isProfileModalOpen}
-                  onClose={closeProfileModal}
+                  toggle={toggleProfileModal}
                   user={{
                     name: "홍길동",
                     email: "skillup@gmail.com",
@@ -117,7 +114,7 @@ export default function Header({ variant }: HeaderProps) {
           )}
 
           {!isLogin ? (
-            <Button variant="secondary" size="large" onClick={openModal}>
+            <Button variant="secondary" size="large" onClick={toggleModal}>
               로그인 · 회원가입
             </Button>
           ) : (
@@ -128,7 +125,7 @@ export default function Header({ variant }: HeaderProps) {
         </div>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen} toggle={toggleModal}>
         <LoginContent />
       </Modal>
       <Alert

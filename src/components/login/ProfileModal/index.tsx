@@ -11,7 +11,7 @@ import ChatIcon from "@/assets/svg/chatIcon.svg";
 
 interface ProfileModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  toggle: () => void;
   user: {
     name: string;
     email: string;
@@ -22,7 +22,7 @@ interface ProfileModalProps {
 
 export default function ProfileModal({
   isOpen,
-  onClose,
+  toggle,
   user,
   triggerRef,
 }: ProfileModalProps) {
@@ -32,11 +32,11 @@ export default function ProfileModal({
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") toggle();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, toggle]);
 
   // 외부 클릭 시 닫기
   useEffect(() => {
@@ -46,12 +46,12 @@ export default function ProfileModal({
         !modalRef.current.contains(e.target as Node) &&
         !triggerRef.current?.contains(e.target as Node)
       ) {
-        onClose();
+        toggle();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen, onClose, triggerRef]);
+  }, [isOpen, toggle, triggerRef]);
 
   // 스크롤 막기
   useEffect(() => {
