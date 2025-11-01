@@ -1,7 +1,7 @@
 /* 
-  작성자 : 김재혁
+  작성자 : 김재혁, 김은혜
   최초 작성일 : 2025-08-21
-  최종 수정일 : 2025-09-30
+  최종 수정일 : 2025-10-25
 */
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
@@ -48,8 +48,7 @@ body {
 
 #wrap {
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
+  height : 100%;
 }
 
 a {

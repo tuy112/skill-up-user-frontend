@@ -1,39 +1,118 @@
 /* 
   작성자 : 김재혁
   최초 작성일 : 2025-08-21
-  최종 수정일 : 2025-09-16
+  최종 수정일 : 2025-10-25
 */
 
 /* footer */
 .footer {
-  background: #f8f9fa;
-  border-top: 1px solid #ddd;
+  width: 100%;
+  min-width: 1294px;
+  background: #1b1d26;
+  color: #fff;
+  position : relative;
+  transform : translateY(-100%);
 }
 
-.footer .inner {
-  max-width: 1200px;
+.inner {
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 20px 20px;
-  display: flex;
-  flex-direction: column; /* 위아래 구조: top / bottom */
-  gap: 30px;
-}
-
-/* footer-top */
-.footerTop {
+  padding: 54px 100px 54px 100px;
   display: flex;
   justify-content: space-between;
-  gap: 40px;
-}
-.footerLogo h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #333;
-}
-.social {
-  display: flex;
-  gap: 15px;
+  align-items: flex-start;
 }
 
-/* footer-bottom */
-.footerBottom {}
+/* 왼쪽 블록 전체 (로고+링크+이메일) */
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 로고 + 정책 링크 한 줄 */
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logoWrap {
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.policyGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.policyGroup a {
+  color: #e6e6e6;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -4%;
+  padding: 0 20px 8px 20px;
+}
+
+/* 이메일 + 카피 */
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.email,
+.copy {
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: -4%;
+  font-weight: 500;
+}
+
+/* 오른쪽 블록 */
+.rightBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 아이콘 그룹 */
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #dbdbdb;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.iconBtn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* 행사 제보 버튼 */
+.submitBtn {
+  background: #000;
+  color: #fff;
+  padding: 10px 20px 11px 26px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 2px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -4%;
+}
