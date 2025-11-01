@@ -10,6 +10,8 @@ import InputField from "@/components/common/InputField";
 import Input from "@/components/common/Input";
 import Dropdown, { DropdownOption } from "@/components/common/Dropdown";
 import RadioGroup, { Option } from "@/components/common/RadioGroup";
+import { MultiSelectButtonGroup } from "@/components/common/MultiSelectButtonGroup";
+import Button from "@/components/common/Button";
 
 export default function ProfileEditPageLayout() {
   const [imageUrl, setImageUrl] = useState<string>(
@@ -18,8 +20,8 @@ export default function ProfileEditPageLayout() {
   const [name, setName] = useState<string>("");
   const [selectedGender, setSelectedGender] = useState<string>("");
   const [selectedAge, setSelectedAge] = useState<string>("");
-  const [selectedInterest, setSelectedInterest] = useState<string>("");
-
+  const [selectedJob, setSelectedJob] = useState<string>("");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const genderOptions: Option[] = [
     { label: "남성", value: "male" },
     { label: "여성", value: "female" },
@@ -34,10 +36,18 @@ export default function ProfileEditPageLayout() {
     { label: "60대이상", value: "60대이상" },
   ];
 
-  const interestOptions: Option[] = [
+  const jobOptions: Option[] = [
     { label: "기획자", value: "pm" },
     { label: "디자이너", value: "design" },
     { label: "개발자", value: "dev" },
+    { label: "기타", value: "etc" },
+  ];
+
+  const interestOptions: Option[] = [
+    { label: "웹 개발", value: "web" },
+    { label: "모바일 개발", value: "mobile" },
+    { label: "AI", value: "ai" },
+    { label: "데이터 분석", value: "data" },
     { label: "기타", value: "etc" },
   ];
 
@@ -61,8 +71,12 @@ export default function ProfileEditPageLayout() {
     setSelectedGender(value);
   };
 
-  const handleChangeInterest = (value: DropdownOption) => {
-    setSelectedInterest(value.label);
+  const handleChangeJob = (value: DropdownOption) => {
+    setSelectedJob(value.label);
+  };
+
+  const handleChangeInterest = (value: string[]) => {
+    setSelectedInterests(value);
   };
 
   return (
@@ -106,21 +120,39 @@ export default function ProfileEditPageLayout() {
               onChange={handleChangeGender}
             />
           </InputField>
-          <InputField label="관심 분야">
+          <InputField label="직무">
             <Dropdown
-              options={interestOptions}
-              selected={{ label: selectedInterest, value: selectedInterest }}
-              onSelect={handleChangeInterest}
+              options={jobOptions}
+              selected={{ label: selectedJob, value: selectedJob }}
+              onSelect={handleChangeJob}
               block={true}
-              buttonLabel={
-                selectedInterest ? selectedInterest : "관심 분야를 선택하세요"
-              }
+              buttonLabel={selectedJob ? selectedJob : "직무를 선택하세요"}
             />
           </InputField>
         </div>
         <InputField label="관심사" description="주요 관심사를 선택해주세요">
-          .
+          <MultiSelectButtonGroup
+            options={interestOptions}
+            selectedValues={selectedInterests}
+            onSelect={handleChangeInterest}
+          />
         </InputField>
+      </div>
+      <div className={styles.profileEditPageLayoutFooter}>
+        <Button
+          variant="outlined"
+          size="extraLarge"
+          className={styles.profileEditPageLayoutFooterCancelButton}
+        >
+          취소
+        </Button>
+        <Button
+          variant="primary"
+          size="extraLarge"
+          className={styles.profileEditPageLayoutFooterSaveButton}
+        >
+          저장
+        </Button>
       </div>
     </div>
   );

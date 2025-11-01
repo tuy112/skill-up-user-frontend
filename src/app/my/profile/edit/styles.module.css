@@ -28,3 +28,18 @@
   gap: 1rem;
   align-items: center;
 }
+
+.profileEditPageLayoutFooter {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.profileEditPageLayoutFooterCancelButton {
+  width: 7.5rem;
+}
+
+.profileEditPageLayoutFooterSaveButton {
+  width: 7.5rem;
+}

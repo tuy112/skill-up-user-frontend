@@ -1,0 +1,25 @@
+/* src/components/common/MultiSelectButtonGroup/styles.module.css */
+
+.multiSelectButtonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.multiSelectButtonGroupItemButton {
+  box-sizing: border-box;
+  width: fit-content;
+  display: flex;
+  padding: 0.5rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--Line-normal);
+  background: var(--Common-white);
+}
+
+.active {
+  border: 1px solid var(--Primary-normal);
+  background: var(--Primary-extraLight);
+}
