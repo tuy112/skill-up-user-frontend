@@ -42,3 +42,6 @@ next-env.d.ts
 
 # cursorRules
 .cursorrules
+
+*storybook.log
+storybook-static

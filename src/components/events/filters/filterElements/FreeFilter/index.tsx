@@ -3,6 +3,7 @@
 "use client";
 
 import styles from "./styles.module.css";
+import Text from "@/components/common/Text";
 
 export default function FreeFilter({
   checked,
@@ -15,7 +16,9 @@ export default function FreeFilter({
 }) {
   return (
     <label className={styles.toggleWrapper}>
-      <span className={styles.labelText}>{label}</span>
+      <Text typography="label2_m_16" color="neutral-30">
+        {label}
+      </Text>
       <div
         className={`${styles.toggle} ${checked ? styles.active : ""}`}
         onClick={() => setChecked(!checked)}

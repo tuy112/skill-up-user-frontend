@@ -16,16 +16,6 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-
-  p {
-    color: var(--Neutral-30);
-
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: -0.045rem;
-  }
 }
 
 .eventCardListEmptyDescription {

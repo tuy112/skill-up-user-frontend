@@ -1,0 +1,49 @@
+/* src/components/common/IconButton/styles.module.css */
+
+.iconButton {
+  border-radius: 0.25rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary {
+  background: var(--Primary-strong);
+  color: var(--Common-white);
+}
+
+.secondary {
+  background: var(--Common-black);
+  color: var(--Common-white);
+}
+
+.disabled {
+  background: var(--Neutral-95);
+  color: var(--Neutral-70);
+}
+
+.opacity {
+  background: var(--Opacity_b_60);
+  color: var(--Common-white);
+}
+
+.small {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.medium {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.large {
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.extraLarge {
+  width: 2.875rem;
+  height: 2.875rem;
+}

@@ -22,6 +22,16 @@
   gap: 0.75rem;
 }
 
+.pageItemList {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ellipsis {
+  margin: 0 2rem;
+}
+
 .pageList {
   display: flex;
   gap: 3.75rem;
@@ -33,11 +43,6 @@
   font-weight: 500;
   line-height: 140%;
   letter-spacing: -0.04rem;
-}
-
-.paginationRightSelect {
-  border: 1px solid var(--Line-normal);
-  border-radius: 0.25rem;
 }
 
 .paginationPageButton {
@@ -77,27 +82,10 @@
   color: var(--Common-white);
 }
 
-.pageItem {
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
-}
-
 .pageItemList {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-}
-
-.paginationRightText {
-  color: var(--Neutral-30);
-  text-align: center;
-
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
-  letter-spacing: -0.04rem;
 }
 
 .paginationRightDropdown {

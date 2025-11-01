@@ -3,13 +3,12 @@
 "use client";
 
 import EventHeader from "@/components/events/EventHeader";
-import EventCard from "@/components/events/EventCard";
+import EventCard from "@/components/common/EventCard";
 import styles from "./styles.module.css";
 import SortDropdown from "@/components/events/sorting/SortDropdown";
 import FilterButton from "@/components/events/filters/FilterButton";
 import ConferenceFilterView from "@/components/events/filters/views/ConferenceFilterView";
 import RoleSelector from "@/components/events/filters/RoleSelector";
-import { eventListMock } from "@/mocks/eventListMock";
 import Button from "@/components/common/Button";
 
 import { usePageFilters } from "@/components/events/filters/hooks/usePageFilters";
@@ -20,6 +19,8 @@ import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
 import FilterBadges from "@/components/events/filters/FilterBadges";
 import Pagination from "@/components/common/Pagination";
 import { useState } from "react";
+import Text from "@/components/common/Text";
+import { Event } from "@/types/event/event";
 
 const sortOptions: DropdownOption[] = [
   { label: "인기순", value: "popular" },
@@ -38,7 +39,7 @@ const goToPageOptions: DropdownOption[] = [
 export default function ConferencePageLayout({
   eventList,
 }: {
-  eventList: typeof eventListMock;
+  eventList: Event[];
 }) {
   const {
     selectedRoles,
@@ -96,22 +97,20 @@ export default function ConferencePageLayout({
             <EventEmpty title="컨퍼런스 · 세미나" url="/conference/create" />
             <div className={styles.eventRecommendCardList}>
               <div className={styles.eventRecommendCardListTitle}>
-                <h3>이런 행사는 어떠세요?</h3>
-                <Button textOnly icon={<ChevronRightIcon />} size="medium">
+                <Text typography="head3_m_24" color="black">
+                  이런 행사는 어떠세요?
+                </Text>
+                <Button
+                  variant="textOnly"
+                  icon={<ChevronRightIcon />}
+                  size="medium"
+                >
                   IT 행사 더보기
                 </Button>
               </div>
               <div className={styles.eventCardList}>
                 {eventList.map((item) => (
-                  // 목업 데이터
-                  <EventCard
-                    key={item.id}
-                    title={item.title}
-                    date={item.date}
-                    place={item.place}
-                    price={item.price}
-                    category={item.category}
-                  />
+                  <EventCard key={item.id} size="medium" event={item} />
                 ))}
               </div>
             </div>
@@ -121,19 +120,12 @@ export default function ConferencePageLayout({
             <div className={styles.eventCardList}>
               {eventList.map((item) => (
                 // 목업 데이터
-                <EventCard
-                  key={item.id}
-                  title={item.title}
-                  date={item.date}
-                  place={item.place}
-                  price={item.price}
-                  category={item.category}
-                />
+                <EventCard key={item.id} size="medium" event={item} />
               ))}
             </div>
             <Pagination
               currentPage={currentPage}
-              totalPages={10}
+              totalPages={20}
               onPageChange={setCurrentPage}
               options={goToPageOptions}
               selected={goToPageOptions[0]}

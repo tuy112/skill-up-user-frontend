@@ -26,3 +26,11 @@
 .badge.secondary span {
   color: var(--Common-white);
 }
+
+.badge.opacity {
+  background: var(--Opacity_b_60);
+}
+
+.badge.opacity span {
+  color: var(--Common-white);
+}

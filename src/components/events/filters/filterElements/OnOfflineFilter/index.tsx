@@ -1,6 +1,7 @@
 // src/components/events/filters/filterElements/OnOfflineFilter/index.tsx
 
 import styles from "./styles.module.css";
+import Text from "@/components/common/Text";
 
 interface OnOfflineFilterProps {
   onSelect: (value: string) => void;
@@ -13,7 +14,9 @@ export default function OnOfflineFilter({
 }: OnOfflineFilterProps) {
   return (
     <div className={styles.onOfflineFilter}>
-      <span className={styles.onOfflineFilterTitle}>온 · 오프라인</span>
+      <Text typography="label2_m_16" color="neutral-30">
+        온 · 오프라인
+      </Text>
       <div className={styles.onOfflineFilterButtonContainer}>
         {/* TODO: 추후 버튼 컴포넌트로 변경 */}
         <button

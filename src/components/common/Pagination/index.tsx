@@ -2,11 +2,12 @@
 
 import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
+import EllipsisIcon from "@/assets/svg/ellipsisIcon.svg";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import EllipsisIcon from "@/assets/svg/ellipsisIcon.svg";
 import Button from "../Button";
 import Dropdown, { DropdownOption } from "../Dropdown";
+import Text from "../Text";
 
 interface PaginationProps {
   currentPage: number;
@@ -17,32 +18,52 @@ interface PaginationProps {
   onSelect: (option: DropdownOption) => void;
 }
 
-export default function Pagination({
+const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
   options,
   selected,
   onSelect,
-}: PaginationProps) {
-  let pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
+}: PaginationProps) => {
+  const createPageList = () => {
+    const pages: (number | "ellipsis")[] = [];
 
-  if (totalPages > 3) {
-    pageList = pageList.slice(currentPage - 1, currentPage + 2);
-  } else {
-    pageList = pageList.slice(0, totalPages);
-  }
+    if (totalPages <= 4) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return pages;
+    }
+
+    if (currentPage <= 3) {
+      // Case: 1~3
+      pages.push(1, 2, 3);
+      pages.push("ellipsis");
+      pages.push(totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      // Case: 8~10
+      pages.push(1);
+      pages.push("ellipsis");
+      for (let i = totalPages - 2; i <= totalPages; i++) pages.push(i);
+    } else {
+      // Case: 4~7
+      pages.push("ellipsis");
+      for (let i = currentPage; i < currentPage + 4 && i <= totalPages; i++) {
+        pages.push(i);
+      }
+      pages.push("ellipsis");
+    }
+
+    return pages;
+  };
+
+  const pageList = createPageList();
 
   const handleLeftClick = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
+    if (currentPage > 1) onPageChange(currentPage - 1);
   };
 
   const handleRightClick = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
+    if (currentPage < totalPages) onPageChange(currentPage + 1);
   };
 
   return (
@@ -52,48 +73,49 @@ export default function Pagination({
           <button
             className={styles.paginationPageButton}
             onClick={handleLeftClick}
+            disabled={currentPage === 1}
           >
             <ChevronLeftIcon />
           </button>
-          <div className={styles.pageItem}>
-            <div className={styles.pageItemList}>
-              {pageList.map((page) => (
-                <button
-                  key={page}
-                  className={`${styles.paginationButton} ${
-                    currentPage === page ? styles.active : ""
-                  }`}
-                  onClick={() => onPageChange(page)}
-                >
-                  {page}
-                </button>
-              ))}
-            </div>
 
-            <span>
-              <Image src={EllipsisIcon} alt="ellipsis" />
-            </span>
-            <button
-              className={`${styles.paginationButton} ${
-                currentPage === totalPages ? styles.active : ""
-              }`}
-              onClick={handleRightClick}
-            >
-              {totalPages}
-            </button>
+          <div className={styles.pageItemList}>
+            {pageList.map((item, idx) => {
+              if (item === "ellipsis") {
+                return (
+                  <span key={`ellipsis-${idx}`} className={styles.ellipsis}>
+                    <Image src={EllipsisIcon} alt="..." />
+                  </span>
+                );
+              }
+
+              return (
+                <button
+                  key={item}
+                  className={`${styles.paginationButton} ${
+                    currentPage === item ? styles.active : ""
+                  }`}
+                  onClick={() => onPageChange(item)}
+                >
+                  {item}
+                </button>
+              );
+            })}
           </div>
+
           <button
             className={styles.paginationPageButton}
-            onClick={() => onPageChange(currentPage + 1)}
+            onClick={handleRightClick}
+            disabled={currentPage === totalPages}
           >
             <ChevronRightIcon />
           </button>
         </div>
       </div>
 
-      {/* 오른쪽 영역: Go to Page */}
       <div className={styles.paginationRight}>
-        <span className={styles.paginationRightText}>Go to Page</span>
+        <Text typography="label2_m_16" color="neutral-30">
+          Go to Page
+        </Text>
         <div className={styles.paginationRightDropdown}>
           <Dropdown options={options} selected={selected} onSelect={onSelect} />
           <Button variant="secondary" size="large">
@@ -103,4 +125,6 @@ export default function Pagination({
       </div>
     </div>
   );
-}
+};
+
+export default Pagination;

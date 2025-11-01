@@ -1,15 +1,9 @@
-/* 
-  작성자 : 김재혁
-  최초 작성일 : 2025-08-21
-  최종 수정일 : 2025-09-30
-*/
-
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 9999;
 }
 
 .mainHeader {

@@ -1,0 +1,195 @@
+/* src/components/common/Text/styles.module.css */
+
+.head1_b_42 {
+  font-size: 2.625rem;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.105rem;
+}
+
+.head1_m_42 {
+  font-size: 2.625rem;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.105rem;
+}
+
+.head2_sb_30 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.075rem;
+}
+
+.head3_m_24 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.06rem;
+}
+
+.head4_sb_20 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.05rem;
+}
+
+.sub1_m_20 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.05rem;
+}
+
+.sub2_m_18 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.045rem;
+}
+
+.sub3_m_16 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.body1_r_16 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.04rem;
+}
+
+.body2_r_14 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.035rem;
+}
+
+.label1_r_18 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.045rem;
+}
+
+.label2_m_16 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.04rem;
+}
+
+.label3_m_14 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.035rem;
+}
+
+.label4_r_12 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.03rem;
+}
+
+.white {
+  color: var(--Common-white);
+}
+
+.black {
+  color: var(--Common-black);
+}
+
+.neutral-5 {
+  color: var(--Neutral-5);
+}
+
+.neutral-10 {
+  color: var(--Neutral-10);
+}
+
+.neutral-15 {
+  color: var(--Neutral-15);
+}
+
+.neutral-20 {
+  color: var(--Neutral-20);
+}
+
+.neutral-30 {
+  color: var(--Neutral-30);
+}
+
+.neutral-40 {
+  color: var(--Neutral-40);
+}
+
+.neutral-50 {
+  color: var(--Neutral-50);
+}
+
+.neutral-60 {
+  color: var(--Neutral-60);
+}
+
+.neutral-70 {
+  color: var(--Neutral-70);
+}
+
+.neutral-80 {
+  color: var(--Neutral-80);
+}
+
+.neutral-90 {
+  color: var(--Neutral-90);
+}
+
+.neutral-95 {
+  color: var(--Neutral-95);
+}
+
+.neutral-99 {
+  color: var(--Neutral-99);
+}
+
+.line-normal {
+  color: var(--Line-normal);
+}
+
+.line-neutral {
+  color: var(--Line-neutral);
+}
+
+.primary-light {
+  color: var(--Primary-light);
+}
+
+.primary-strong {
+  color: var(--Primary-strong);
+}
+
+.primary-normal {
+  color: var(--Primary-normal);
+}
+
+.primary-extra-light {
+  color: var(--Primary-ExtraLight);
+}
+
+.fill-strong {
+  color: var(--Fill-strong);
+}
+
+.error-normal {
+  color: var(--Error-normal);
+}
+
+.gray-scale-900 {
+  color: var(--GrayScale-900);
+}

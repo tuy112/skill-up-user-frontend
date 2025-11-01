@@ -10,11 +10,16 @@
 :root {
   --Common-black: #000;
   --Common-white: #fff;
+  --GrayScale-900: #121212;
+  --Neutral-5: #0f0f0f;
+  --Neutral-10: #1a1a1a;
+  --Neutral-15: #1c1c1c;
   --Neutral-20: #2a2a2a;
   --Neutral-30: #474747;
   --Neutral-40: #5c5c5c;
   --Neutral-50: #737373;
   --Neutral-60: #8a8a8a;
+  --Neutral-70: #9b9b9b;
   --Neutral-80: #b0b0b0;
   --Neutral-90: #c4c4c4;
   --Neutral-95: #e6e6e6;
@@ -27,6 +32,8 @@
   --Primary-ExtraLight: #ededff;
   --Fill-strong: #55555c;
   --Error-normal: #ff6359;
+  --Opacity_b_40: rgba(0, 0, 0, 0.4);
+  --Opacity_b_60: rgba(0, 0, 0, 0.6);
 }
 
 html,

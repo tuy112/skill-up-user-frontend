@@ -1,4 +1,4 @@
-// src/components/events/EventCard/icons.tsx
+// src/assets/icons/BookmarkIcon.tsx
 
 interface BookmarkIconProps {
   className?: string;

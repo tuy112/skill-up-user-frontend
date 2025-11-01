@@ -3,13 +3,19 @@
 import styles from "./styles.module.css";
 
 interface ButtonProps {
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "disabled"
+    | "outlined"
+    | "textOnly"
+    | "iconOpacity";
   size?: "small" | "medium" | "large" | "extraLarge";
-  textOnly?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
 }
 
@@ -17,7 +23,6 @@ export default function Button({
   children,
   variant,
   size,
-  textOnly,
   disabled,
   className,
   onClick,
@@ -33,7 +38,10 @@ export default function Button({
         size === "medium" ? styles.medium : ""
       } ${size === "large" ? styles.large : ""} ${
         size === "extraLarge" ? styles.extraLarge : ""
-      } ${textOnly ? styles.textOnly : ""}
+      } ${variant === "disabled" ? styles.disabled : ""} ${
+        variant === "outlined" ? styles.outlined : ""
+      } ${variant === "textOnly" ? styles.textOnly : ""}
+      } ${variant === "iconOpacity" ? styles.iconOpacity : ""}
       } ${disabled ? styles.disabled : ""}
         `}
       onClick={onClick}
