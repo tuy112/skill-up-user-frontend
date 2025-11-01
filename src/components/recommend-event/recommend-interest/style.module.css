@@ -1,0 +1,107 @@
+/* 관심 행사 CSS */
+.interestSection {
+  background: #212025;
+  padding: 100px 0;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1240px;
+  margin: 0 auto;
+  gap: 60px;
+}
+
+/* 왼쪽 텍스트 영역 */
+.leftBox {
+  flex: 1;
+  max-width: 440px;
+}
+
+/* 키워드 버튼 */
+.keywordBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 380px;
+  margin-top: 24px;
+}
+
+.keywordBtn {
+  background: #2c2c36;
+  border: 1px solid #737373;
+  font-size: 13px;
+  padding: 6px 16px 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  gap: 10px;
+  color: #c4c4c4;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -4%;
+}
+
+
+/* 오른쪽 카드 2x2 */
+.cardGrid {
+  flex: 1.4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  width: 350px;
+  height: 262px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imgBox {
+  background: #fff;
+  width: 350px;
+  height: 200px;
+  gap: 10px;
+  position: relative;
+}
+
+.bookmarkBtn {
+  position: absolute;
+  top: 16px;
+  left: 292px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.bookmarkBtn svg {
+  width: 15.17px;
+  height: 18.42px;
+  color: #fff;
+}
+
+.textBox {
+  margin-top: 5px;
+}
+
+.metaTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e6e6e6;
+  line-height: 140%;
+  letter-spacing: -4%;
+}
+
+.metaDesc {
+  font-size: 16px;
+  font-weight: 400;
+  color: #e6e6e6;
+  line-height: 150%;
+  letter-spacing: -4%;
+}

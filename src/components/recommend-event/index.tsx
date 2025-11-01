@@ -1,65 +1,13 @@
-import Link from "next/link";
-import styles from "./style.module.css";
-import { FaRegBookmark, FaRegCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import RecommendNow from "./recommend-now";
+import RecommendInterest from "./recommend-interest";
+import RecommendDeadline from "./recommend-deadline";
 
 export default function RecommendEvent() {
   return (
-    <section className={styles.recommend}>
-        <div className={styles.head}>
-            <div className={styles.titles}>
-                <p className={styles.subTitle}>추천행사</p>
-                <h2 className={styles.title}>지금 <strong>주목받고 있어요</strong></h2>
-            </div>
-
-            {/* 탭 메뉴 */}
-            <ul className={styles.tabMenu}>
-                <li><button className={styles.active}>전체</button></li>
-                <li><button>기획</button></li>
-                <li><button>디자인</button></li>
-                <li><button>개발</button></li>
-                <li><button>AI</button></li>
-            </ul>
-        </div>
-
-        {/* 카드 리스트 */}
-        <div className={styles.cardList}>
-          {Array.from({ length: 4 }).map((_, idx) => (
-            <div key={idx} className={styles.card}>
-              <div className={styles.imgBox}>
-                <span className={styles.dday}>마감 D-N</span>
-                <button className={styles.bookmarkBtn}>
-                  <FaRegBookmark size={20} />
-                </button>
-              </div>
-
-              <div className={styles.cardBody}>
-                <span className={styles.category}>카테고리</span>
-                <h3 className={styles.cardTitle}>요즘 핫한 행사! 요즘 핫한 행사!</h3>
-
-                <div className={styles.infoRow}>
-                  <FaRegCalendarAlt className={styles.icon} />
-                  <p>2025.01.01 - 2025.01.01</p>
-                </div>
-
-                <div className={styles.infoRow}>
-                  <FaMapMarkerAlt className={styles.icon} />
-                  <p>서울특별시 강남구 테헤란로 22길</p>
-                </div>
-
-                <div className={styles.priceRow}>
-                  <p className={styles.price}>88,888원 ~</p>
-                  <Link href="#" className={styles.detailBtn}>
-                    자세히 보기
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      <div className={styles.moreBox}>
-        <button className={styles.moreBtn}>IT 인기 행사 더보기</button>
-      </div>
-    </section>
+    <>
+      <RecommendNow />
+      <RecommendInterest />
+      <RecommendDeadline />
+    </>
   );
 }

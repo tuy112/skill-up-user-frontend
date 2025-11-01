@@ -17,6 +17,7 @@ interface ButtonProps {
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
+  opacity?: number;
 }
 
 export default function Button({
@@ -27,7 +28,11 @@ export default function Button({
   className,
   onClick,
   icon,
+  opacity,
 }: ButtonProps) {
+  const backgroundStyle =
+  opacity !== undefined ? { backgroundColor: `rgba(0, 0, 0, ${opacity})` } : undefined;
+
   return (
     <button
       className={`${styles.button} ${className || ""} ${
@@ -46,6 +51,7 @@ export default function Button({
         `}
       onClick={onClick}
       disabled={disabled}
+      style={backgroundStyle}
     >
       {children && <span>{children}</span>}
       {icon && <div className={styles.icon}>{icon}</div>}
