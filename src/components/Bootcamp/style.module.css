@@ -1,0 +1,72 @@
+.bootcampSection {
+  background: #000;
+  padding: 100px 0;
+}
+
+.inner {
+  width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 헤더 (제목 + 탭) */
+.sectionHead {
+  width: 1240px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+/* 타이틀 블록 */
+.titles { display: flex; flex-direction: column; }
+.subTitle {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: medium;
+  color: #7779ff;
+  line-height: 140%;
+  letter-spacing: -4%;
+}
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  font-style: medium;
+  color: #fff;
+  line-height: 130%;
+  letter-spacing: -4%;
+}
+.titleSpan { 
+  font-weight: 700;
+  font-style: bold;
+}
+
+/* 카드 공통 CSS */
+.cardListWrap {
+  width: 100%;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* 더보기 버튼 */
+.moreBox {
+  text-align: center;
+}
+
+.moreBtn {
+  font-size: 16px;
+  color: #8a8a8a;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #8a8a8a;
+  padding-bottom: 2px;
+  line-height: 140%;
+  letter-spacing: -4%;
+}
