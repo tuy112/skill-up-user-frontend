@@ -55,8 +55,8 @@ export default function BookmarkPageLayout({
             />
           </Flex>
           <div className={styles.cardList}>
-            {eventList.map((event, index) => (
-              <EventCard key={index} size="medium" event={event} />
+            {eventList.map((event) => (
+              <EventCard key={event.id} size="medium" event={event} />
             ))}
           </div>
         </Flex>
