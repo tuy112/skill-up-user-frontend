@@ -1,10 +1,5 @@
 /* src/components/common/Accordion/styles.module.css */
 
-.accordion {
-  display: flex;
-  flex-direction: column;
-}
-
 .item {
   border-bottom: 1px solid var(--Line-normal);
   padding: 1.25rem 1.5rem;
@@ -16,21 +11,11 @@
 
 .question {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   text-align: left;
-}
-
-.questionContent {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
 }
 
 .icon {
@@ -41,19 +26,4 @@
 
 .item.open .icon {
   transform: rotate(180deg);
-}
-
-.answer {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding-left: 0.25rem;
-}
-
-.answerContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
-  flex: 1 0 0;
 }

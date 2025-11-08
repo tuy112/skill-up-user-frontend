@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import Text from "@/components/common/Text";
 import IconButton from "@/components/common/IconButton";
 import Button from "@/components/common/Button";
+import Flex from "@/components/common/Flex";
 import { Event } from "@/types/event/event";
 
 interface EventCardProps {
@@ -21,8 +22,8 @@ interface EventCardProps {
 }
 
 export default function EventCard({ size, event, block }: EventCardProps) {
-  const { id, title, date, place, price, category, url, image, badgeLabel } =
-    event;
+  // 나중에 id 기반으로 url 이동해야함.
+  const { title, date, place, price, category, url, image, badgeLabel } = event;
   const [isBookmarked, setIsBookmarked] = useState(false);
   const router = useRouter();
   const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,7 +33,9 @@ export default function EventCard({ size, event, block }: EventCardProps) {
   };
 
   return (
-    <div
+    <Flex
+      direction="column"
+      gap="1rem"
       onClick={() => router.push(url || "/")}
       className={`${styles.eventCard} ${
         size === "large"
@@ -46,7 +49,7 @@ export default function EventCard({ size, event, block }: EventCardProps) {
         {/* 목업 이미지 */}
         <Image src={image} alt="Event Card Image" fill priority />
 
-        <div className={styles.eventCardImageOverlay}>
+        <Flex justify="space-between" className={styles.eventCardImageOverlay}>
           <Badge label={badgeLabel || ""} variant="opacity" />
           <IconButton
             variant="opacity"
@@ -61,11 +64,11 @@ export default function EventCard({ size, event, block }: EventCardProps) {
             }
             onClick={handleBookmarkClick}
           />
-        </div>
+        </Flex>
       </div>
-      <div className={styles.eventCardContent}>
-        <div className={styles.eventCardContentBody}>
-          <div className={styles.eventCardContentBodyItem}>
+      <Flex direction="column" gap="1rem" style={{ padding: "0 1rem" }}>
+        <Flex direction="column" gap="0.75rem">
+          <Flex direction="column" gap="0.25rem">
             <Badge label={category} />
             {size === "large" || size === "small" ? (
               <Text
@@ -86,9 +89,9 @@ export default function EventCard({ size, event, block }: EventCardProps) {
                 {title}
               </Text>
             )}
-          </div>
-          <div className={styles.eventCardContentBodyDatePlace}>
-            <div className={styles.eventCardContentBodyDatePlaceItem}>
+          </Flex>
+          <Flex direction="column" gap="0.12rem">
+            <Flex align="center" gap="0.5rem">
               <Image src={CalendarIcon} alt="Calendar Icon" />
               <Text
                 typography="body2_r_14"
@@ -97,8 +100,8 @@ export default function EventCard({ size, event, block }: EventCardProps) {
               >
                 {date}
               </Text>
-            </div>
-            <div className={styles.eventCardContentBodyDatePlaceItem}>
+            </Flex>
+            <Flex align="center" gap="0.5rem">
               <Image src={LocationIcon} alt="Location Icon" />
               <Text
                 typography="body2_r_14"
@@ -107,17 +110,17 @@ export default function EventCard({ size, event, block }: EventCardProps) {
               >
                 {place}
               </Text>
-            </div>
-          </div>
-        </div>
+            </Flex>
+          </Flex>
+        </Flex>
         {(size === "large" || size === "medium") && (
-          <div className={styles.eventCardContentFooter}>
-            <div className={styles.eventCardContentFooterItem}>
+          <Flex justify="space-between">
+            <Flex align="center" gap="0.5rem">
               <Text typography="sub2_m_18" color="black">
                 {price}
               </Text>
               {price === "0원" && <Badge label="무료" />}
-            </div>
+            </Flex>
             {size === "large" && (
               <Button
                 variant="secondary"
@@ -131,9 +134,9 @@ export default function EventCard({ size, event, block }: EventCardProps) {
                 자세히 보기
               </Button>
             )}
-          </div>
+          </Flex>
         )}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 }

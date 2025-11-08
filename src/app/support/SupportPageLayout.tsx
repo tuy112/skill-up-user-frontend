@@ -5,6 +5,7 @@ import { useState, useMemo } from "react";
 import styles from "./styles.module.css";
 import Text from "@/components/common/Text";
 import Accordion from "@/components/common/Accordion";
+import Flex from "@/components/common/Flex";
 import { faqData } from "./faqData";
 import Pagination from "@/components/common/Pagination";
 import { DropdownOption } from "@/components/common/Dropdown";
@@ -46,7 +47,7 @@ export default function SupportPageLayout() {
   };
 
   return (
-    <div className={styles.content}>
+    <Flex direction="column" gap={4} className={styles.content}>
       <Text typography="head2_sb_30" color="black" as="h1">
         고객센터
       </Text>
@@ -56,7 +57,7 @@ export default function SupportPageLayout() {
       </div>
 
       {totalPages > 1 && (
-        <div className={styles.paginationWrapper}>
+        <Flex justify="center" style={{ marginTop: "2rem" }}>
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
@@ -66,8 +67,8 @@ export default function SupportPageLayout() {
             onSelect={handleDropdownSelect}
             goToPage={false}
           />
-        </div>
+        </Flex>
       )}
-    </div>
+    </Flex>
   );
 }

@@ -8,6 +8,7 @@ import Image from "next/image";
 import Button from "../Button";
 import Dropdown, { DropdownOption } from "../Dropdown";
 import Text from "../Text";
+import Flex from "../Flex";
 
 interface PaginationProps {
   currentPage: number;
@@ -70,8 +71,8 @@ const Pagination = ({
 
   return (
     <div className={styles.pagination}>
-      <div className={styles.centerPagination}>
-        <div className={styles.pageList}>
+      <Flex gap="8px" className={styles.centerPagination}>
+        <Flex gap="3.75rem" align="center">
           <button
             className={styles.paginationPageButton}
             onClick={handleLeftClick}
@@ -80,7 +81,7 @@ const Pagination = ({
             <ChevronLeftIcon />
           </button>
 
-          <div className={styles.pageItemList}>
+          <Flex gap="0.5rem" align="center">
             {pageList.map((item, idx) => {
               if (item === "ellipsis") {
                 return (
@@ -102,7 +103,7 @@ const Pagination = ({
                 </button>
               );
             })}
-          </div>
+          </Flex>
 
           <button
             className={styles.paginationPageButton}
@@ -111,15 +112,15 @@ const Pagination = ({
           >
             <ChevronRightIcon />
           </button>
-        </div>
-      </div>
+        </Flex>
+      </Flex>
 
       {goToPage && (
-        <div className={styles.paginationRight}>
+        <Flex align="center" gap="0.75rem" className={styles.paginationRight}>
           <Text typography="label2_m_16" color="neutral-30">
             Go to Page
           </Text>
-          <div className={styles.paginationRightDropdown}>
+          <Flex gap="0.25rem" align="center">
             <Dropdown
               options={options}
               selected={selected}
@@ -128,8 +129,8 @@ const Pagination = ({
             <Button variant="secondary" size="large">
               GO
             </Button>
-          </div>
-        </div>
+          </Flex>
+        </Flex>
       )}
     </div>
   );

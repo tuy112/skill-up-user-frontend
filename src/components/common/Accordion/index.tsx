@@ -4,6 +4,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import Text from "@/components/common/Text";
+import Flex from "@/components/common/Flex";
 
 interface AccordionItemProps {
   id: string;
@@ -24,19 +25,22 @@ export function AccordionItem({
 }: AccordionItemProps) {
   return (
     <div className={`${styles.item} ${isOpen ? styles.open : ""}`}>
-      <button
+      <Flex
+        as="button"
+        justify="space-between"
+        align="center"
         className={styles.question}
         onClick={() => onToggle?.(id)}
-        aria-expanded={isOpen}
+        aria-label={question}
       >
-        <div className={styles.questionContent}>
+        <Flex align="center" gap="1rem" style={{ flex: 1 }}>
           <Text typography="head3_m_24" color="neutral-30" as="span">
             Q
           </Text>
           <Text typography="sub2_m_18" color="black">
             {question}
           </Text>
-        </div>
+        </Flex>
         <svg
           width="24"
           height="24"
@@ -53,21 +57,21 @@ export function AccordionItem({
             strokeLinejoin="round"
           />
         </svg>
-      </button>
+      </Flex>
       {isOpen && (
-        <div className={styles.answer}>
+        <Flex gap="1rem" style={{ marginTop: "1.5rem", paddingLeft: "0.25rem" }}>
           <Text typography="head3_m_24" color="primary-strong" as="span">
             A
           </Text>
-          <div className={styles.answerContent}>
+          <Flex direction="column" align="flex-start" gap="0.75rem" style={{ flex: "1 0 0" }}>
             <Text typography="sub2_m_18" color="black">
               {answerTitle}
             </Text>
             <Text typography="body2_r_14" color="neutral-30">
               {answerDetail}
             </Text>
-          </div>
-        </div>
+          </Flex>
+        </Flex>
       )}
     </div>
   );
@@ -104,7 +108,7 @@ export default function Accordion({
   };
 
   return (
-    <div className={styles.accordion}>
+    <Flex direction="column" className={styles.accordion}>
       {items.map((item) => (
         <AccordionItem
           key={item.id}
@@ -116,6 +120,6 @@ export default function Accordion({
           onToggle={handleToggle}
         />
       ))}
-    </div>
+    </Flex>
   );
 }
