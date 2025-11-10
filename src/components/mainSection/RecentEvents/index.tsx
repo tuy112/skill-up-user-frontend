@@ -1,13 +1,18 @@
 // 최근 본 행사
-import { dummyEvents } from "./dummyData";
 import Flex from "@/components/common/Flex";
 import styles from "./style.module.css";
-import EventCard from "@/components/common/Card";
+import EventCard from "@/components/common/EventCard";
+import { eventListMock } from "@/mocks/eventListMock";
 
 export default function RecentEvent() {
   return (
     <section className={styles.recentEvent} aria-labelledby="recent-title">
-      <Flex justify="space-between" align="flex-end" gap="40px" className={styles.sectionHead}>
+      <Flex
+        justify="space-between"
+        align="flex-end"
+        gap="40px"
+        className={styles.sectionHead}
+      >
         <Flex direction="column">
           <p className={styles.subTitle}>최근 본 행사</p>
           <h2 id="rec-title" className={styles.title}>
@@ -18,8 +23,8 @@ export default function RecentEvent() {
       </Flex>
 
       <Flex wrap="wrap" gap="12px" className={styles.cardList}>
-        {dummyEvents.map((item) => (
-          <EventCard key={item.id} size="large" {...item} />
+        {eventListMock.map((item) => (
+          <EventCard key={item.id} size="large" event={item} />
         ))}
       </Flex>
 
