@@ -1,12 +1,6 @@
-/* 그리드: 한 줄 4개 */
-:global(.cardList) {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
 /* 하단 영역 정렬 */
 .bottomRow {
-  width: 1240px;
+  max-width: 1240px;
   margin: 16px auto 0;
   display: flex;
   align-items: center;
@@ -14,29 +8,37 @@
 }
 
 /* 좌우 화살표 그룹 */
-.arrowGroup { 
-  display: flex; 
-  align-items: center; 
-  gap: 20px; 
+.arrowGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 .arrowBtn {
-  width: 36px; 
+  width: 36px;
   height: 36px;
-  display: inline-flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
-  border-radius: 1000px;
+  border-radius: 50%;
   border: 1px solid #737373;
   background: #fff;
+  cursor: pointer;
 }
-/* .arrowBtn:disabled { opacity: .4; cursor: not-allowed; } */
-.lightBtn { background: #fff; }
-.darkBtn  { background: #000; border-color: #000; }
-.darkBtn svg path { stroke: #fff; }
+.lightBtn {
+  background: #fff;
+}
+.darkBtn {
+  background: #000;
+  border-color: #000;
+}
+.darkBtn svg path {
+  stroke: #fff;
+}
 
 /* 더보기 버튼 */
 .moreBox {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .moreBtn {
@@ -46,6 +48,6 @@
   border: none;
   border-bottom: 1px solid #8a8a8a;
   padding-bottom: 2px;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
+  cursor: pointer;
 }

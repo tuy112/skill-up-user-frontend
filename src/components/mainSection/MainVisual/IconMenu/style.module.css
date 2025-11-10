@@ -2,7 +2,7 @@
   background: #fff;
   padding: 40px 20px;
 }
-  
+
 .iconMenu ul {
   max-width: 1440px;
   margin: 0 auto;
@@ -10,7 +10,7 @@
   justify-content: center;
   gap: 16px;
 }
-  
+
 .iconMenu li {
   width: 150px;
   height: 100px;
@@ -27,21 +27,15 @@
 }
 
 .iconMenu li:hover {
-  color: #5A23FF;
+  color: #5a23ff;
 }
 
 .iconMenu li:hover img {
-  filter: invert(21%) sepia(93%) saturate(5983%) hue-rotate(247deg)
-    brightness(94%) contrast(102%);
+  filter: invert(21%) sepia(93%) saturate(5983%) hue-rotate(247deg) brightness(94%) contrast(102%);
 }
 
 .iconBox {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.icon {
-  width: 33.37px;
-  height: 29.94px;
 }

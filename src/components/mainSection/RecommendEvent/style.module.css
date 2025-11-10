@@ -1,13 +1,13 @@
 /* 공통 CSS */
 .recommend {
-  width: 1440px;
+  max-width: 1440px;
   margin: 80px auto;
   padding: 0 20px;
 }
 
-/* 헤더 (제목 + 탭) */
+/* 헤더 */
 .sectionHead {
-  width: 1240px;
+  max-width: 1240px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -15,7 +15,6 @@
   margin-bottom: 20px;
 }
 
-/* 관심행사 sectionHead */
 .titles {
   display: flex;
   flex-direction: column;
@@ -25,30 +24,26 @@
   font-size: 18px;
   color: #5a23ff;
   font-weight: 500;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
 }
 
 .title {
   font-size: 42px;
   font-weight: 500;
   color: #000;
-  line-height: 130%;
-  font-style: medium;
+  line-height: 1.3;
 }
 
 .titleSpan {
   font-weight: 700;
-  font-style: bold;
 }
 
-/* 관심 + 신청마감 sectionHead */
+/* 관심 + 신청마감 섹션 */
 .subEng {
   color: #e6e6e6;
   font-size: 18px;
   font-weight: 400;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -57,25 +52,24 @@
   font-size: 42px;
   font-weight: 700;
   color: #fff;
-  line-height: 130%;
-  letter-spacing: -4%;
+  line-height: 1.3;
 }
 
 .interestSpan {
   font-weight: 500;
 }
 
-
-/* 카드 공통 CSS */
+/* 카드 리스트 */
 .cardList {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 /* 더보기 버튼 */
 .moreBox {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .moreBtn {
@@ -85,6 +79,6 @@
   border: none;
   border-bottom: 1px solid #8a8a8a;
   padding-bottom: 2px;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
+  cursor: pointer;
 }

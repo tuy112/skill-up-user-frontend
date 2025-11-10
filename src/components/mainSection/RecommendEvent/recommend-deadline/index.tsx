@@ -21,12 +21,10 @@ export default function RecommendDeadline() {
         </div>
 
         {/* 카드 리스트 */}
-        <div className={localStyles.cardListWrap}>
-          <div className={globalStyles.cardList}>
-            {eventListMock.map((item) => (
-              <EventCard key={item.id} size="medium" event={item} />
-            ))}
-          </div>
+        <div className={globalStyles.cardList}>
+          {eventListMock.map((item) => (
+            <EventCard key={item.id} size="medium" event={item} />
+          ))}
         </div>
       </div>
     </section>

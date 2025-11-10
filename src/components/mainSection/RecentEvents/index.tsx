@@ -1,7 +1,7 @@
 // 최근 본 행사
+import { dummyEvents } from "./dummyData";
 import styles from "./style.module.css";
-import EventCard from "@/components/common/EventCard";
-import { eventListMock } from "@/mocks/eventListMock";
+import EventCard from "@/components/common/Card";
 
 export default function RecentEvent() {
   return (
@@ -17,8 +17,8 @@ export default function RecentEvent() {
       </div>
 
       <div className={styles.cardList}>
-        {eventListMock.map((item) => (
-          <EventCard key={item.id} size="large" event={item} />
+        {dummyEvents.map((item) => (
+          <EventCard key={item.id} size="large" {...item} />
         ))}
       </div>
 

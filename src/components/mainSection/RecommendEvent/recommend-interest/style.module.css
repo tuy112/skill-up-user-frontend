@@ -24,7 +24,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  width: 380px;
+  max-width: 380px;
   margin-top: 24px;
 }
 
@@ -32,15 +32,13 @@
   background: #2c2c36;
   border: 1px solid #737373;
   font-size: 13px;
-  padding: 6px 16px 6px 16px;
+  padding: 6px 16px;
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
-  gap: 10px;
   color: #c4c4c4;
   font-weight: 500;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
 }
 
 
@@ -70,7 +68,7 @@
 .bookmarkBtn {
   position: absolute;
   top: 16px;
-  left: 292px;
+  right: 16px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -94,14 +92,12 @@
   font-size: 20px;
   font-weight: 600;
   color: #e6e6e6;
-  line-height: 140%;
-  letter-spacing: -4%;
+  line-height: 1.4;
 }
 
 .metaDesc {
   font-size: 16px;
   font-weight: 400;
   color: #e6e6e6;
-  line-height: 150%;
-  letter-spacing: -4%;
+  line-height: 1.5;
 }

@@ -4,7 +4,7 @@
 }
 
 .inner {
-  width: 1240px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -16,22 +16,4 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-/* 카드 리스트 */
-.cardListWrap {
-  width: 100%;
-}
-
-.cardListWrap :global(.cardList) {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-/* 중간 카드 스타일 보정 */
-.cardListWrap :global(.card_middle) {
-  background: #1b1b1b;
-  color: #fff;
-  border: 1px solid #333;
 }
