@@ -1,0 +1,44 @@
+.errorWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* Header 제외 높이 */
+  text-align: center;
+}
+
+.logo {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.homeBtn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.homeBtn:hover {
+  background-color: #333;
+}

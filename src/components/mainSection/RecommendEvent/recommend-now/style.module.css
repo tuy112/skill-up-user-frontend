@@ -1,0 +1,40 @@
+.bottomRow {
+  max-width: 1240px;
+  margin: 16px auto 0;
+}
+
+.arrowBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #737373;
+  background: #fff;
+  cursor: pointer;
+}
+
+.lightBtn {
+  background: #fff;
+}
+
+.darkBtn {
+  background: #000;
+  border-color: #000;
+}
+
+.darkBtn svg path {
+  stroke: #fff;
+}
+
+.moreBtn {
+  font-size: 16px;
+  color: #8a8a8a;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #8a8a8a;
+  padding-bottom: 2px;
+  line-height: 1.4;
+  cursor: pointer;
+}

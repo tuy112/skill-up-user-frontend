@@ -1,0 +1,55 @@
+/* 공통 스타일 */
+.tabWrap {
+  width: 460px;
+  border-bottom: 1px solid #8a8a8a;
+}
+
+/* 배경색에 따른 테마 */
+.light {
+  --tab-text-color: #474747;
+  --tab-active-color: #000;
+  --tab-border-color: #000;
+}
+
+.dark {
+  --tab-text-color: #8a8a8a;
+  --tab-active-color: #fff;
+  --tab-border-color: #fff;
+}
+
+/* 탭 메뉴 컨테이너 */
+.tabMenu {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* 개별 탭 버튼 */
+.tabItem {
+  width: 92px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  color: var(--tab-text-color);
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.tabItem:hover {
+  color: var(--tab-active-color);
+}
+
+/* 활성 탭 */
+.active {
+  color: var(--tab-active-color);
+  font-weight: 600;
+  border-bottom: 3px solid var(--tab-border-color);
+}

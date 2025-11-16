@@ -1,0 +1,43 @@
+// 삭제 예정 (확인용)
+export const dummyEvents = [
+  {
+    id: 1,
+    title: "요즘 핫한 행사! 요즘 핫한 행사!",
+    category: "기획",
+    date: "2025.01.01 - 2025.01.01",
+    location: "서울특별시 강남구 테헤란로 22길",
+    price: "88,888원 ~",
+    dday: "마감 D-7",
+    isFree: false,
+  },
+  {
+    id: 2,
+    title: "디자인 트렌드 세미나 2025",
+    category: "디자인",
+    date: "2025.02.01 - 2025.02.02",
+    location: "서울특별시 성동구 왕십리로 10",
+    price: "무료",
+    dday: "마감 D-3",
+    isFree: true,
+  },
+  {
+    id: 3,
+    title: "AI & 데이터 분석 컨퍼런스",
+    category: "AI",
+    date: "2025.03.10 - 2025.03.12",
+    location: "서울특별시 마포구 월드컵북로 5길",
+    price: "55,000원 ~",
+    dday: "마감 D-10",
+    isFree: false,
+  },
+  {
+    id: 4,
+    title: "개발자 네트워킹 밋업",
+    category: "개발",
+    date: "2025.04.01",
+    location: "부산시 해운대구 센텀로 22",
+    price: "0원",
+    dday: "모집마감",
+    isFree: true,
+  },
+];
