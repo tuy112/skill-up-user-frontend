@@ -1,13 +1,13 @@
 "use client";
 
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import SkillUpWhiteLogo from "@/assets/svg/skillUp_white.svg";
 import SkillUpBlackLogo from "@/assets/svg/skillUp_black.svg";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import Modal from "../Modal";
-import LoginContent from "@/components/login/LoginContent";
+// import Modal from "../Modal";
+// import LoginContent from "@/components/login/LoginContent";
 import EventCategoryTabs from "@/components/common/Header/EventCategoryTabs";
 import Button from "../Button";
 import IconButton from "../IconButton";
@@ -16,14 +16,30 @@ import SearchIcon from "@/assets/svg/searchIcon.svg";
 import ProfileModal from "@/components/login/ProfileModal";
 import LogoDefaultImg from "@/assets/images/logoDefaultImg.png";
 import Alert from "../Alert";
+import { useAuth } from "@/hooks/useAuth";
+import { useLogin } from "@/hooks/useLogin";
 
 interface HeaderProps {
   variant: "main" | "sub";
 }
 
 export default function Header({ variant }: HeaderProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen((prev) => !prev);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const toggleModal = () => setIsModalOpen((prev) => !prev);
+  const { isAuthenticated } = useAuth();
+  const { mutate: loginMutate, isPending: isLoginPending } = useLogin();
+
+  // 클라이언트 마운트 체크 (Hydration 깜빡임 방지)
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // 테스트 로그인 핸들러 : 추후 소셜로 변경필요
+  const handleTestLogin = () => {
+    loginMutate();
+  };
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
@@ -31,8 +47,6 @@ export default function Header({ variant }: HeaderProps) {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const toggleAlert = () => setIsAlertOpen((prev) => !prev);
 
-  // 임의로 로그인 상태 확인
-  const isLogin = true;
   const profileBtnRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -84,7 +98,7 @@ export default function Header({ variant }: HeaderProps) {
               <Image src={SearchIcon} alt="search" width={20} height={20} />
             </button>
           </div>
-          {isLogin && (
+          {isMounted && isAuthenticated && (
             <div
               className={styles.profileBtnWrap}
               onClick={(e) => {
@@ -113,21 +127,30 @@ export default function Header({ variant }: HeaderProps) {
             </div>
           )}
 
-          {!isLogin ? (
-            <Button variant="secondary" size="large" onClick={toggleModal}>
-              로그인 · 회원가입
-            </Button>
-          ) : (
-            <Button variant="secondary" size="large" onClick={toggleAlert}>
-              로그아웃
-            </Button>
+          {isMounted && (
+            <>
+              {!isAuthenticated ? (
+                <Button
+                  variant="secondary"
+                  size="large"
+                  onClick={handleTestLogin}
+                  disabled={isLoginPending}
+                >
+                  {isLoginPending ? "로그인 중..." : "로그인 · 회원가입"}
+                </Button>
+              ) : (
+                <Button variant="secondary" size="large" onClick={toggleAlert}>
+                  로그아웃
+                </Button>
+              )}
+            </>
           )}
         </div>
       </div>
 
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+      {/* <Modal isOpen={isModalOpen} toggle={toggleModal}>
         <LoginContent />
-      </Modal>
+      </Modal> */}
       <Alert
         isOpen={isAlertOpen}
         toggle={toggleAlert}

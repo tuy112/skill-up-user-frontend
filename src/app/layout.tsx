@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/global.css";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,9 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
