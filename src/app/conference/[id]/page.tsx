@@ -1,18 +1,17 @@
 // src/app/conference/[id]/page.tsx
 
-import ConferenceDetailLayout from "./ConferenceDetailLayout";
-import { getEventDetail } from "@/api/events";
+"use client";
 
-export default async function ConferenceDetailPage({
+import { use } from "react";
+import ConferenceDetailLayout from "./ConferenceDetailLayout";
+
+export default function ConferenceDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const resolvedParams = await params;
+  const resolvedParams = use(params);
   const eventId = Number(resolvedParams.id);
 
-  // SSR: 초기 데이터 서버에서 로드
-  const initialEventDetail = await getEventDetail(eventId);
-
-  return <ConferenceDetailLayout initialEventDetail={initialEventDetail} />;
+  return <ConferenceDetailLayout eventId={eventId} />;
 }
