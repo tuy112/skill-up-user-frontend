@@ -31,7 +31,7 @@ export default function ConferencePageLayout({
     []
   );
 
-  const { data: eventList } = useEventList(
+  const { data: eventList, isLoading } = useEventList(
     searchParams,
     initialEventList,
     initialParams
@@ -44,6 +44,7 @@ export default function ConferencePageLayout({
       eventList={eventList || []}
       FilterView={ConferenceFilterView}
       emptyUrl="/conference/create"
+      isLoadingEventList={isLoading}
     />
   );
 }

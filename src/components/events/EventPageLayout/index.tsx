@@ -16,6 +16,8 @@ import { usePageFilters } from "@/components/events/filters/hooks/usePageFilters
 import { ITEMS_PER_PAGE, generatePageOptions } from "@/constants/pagination";
 import styles from "./styles.module.css";
 import { EventSortOption } from "@/constants/event";
+import { useRecommendedEvents } from "@/hooks/useRecommendedEvents";
+import { PAGE_CATEGORY_MAP } from "@/components/events/filters/atoms/pageFilterAtoms";
 
 interface EventPageLayoutProps {
   pageId: "bootcamp" | "conference" | "hackathon" | "mentoring";
@@ -23,6 +25,7 @@ interface EventPageLayoutProps {
   eventList: Event[];
   FilterView: React.ComponentType;
   emptyUrl: string;
+  isLoadingEventList?: boolean;
 }
 
 export default function EventPageLayout({
@@ -31,6 +34,7 @@ export default function EventPageLayout({
   eventList,
   FilterView,
   emptyUrl,
+  isLoadingEventList = false,
 }: EventPageLayoutProps) {
   const {
     selectedRoles,
@@ -48,6 +52,13 @@ export default function EventPageLayout({
   } = usePageFilters({ pageId });
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  // 추천 이벤트 조회 - 검색 결과가 없을 때만 호출 (로딩 중이 아닐 때)
+  const category = PAGE_CATEGORY_MAP[pageId];
+  const shouldFetchRecommended =
+    !isLoadingEventList && eventList.length === 0;
+  const { data: recommendedEvents, isLoading: isLoadingRecommended } =
+    useRecommendedEvents(category, shouldFetchRecommended);
 
   const totalPages = Math.ceil(eventList.length / ITEMS_PER_PAGE);
   const pageOptions = useMemo(
@@ -113,7 +124,19 @@ export default function EventPageLayout({
                 </Button>
               </Flex>
               <div className={styles.cardList}>
-                {/* 추천 행사 데이터는 props로 받을 수 있도록 확장 가능 */}
+                {isLoadingRecommended ? (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천 행사를 불러오는 중...
+                  </Text>
+                ) : recommendedEvents && recommendedEvents.length > 0 ? (
+                  recommendedEvents.slice(0, 3).map((event: Event) => (
+                    <EventCard key={event.id} size="medium" event={event} />
+                  ))
+                ) : (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천할 행사가 없습니다.
+                  </Text>
+                )}
               </div>
             </Flex>
           </>

@@ -12,9 +12,11 @@ import Image from "next/image";
 import Text from "@/components/common/Text";
 import EventCard from "@/components/common/EventCard";
 import Flex from "@/components/common/Flex";
-import { eventListMock } from "@/mocks/eventListMock";
 import { useEventDetail } from "@/hooks/useEventDetail";
+import { useRecommendedEvents } from "@/hooks/useRecommendedEvents";
 import { formatDate, formatPriceWithUnit, getDdayLabel } from "@/utils/format";
+import { EVENT_CATEGORY } from "@/constants/event";
+import { Event } from "@/types/event";
 
 export default function HackathonDetailLayout({
   eventId,
@@ -22,6 +24,8 @@ export default function HackathonDetailLayout({
   eventId: number;
 }) {
   const { data: eventDetail, isLoading } = useEventDetail(eventId);
+  const { data: recommendedEvents, isLoading: isLoadingRecommended } =
+    useRecommendedEvents(EVENT_CATEGORY.COMPETITION_HACKATHON);
 
   if (isLoading) {
     return (
@@ -96,12 +100,25 @@ export default function HackathonDetailLayout({
           <Text typography="head3_m_24" color="black" as="h3">
             이런 행사는 어떠세요?
           </Text>
-          {/* 목업데이터 */}
-          <Flex align="center" gap="0.5rem">
-            <EventCard size="small" event={eventListMock[0]} block />
-            <EventCard size="small" event={eventListMock[1]} block />
-            <EventCard size="small" event={eventListMock[2]} block />
-          </Flex>
+          {isLoadingRecommended ? (
+            <Flex align="center" gap="0.5rem">
+              <Text typography="body1_r_16" color="neutral-40">
+                추천 행사를 불러오는 중...
+              </Text>
+            </Flex>
+          ) : recommendedEvents && recommendedEvents.length > 0 ? (
+            <Flex align="center" gap="0.5rem">
+              {recommendedEvents.slice(0, 3).map((event: Event) => (
+                <EventCard key={event.id} size="small" event={event} block />
+              ))}
+            </Flex>
+          ) : (
+            <Flex align="center" gap="0.5rem">
+              <Text typography="body1_r_16" color="neutral-40">
+                추천할 행사가 없습니다.
+              </Text>
+            </Flex>
+          )}
         </Flex>
       </Flex>
     </Flex>

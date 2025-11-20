@@ -1,5 +1,6 @@
 // src/api/events.ts
 
+import { EventCategory } from "@/constants/event";
 import instance from "./instance";
 import { Event, EventSearchParams } from "@/types/event";
 
@@ -59,5 +60,15 @@ export const updateEvent = async (eventId: number) => {
 // 행사 삭제 API
 export const deleteEvent = async (eventId: number) => {
   const response = await instance.delete(`/events/${eventId}`);
+  return response.data.data;
+};
+
+// "이런 행사는 어때요" 추천 행사 조회 API
+export const getRecommendedEvents = async (category: EventCategory) => {
+  const response = await instance.get("/events/category-page/recommended", {
+    params: {
+      category,
+    },
+  });
   return response.data.data;
 };

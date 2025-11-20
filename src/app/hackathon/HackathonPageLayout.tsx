@@ -31,7 +31,7 @@ export default function HackathonPageLayout({
     []
   );
 
-  const { data: eventList } = useEventList(
+  const { data: eventList, isLoading } = useEventList(
     searchParams,
     initialEventList,
     initialParams
@@ -44,6 +44,7 @@ export default function HackathonPageLayout({
       eventList={eventList || []}
       FilterView={HackathonFilterView}
       emptyUrl="/hackathon/create"
+      isLoadingEventList={isLoading}
     />
   );
 }

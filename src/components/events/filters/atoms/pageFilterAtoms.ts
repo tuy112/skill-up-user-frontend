@@ -53,12 +53,13 @@ export const pageFilterAtomsMap = {
 export type PageId = keyof typeof pageFilterAtomsMap;
 
 // 카테고리 매핑
-const PAGE_CATEGORY_MAP: Record<PageId, EventSearchParams["category"]> = {
-  conference: "CONFERENCE_SEMINAR",
-  bootcamp: "BOOTCAMP_CLUB",
-  hackathon: "COMPETITION_HACKATHON",
-  mentoring: "NETWORKING_MENTORING",
-};
+export const PAGE_CATEGORY_MAP: Record<PageId, EventSearchParams["category"]> =
+  {
+    conference: "CONFERENCE_SEMINAR",
+    bootcamp: "BOOTCAMP_CLUB",
+    hackathon: "COMPETITION_HACKATHON",
+    mentoring: "NETWORKING_MENTORING",
+  };
 
 // Jotai 필터 상태를 API params로 변환하는 derived atom 생성
 export const createEventSearchParamsAtom = (pageId: PageId) => {

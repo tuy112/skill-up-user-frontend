@@ -31,7 +31,7 @@ export default function BootcampPageLayout({
     []
   );
 
-  const { data: eventList } = useEventList(
+  const { data: eventList, isLoading } = useEventList(
     searchParams,
     initialEventList,
     initialParams
@@ -44,6 +44,7 @@ export default function BootcampPageLayout({
       eventList={eventList || []}
       FilterView={BootcampFilterView}
       emptyUrl="/bootcamp/create"
+      isLoadingEventList={isLoading}
     />
   );
 }

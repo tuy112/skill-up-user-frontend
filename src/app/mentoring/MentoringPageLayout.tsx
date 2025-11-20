@@ -31,7 +31,7 @@ export default function MentoringPageLayout({
     []
   );
 
-  const { data: eventList } = useEventList(
+  const { data: eventList, isLoading } = useEventList(
     searchParams,
     initialEventList,
     initialParams
@@ -44,6 +44,7 @@ export default function MentoringPageLayout({
       eventList={eventList || []}
       FilterView={MentoringFilterView}
       emptyUrl="/conference/create"
+      isLoadingEventList={isLoading}
     />
   );
 }
