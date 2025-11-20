@@ -32,6 +32,7 @@ export const createPageFilterAtoms = () => {
     tempFreeFilterAtom: atom<boolean>(false),
     tempStartDateAtom: atom<Date | undefined>(undefined),
     tempEndDateAtom: atom<Date | undefined>(undefined),
+    currentPageAtom: atom<number>(1), // UI 페이지 (1부터 시작)
   };
 };
 
@@ -72,11 +73,12 @@ export const createEventSearchParamsAtom = (pageId: PageId) => {
     const sortOption = get(atoms.sortOptionAtom);
     const startDate = get(atoms.startDateAtom);
     const endDate = get(atoms.endDateAtom);
+    const currentPage = get(atoms.currentPageAtom);
 
     const params: EventSearchParams = {
       category: PAGE_CATEGORY_MAP[pageId],
       sort: sortOption,
-      page: 0, // API는 0부터 시작, 나중에 페이지네이션 atom 추가 가능
+      page: currentPage - 1, // UI는 1부터, API는 0부터 시작
     };
 
     // 선택 필드들 - 값이 있을 때만 추가

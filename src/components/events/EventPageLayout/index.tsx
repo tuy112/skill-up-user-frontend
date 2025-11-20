@@ -2,7 +2,8 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
+import { useAtom } from "jotai";
 import EventCard from "@/components/common/EventCard";
 import EventEmpty from "@/components/events/EventEmpty";
 import EventPageHeader from "@/components/events/EventPageHeader";
@@ -17,7 +18,10 @@ import { ITEMS_PER_PAGE, generatePageOptions } from "@/constants/pagination";
 import styles from "./styles.module.css";
 import { EventSortOption } from "@/constants/event";
 import { useRecommendedEvents } from "@/hooks/useRecommendedEvents";
-import { PAGE_CATEGORY_MAP } from "@/components/events/filters/atoms/pageFilterAtoms";
+import {
+  PAGE_CATEGORY_MAP,
+  pageFilterAtomsMap,
+} from "@/components/events/filters/atoms/pageFilterAtoms";
 
 interface EventPageLayoutProps {
   pageId: "bootcamp" | "conference" | "hackathon" | "mentoring";
@@ -51,7 +55,9 @@ export default function EventPageLayout({
     handleReset,
   } = usePageFilters({ pageId });
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useAtom(
+    pageFilterAtomsMap[pageId].currentPageAtom
+  );
 
   // 추천 이벤트 조회 - 검색 결과가 없을 때만 호출 (로딩 중이 아닐 때)
   const category = PAGE_CATEGORY_MAP[pageId];

@@ -6,30 +6,22 @@ import { useMemo } from "react";
 import { useAtomValue } from "jotai";
 import EventPageLayout from "@/components/events/EventPageLayout";
 import HackathonFilterView from "@/components/events/filters/views/HackathonFilterView";
-import { Event } from "@/types/event";
+import { Event, EventSearchParams } from "@/types/event";
 import { useEventList } from "@/hooks/useEventList";
 import { createEventSearchParamsAtom } from "@/components/events/filters/atoms/pageFilterAtoms";
 
 export default function HackathonPageLayout({
   initialEventList,
+  initialParams,
 }: {
   initialEventList: Event[];
+  initialParams: EventSearchParams;
 }) {
   const searchParamsAtom = useMemo(
     () => createEventSearchParamsAtom("hackathon"),
     []
   );
   const searchParams = useAtomValue(searchParamsAtom);
-
-  // SSR 시 사용한 초기 params
-  const initialParams = useMemo(
-    () => ({
-      category: "COMPETITION_HACKATHON" as const,
-      sort: "latest" as const,
-      page: 0,
-    }),
-    []
-  );
 
   const { data: eventList, isLoading } = useEventList(
     searchParams,
