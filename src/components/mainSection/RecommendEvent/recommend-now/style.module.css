@@ -1,3 +1,30 @@
+/* RecommendNow 전용 클래스 */
+.nowTrackWrap {
+  margin-top: 12px;
+}
+
+.nowTrack {
+  gap: 12px;
+}
+
+.nowTrackInner {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.nowTrackInner::-webkit-scrollbar {
+  display: none;
+}
+
+/* 카드 컨테이너 */
+.nowCard {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
 .bottomRow {
   max-width: 1240px;
   margin: 16px auto 0;
@@ -6,7 +33,7 @@
 .arrowBtn {
   width: 36px;
   height: 36px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
