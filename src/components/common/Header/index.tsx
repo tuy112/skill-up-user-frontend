@@ -5,9 +5,9 @@ import Image from "next/image";
 import SkillUpWhiteLogo from "@/assets/svg/skillUp_white.svg";
 import SkillUpBlackLogo from "@/assets/svg/skillUp_black.svg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
-// import Modal from "../Modal";
-// import LoginContent from "@/components/login/LoginContent";
+
 import EventCategoryTabs from "@/components/common/Header/EventCategoryTabs";
 import Button from "../Button";
 import IconButton from "../IconButton";
@@ -19,13 +19,15 @@ import Alert from "../Alert";
 import { useAuth } from "@/hooks/useAuth";
 import { useLogin } from "@/hooks/useLogin";
 
+import SearchOverlay from "@/components/search/SearchOverlay";
+
 interface HeaderProps {
   variant: "main" | "sub";
 }
 
 export default function Header({ variant }: HeaderProps) {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const toggleModal = () => setIsModalOpen((prev) => !prev);
+  const router = useRouter();
+
   const { isAuthenticated, logout } = useAuth();
   const { mutate: loginMutate, isPending: isLoginPending } = useLogin();
 
@@ -35,6 +37,9 @@ export default function Header({ variant }: HeaderProps) {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // 검색어 기능 (최대 50자)
+  const [headerKeyword, setHeaderKeyword] = useState("");
 
   // 테스트 로그인 핸들러 : 추후 소셜로 변경필요
   const handleTestLogin = () => {
@@ -52,6 +57,9 @@ export default function Header({ variant }: HeaderProps) {
   const handleLogout = () => {
     logout();
   };
+
+  // 검색 오버레이 on / off!!!
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <header
@@ -97,11 +105,27 @@ export default function Header({ variant }: HeaderProps) {
               type="text"
               placeholder="검색어를 입력해주세요."
               className={styles.searchBox}
+              maxLength={50}                         
+              onFocus={() => setIsSearchOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") setIsSearchOpen(true);
+              }}
             />
-            <button className={styles.searchBtn}>
+            <button
+              className={styles.searchBtn}
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="검색 열기"
+            >
               <Image src={SearchIcon} alt="search" width={20} height={20} />
             </button>
           </div>
+
+        {/* 검색 오버레이 */}
+        <SearchOverlay
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+        />
+
           {isMounted && isAuthenticated && (
             <div
               className={styles.profileBtnWrap}
