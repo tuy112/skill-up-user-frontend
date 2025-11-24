@@ -1,0 +1,95 @@
+/* 오버레이 */
+.overlay{
+    position:fixed; inset:0; z-index:9999;
+    display:flex; justify-content:center; align-items:center;
+    background:rgba(0,0,0,.4); backdrop-filter:blur(2px);
+}
+  
+/* 모달 600×542 */
+.modal {
+    width:600px; 
+    height:542px;
+    background:#fff; 
+    border-radius:8px;
+    box-sizing:border-box; 
+    padding:24px 28px;
+    display:flex; 
+    flex-direction:column; 
+    gap:16px;
+}
+  
+.titleRow { 
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+}
+
+.backBtn { 
+    width:24px; 
+    height:24px; 
+    background:none;
+    border:0;
+    cursor:pointer;
+}
+
+.title {
+    font-family:Pretendard, sans-serif;
+    font-weight:600; 
+    font-size:20px; 
+    line-height:140%;
+    letter-spacing:-0.04em; 
+    color:#000000;
+}
+  
+.searchBox {
+    position:relative;
+    width:540px; 
+    height:52px;
+    border-radius:1000px; 
+    background:#fff;
+    padding:6px 6px 6px 20px;
+    box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    display:flex; 
+    align-items:center; 
+    gap:12px;
+}
+
+.searchBox input {
+    flex:1; 
+    height:100%;
+    border:0; 
+    outline:0; 
+    background:transparent;
+    font-size:15px; 
+    color:#333;
+}
+
+.searchBox input::placeholder { 
+    color:#c4c4c4;
+}
+  
+.searchBtn{
+    width:40px; 
+    height:40px; 
+    border-radius:1000px;
+    background:#000000; 
+    color:#fff; 
+    border:0; 
+    cursor:pointer;
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+}
+  
+/* 최근 검색어 */
+.recentHead{ display:flex; justify-content:space-between; align-items:center; margin-top:28px; }
+.recentTitle{ font-size:14px; color:#000; }
+.clearAll{ background:none; border:0; color:#8A8A8A; font-size:13px; cursor:pointer; }
+  
+.recentList{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.chip{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:8px 12px; background:#F3F3F3; border-radius:8px;
+    font-size:13px; color:#333; border:1px solid #EAEAEA;
+}
+.chipClose{ background:none; border:0; cursor:pointer; font-size:14px; line-height:1; }

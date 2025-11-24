@@ -1,5 +1,5 @@
-// 지금 주목받고 있어요
-// import { useState } from "react";
+// 추천 행사 - 지금 주목받고 있어요
+import { useRef } from "react";
 import Flex from "@/components/common/Flex";
 import EventCard from "@/components/common/EventCard";
 import globalStyles from "../style.module.css";
@@ -7,18 +7,17 @@ import localStyles from "./style.module.css";
 import TabMenu from "@/components/common/Tab";
 import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
+
 import { eventListMock } from "@/mocks/eventListMock";
 
 export default function RecommendNow() {
-  // const PAGE_SIZE = 4;
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const totalPages = Math.max(1, Math.ceil(eventListMock.length / PAGE_SIZE));
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const prev = () => {
-    console.log("이전");
-  };
-  const next = () => {
-    console.log("다음");
+  const scroll = (dir: "prev" | "next") => {
+    const el = trackRef.current;
+    if (!el) return;
+    const step = Math.round(el.clientWidth * 0.9);
+    el.scrollBy({ left: dir === "next" ? step : -step, behavior: "smooth" });
   };
 
   return (
@@ -44,22 +43,24 @@ export default function RecommendNow() {
         />
       </Flex>
 
-      <Flex wrap="wrap" gap="12px" className={globalStyles.cardList}>
-        {eventListMock.map((item) => (
-          <EventCard key={item.id} size="large" event={item} />
-        ))}
-      </Flex>
+      <div className={localStyles.nowTrackWrap}>
+        <Flex gap="12px" className={localStyles.nowTrack} as="div">
+          <div ref={trackRef} className={localStyles.nowTrackInner}>
+            {eventListMock.map((item) => (
+              <div key={item.id} className={localStyles.nowCard}>
+                <EventCard size="large" event={item} />
+              </div>
+            ))}
+          </div>
+        </Flex>
+      </div>
 
-      <Flex
-        align="center"
-        justify="space-between"
-        className={localStyles.bottomRow}
-      >
-        <Flex align="center" gap="20px">
+      <Flex align="center" justify="space-between" className={localStyles.bottomRow}>
+        <Flex align="center" gap="12px">
           <button
             type="button"
-            className={`${localStyles.arrowBtn} ${localStyles.lightBtn}`}
-            onClick={prev}
+            className={localStyles.arrowBtn}
+            onClick={() => scroll("prev")}
             aria-label="이전"
           >
             <ChevronLeftIcon />
@@ -67,7 +68,7 @@ export default function RecommendNow() {
           <button
             type="button"
             className={`${localStyles.arrowBtn} ${localStyles.darkBtn}`}
-            onClick={next}
+            onClick={() => scroll("next")}
             aria-label="다음"
           >
             <ChevronRightIcon />
