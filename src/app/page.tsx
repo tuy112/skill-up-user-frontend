@@ -1,11 +1,9 @@
-/* 
+/*
   작성자 : 김재혁
   작성일 : 2025-08-21
   최종 수정일 : 2025-10-02
 */
-
 "use client";
-import { useState } from "react";
 import Link from "next/link";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
@@ -17,17 +15,9 @@ import Club from "@/components/mainSection/Club";
 import RecommendContents from "@/components/mainSection/RecommendContents";
 import Bootcamp from "@/components/mainSection/Bootcamp";
 import IconMenu from "@/components/mainSection/MainVisual/IconMenu";
-import LoginContent from "@/components/login/LoginContent";
-import Modal from "@/components/common/Modal";
 import NewsletterCTA from "@/components/mainSection/NewsletterCTA";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   return (
     <div id="wrap">
       {/* 시각장애인용 */}
@@ -64,10 +54,6 @@ export default function Home() {
       </main>
 
       <Footer />
-
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
-        <LoginContent />
-      </Modal>
     </div>
   );
 }
