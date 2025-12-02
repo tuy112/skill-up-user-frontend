@@ -1,10 +1,4 @@
-/* src/components/login/LoginModal/style.module.css */
-
-/* 
-  작성자 : 김은혜
-  작성일 : 2025-09-22
-  최종 수정일 : 2025-09-22
-*/
+/* src/components/login/LoginContent/style.module.css */
 
 .loginModal {
   width: 78.75rem;
@@ -101,27 +95,6 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-
-  h2 {
-    color: var(--Common-black);
-
-    font-size: 1.875rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.075rem;
-  }
-
-  p {
-    color: var(--Neutral-40);
-    text-align: center;
-
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.04rem;
-  }
 }
 
 .loginModalRightInnerSocialLogin {
@@ -129,6 +102,13 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+}
+
+.testLoginButtonWrapper {
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--Neutral-90);
 }
 
 .loginModalRightInnerTerms {

@@ -8,7 +8,7 @@ import ProfileCard from "@/components/myPage/bookmarks/ProfileCard";
 import Pagination from "@/components/common/Pagination";
 import Dropdown, { DropdownOption } from "@/components/common/Dropdown";
 import TabBar from "@/components/common/TabBar";
-import { Event } from "@/types/event/event";
+import { Event } from "@/types/event";
 import Flex from "@/components/common/Flex";
 
 const sortOptions: DropdownOption[] = [
@@ -22,10 +22,7 @@ export default function BookmarkPageLayout({
   eventList: Event[];
 }) {
   return (
-    <Flex
-      gap={1}
-      className={styles.container}
-    >
+    <Flex gap={1} className={styles.container}>
       {/* 목업 데이터 */}
       <ProfileCard
         name="홍길동"

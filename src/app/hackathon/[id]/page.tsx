@@ -1,16 +1,17 @@
 // src/app/hackathon/[id]/page.tsx
 
-import HackathonDetailLayout from "./HackathonDetailLayout";
-import { eventDetailMock } from "@/mocks/eventDetailMock";
+"use client";
 
-export default async function HackathonDetailPage({
+import { use } from "react";
+import HackathonDetailLayout from "./HackathonDetailLayout";
+
+export default function HackathonDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const resolvedParams = await params;
-  const eventDetail = eventDetailMock.find(
-    (event) => event.id === resolvedParams.id
-  );
-  return <HackathonDetailLayout eventDetail={eventDetail!} />;
+  const resolvedParams = use(params);
+  const eventId = Number(resolvedParams.id);
+
+  return <HackathonDetailLayout eventId={eventId} />;
 }

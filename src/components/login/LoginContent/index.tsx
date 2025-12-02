@@ -1,10 +1,4 @@
-// src/components/login/LoginModal/index.tsx
-
-/* 
-  작성자 : 김은혜
-  작성일 : 2025-09-22
-  최종 수정일 : 2025-09-22
-*/
+// src/components/login/LoginContent/index.tsx
 "use client";
 
 import styles from "./style.module.css";
@@ -16,8 +10,31 @@ import SocialLoginButton from "../SocialLoginButton";
 import Google from "@/assets/svg/googleIcon.svg";
 import Kakao from "@/assets/svg/kakaoIcon.svg";
 import Naver from "@/assets/svg/naverIcon.svg";
+import Text from "@/components/common/Text";
+import Button from "@/components/common/Button";
+import { useLogin } from "@/hooks/useLogin";
 
-export default function LoginContent() {
+type SocialType = "google" | "kakao" | "naver";
+
+interface LoginContentProps {
+  onSocialLoginClick: (socialType: SocialType) => void;
+  onLoginSuccess?: () => void;
+}
+
+export default function LoginContent({
+  onSocialLoginClick,
+  onLoginSuccess,
+}: LoginContentProps) {
+  const { mutate: testLogin, isPending } = useLogin();
+  const isDevelopment = process.env.NODE_ENV === "development";
+
+  const handleTestLogin = () => {
+    testLogin(undefined, {
+      onSuccess: () => {
+        onLoginSuccess?.();
+      },
+    });
+  };
   return (
     <div className={styles.loginModal}>
       <div className={styles.loginModalLeft}>
@@ -49,8 +66,12 @@ export default function LoginContent() {
               height={35.78}
             />
             <div className={styles.loginModalRightInnerTitleText}>
-              <h2>스킬업에 오신 것을 환영합니다</h2>
-              <p>다양한 IT 행사 정보를 만나보세요</p>
+              <Text typography="head2_sb_30" color="black">
+                스킬업에 오신 것을 환영합니다
+              </Text>
+              <Text typography="body1_r_16" color="neutral-40">
+                다양한 IT 행사 정보를 만나보세요
+              </Text>
             </div>
           </div>
           <div className={styles.loginModalRightInner}>
@@ -58,25 +79,42 @@ export default function LoginContent() {
               <SocialLoginButton
                 src={Google}
                 social="Google"
-                onClick={() => {}}
+                onClick={() => onSocialLoginClick("google")}
               />
               <SocialLoginButton
                 src={Kakao}
                 social="Kakao"
-                onClick={() => {}}
+                onClick={() => onSocialLoginClick("kakao")}
               />
               <SocialLoginButton
                 src={Naver}
                 social="Naver"
-                onClick={() => {}}
+                onClick={() => onSocialLoginClick("naver")}
               />
+
+              {/* 개발 환경에서만 표시되는 테스트 로그인 버튼 */}
+              {isDevelopment && (
+                <div className={styles.testLoginButtonWrapper}>
+                  <Button
+                    variant="primary"
+                    size="large"
+                    onClick={handleTestLogin}
+                    block
+                    disabled={isPending}
+                  >
+                    {isPending ? "로그인 중..." : "🔧 테스트 로그인 (개발용)"}
+                  </Button>
+                </div>
+              )}
             </div>
             <div className={styles.loginModalRightInnerTerms}>
               <p>
                 본인은 만 14세 이상이며, <a>서비스 이용약관</a>과{" "}
                 <a>개인정보 처리방침</a>에 동의하고,
               </p>
-              <p>서비스 제공을 위해 이름과 이메일 수집에 동의합니다.</p>
+              <Text typography="label4_m_12" color="neutral-80">
+                서비스 제공을 위해 이름과 이메일 수집에 동의합니다.
+              </Text>
             </div>
           </div>
         </div>
@@ -84,3 +122,5 @@ export default function LoginContent() {
     </div>
   );
 }
+
+export type { SocialType };

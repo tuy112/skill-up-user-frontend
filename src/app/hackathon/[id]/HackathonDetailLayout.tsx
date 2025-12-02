@@ -1,5 +1,7 @@
 // src/app/hackathon/[id]/HackathonDetailLayout.tsx
 
+"use client";
+
 import styles from "./styles.module.css";
 import StickyApplySection from "@/components/events/detail/StickyApplySection";
 import EventInfoCard from "@/components/events/detail/EventInfoCard";
@@ -10,26 +12,51 @@ import Image from "next/image";
 import Text from "@/components/common/Text";
 import EventCard from "@/components/common/EventCard";
 import Flex from "@/components/common/Flex";
-import { eventListMock } from "@/mocks/eventListMock";
-import { EventDetail } from "@/types/event/event";
+import { useEventDetail } from "@/hooks/useEventDetail";
+import { useRecommendedEvents } from "@/hooks/useRecommendedEvents";
+import { formatDate, formatPriceWithUnit, getDdayLabel } from "@/utils/format";
+import { EVENT_CATEGORY } from "@/constants/event";
+import { Event } from "@/types/event";
 
 export default function HackathonDetailLayout({
-  eventDetail,
+  eventId,
 }: {
-  eventDetail: EventDetail;
+  eventId: number;
 }) {
+  const { data: eventDetail, isLoading } = useEventDetail(eventId);
+  const { data: recommendedEvents, isLoading: isLoadingRecommended } =
+    useRecommendedEvents(EVENT_CATEGORY.COMPETITION_HACKATHON);
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" style={{ minHeight: "80vh" }}>
+        <Text typography="body1_r_16" color="neutral-40">
+          로딩 중...
+        </Text>
+      </Flex>
+    );
+  }
+
+  if (!eventDetail) return null;
+
   return (
     <Flex gap="1rem" className={styles.container}>
       <StickyApplySection
         category={eventDetail.category}
         title={eventDetail.title}
-        date={eventDetail.date}
-        place={eventDetail.place}
-        price={eventDetail.price}
-        phoneNumber={eventDetail.phoneNumber}
-        image={eventDetail.image}
+        eventStart={formatDate(eventDetail.eventStart)}
+        eventEnd={formatDate(eventDetail.eventEnd)}
+        place={eventDetail.locationText}
+        price={eventDetail.isFree ? 0 : eventDetail.price}
+        phoneNumber={eventDetail.contact}
+        image={eventDetail.thumbnailUrl}
+        hashTags={eventDetail.hashTags}
       />
-      <Flex direction="column" gap="6.25rem" style={{ marginBottom: "11.25rem" }}>
+      <Flex
+        direction="column"
+        gap="6.25rem"
+        style={{ marginBottom: "11.25rem" }}
+      >
         <Flex direction="column" gap="0.75rem">
           <EventInfoCard title="행사 설명">
             {eventDetail.description}
@@ -37,17 +64,18 @@ export default function HackathonDetailLayout({
           <EventInfoCard title="모집 기간" isDate>
             <Flex align="center" gap="1rem">
               <Text typography="body1_r_16" color="neutral-20">
-                {eventDetail.date}
+                {formatDate(eventDetail.recruitStart)} ~{" "}
+                {formatDate(eventDetail.recruitEnd)}
               </Text>
-              <Badge label="N일 남았어요" />
+              <Badge label={getDdayLabel(eventDetail.recruitEnd)} />
             </Flex>
           </EventInfoCard>
           <EventInfoCard title="참가비">
             <Flex align="center" gap="1rem">
               <Text typography="body1_r_16" color="neutral-20">
-                {eventDetail.price}
+                {formatPriceWithUnit(eventDetail.price, eventDetail.isFree)}
               </Text>
-              <Badge label="무료" />
+              {eventDetail.isFree && <Badge label="무료" />}
             </Flex>
           </EventInfoCard>
           <EventInfoCard title="장소">
@@ -55,13 +83,13 @@ export default function HackathonDetailLayout({
               <Flex align="center" gap="0.375rem">
                 <Image src={GlobeIcon} alt="globe icon" />
                 <Text typography="body1_r_16" color="neutral-20">
-                  {eventDetail.online ? "온라인" : "오프라인"}
+                  {eventDetail.isOnline ? "온라인" : "오프라인"}
                 </Text>
               </Flex>
               <Flex align="center" gap="0.375rem">
                 <Image src={CursorIcon} alt="cursor icon" />
                 <Text typography="body1_r_16" color="neutral-20">
-                  {eventDetail.place}
+                  {eventDetail.locationText}
                 </Text>
                 {/* TODO : 추후 네이버 지도 api 추가 */}
               </Flex>
@@ -72,12 +100,25 @@ export default function HackathonDetailLayout({
           <Text typography="head3_m_24" color="black" as="h3">
             이런 행사는 어떠세요?
           </Text>
-          {/* 목업데이터 */}
-          <Flex align="center" gap="0.5rem">
-            <EventCard size="small" event={eventListMock[0]} block />
-            <EventCard size="small" event={eventListMock[1]} block />
-            <EventCard size="small" event={eventListMock[2]} block />
-          </Flex>
+          {isLoadingRecommended ? (
+            <Flex align="center" gap="0.5rem">
+              <Text typography="body1_r_16" color="neutral-40">
+                추천 행사를 불러오는 중...
+              </Text>
+            </Flex>
+          ) : recommendedEvents && recommendedEvents.length > 0 ? (
+            <Flex align="center" gap="0.5rem">
+              {recommendedEvents.slice(0, 3).map((event: Event) => (
+                <EventCard key={event.id} size="small" event={event} block />
+              ))}
+            </Flex>
+          ) : (
+            <Flex align="center" gap="0.5rem">
+              <Text typography="body1_r_16" color="neutral-40">
+                추천할 행사가 없습니다.
+              </Text>
+            </Flex>
+          )}
         </Flex>
       </Flex>
     </Flex>

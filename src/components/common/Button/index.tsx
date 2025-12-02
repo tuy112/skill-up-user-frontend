@@ -18,6 +18,7 @@ interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   opacity?: number;
+  block?: boolean;
 }
 
 export default function Button({
@@ -29,9 +30,12 @@ export default function Button({
   onClick,
   icon,
   opacity,
+  block,
 }: ButtonProps) {
   const backgroundStyle =
-  opacity !== undefined ? { backgroundColor: `rgba(0, 0, 0, ${opacity})` } : undefined;
+    opacity !== undefined
+      ? { backgroundColor: `rgba(0, 0, 0, ${opacity})` }
+      : undefined;
 
   return (
     <button
@@ -48,6 +52,7 @@ export default function Button({
       } ${variant === "textOnly" ? styles.textOnly : ""}
       } ${variant === "iconOpacity" ? styles.iconOpacity : ""}
       } ${disabled ? styles.disabled : ""}
+      ${block ? styles.block : ""}
         `}
       onClick={onClick}
       disabled={disabled}

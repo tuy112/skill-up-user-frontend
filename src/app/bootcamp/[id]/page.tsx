@@ -1,16 +1,17 @@
 // src/app/bootcamp/[id]/page.tsx
 
-import BootcampDetailLayout from "./BootcampDetailLayout";
-import { eventDetailMock } from "@/mocks/eventDetailMock";
+"use client";
 
-export default async function BootcampDetailPage({
+import { use } from "react";
+import BootcampDetailLayout from "./BootcampDetailLayout";
+
+export default function BootcampDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const resolvedParams = await params;
-  const eventDetail = eventDetailMock.find(
-    (event) => event.id === resolvedParams.id
-  );
-  return <BootcampDetailLayout eventDetail={eventDetail!} />;
+  const resolvedParams = use(params);
+  const eventId = Number(resolvedParams.id);
+
+  return <BootcampDetailLayout eventId={eventId} />;
 }

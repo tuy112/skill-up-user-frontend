@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./style.module.css";
+import SkillUpSymbolBlack from "@/assets/svg/skillUp_symbol_black.svg";
 
 interface ErrorPageProps {
   type: "404" | "500" | "network";
@@ -64,7 +65,12 @@ export default function ErrorPage({ type }: ErrorPageProps) {
   return (
     <div className={styles.errorWrap}>
       <div className={styles.logo}>
-        <Image src="/logo_symbol.svg" alt="Skill Up Symbol" width={48} height={48} />
+        <Image
+          src={SkillUpSymbolBlack}
+          alt="Skill Up Symbol"
+          width={48}
+          height={48}
+        />
       </div>
 
       <div className={styles.textBox}>

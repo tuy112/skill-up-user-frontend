@@ -4,7 +4,7 @@
 
 import OnOfflineFilter from "../filterElements/OnOfflineFilter";
 import FreeFilter from "../filterElements/FreeFilter";
-import styles from "./styles.module.css";
+import Flex from "@/components/common/Flex";
 import { usePageFilters } from "../../filters/hooks/usePageFilters";
 
 export default function BootcampFilterView() {
@@ -15,7 +15,7 @@ export default function BootcampFilterView() {
     setTempFreeFilter,
   } = usePageFilters({ pageId: "bootcamp" });
   return (
-    <div className={styles.bootcampFilterView}>
+    <Flex direction="column" gap={1.5}>
       <OnOfflineFilter
         onSelect={setTempOnOfflineFilter}
         selected={tempOnOfflineFilter}
@@ -25,6 +25,6 @@ export default function BootcampFilterView() {
         setChecked={setTempFreeFilter}
         label="무료(국비교육)만 보기"
       />
-    </div>
+    </Flex>
   );
 }

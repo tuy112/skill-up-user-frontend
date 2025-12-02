@@ -1,0 +1,15 @@
+/* src/app/article/styles.module.css */
+
+.container {
+  max-width: 77.5rem;
+  margin: 0 auto;
+  padding-bottom: 12.5rem;
+  width: 100%;
+}
+
+.articleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.75rem 0.75rem;
+  width: 100%;
+}

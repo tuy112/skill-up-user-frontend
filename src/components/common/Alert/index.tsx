@@ -47,7 +47,7 @@ export default function Alert({
             <CautionIcon color="var(--Primary-strong)" />
           </div>
           <div className={styles.alertMessage}>
-            <Text typography="sub1_m_20" color="black">
+            <Text typography="head4_sb_20" color="black">
               {title}
             </Text>
             <Text

@@ -3,8 +3,8 @@
 import { DropdownOption } from "@/components/common/Dropdown";
 
 export const SORT_OPTIONS: DropdownOption[] = [
-  { label: "인기순", value: "popular" },
-  { label: "최신등록순", value: "recent" },
+  { label: "인기순", value: "popularity" },
+  { label: "최신등록순", value: "latest" },
   { label: "모집마감순", value: "deadline" },
 ];
 

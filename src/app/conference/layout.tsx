@@ -1,6 +1,7 @@
 // src/app/conference/layout.tsx
 
 import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 export default function ConferenceLayout({
   children,
@@ -11,6 +12,7 @@ export default function ConferenceLayout({
     <>
       <Header variant="sub" />
       {children}
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 // src/app/hackathon/layout.tsx
 
 import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 export default function HackathonLayout({
   children,
@@ -11,6 +12,7 @@ export default function HackathonLayout({
     <>
       <Header variant="sub" />
       {children}
+      <Footer />
     </>
   );
 }

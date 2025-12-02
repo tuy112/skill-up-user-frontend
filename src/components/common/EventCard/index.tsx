@@ -13,7 +13,8 @@ import Text from "@/components/common/Text";
 import IconButton from "@/components/common/IconButton";
 import Button from "@/components/common/Button";
 import Flex from "@/components/common/Flex";
-import { Event } from "@/types/event/event";
+import { Event } from "@/types/event";
+import { EVENT_CATEGORY_LABEL } from "@/constants/event";
 
 interface EventCardProps {
   size: "small" | "medium" | "large" | "block";
@@ -22,9 +23,18 @@ interface EventCardProps {
 }
 
 export default function EventCard({ size, event, block }: EventCardProps) {
-  // 나중에 id 기반으로 url 이동해야함.
-  const { title, date, place, price, category, url, image, badgeLabel } = event;
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const {
+    id,
+    title,
+    scheduleText,
+    locationText,
+    priceText,
+    category,
+    thumbnailUrl,
+    d_dayLabel,
+    bookmarked,
+  } = event;
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const router = useRouter();
   const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -32,11 +42,17 @@ export default function EventCard({ size, event, block }: EventCardProps) {
     setIsBookmarked(!isBookmarked);
   };
 
+  // 이미지 URL이 없으면 placeholder 사용
+  const imageSrc = thumbnailUrl || "/images/placeholder-event.png";
+  const eventUrl = `/conference/${id}`;
+
+  const categoryBadgeLabel = EVENT_CATEGORY_LABEL[category] || "";
+
   return (
     <Flex
       direction="column"
       gap="1rem"
-      onClick={() => router.push(url || "/")}
+      onClick={() => router.push(eventUrl)}
       className={`${styles.eventCard} ${
         size === "large"
           ? styles.large
@@ -46,11 +62,11 @@ export default function EventCard({ size, event, block }: EventCardProps) {
       } ${block ? styles.block : ""}`}
     >
       <div className={styles.eventCardImage}>
-        {/* 목업 이미지 */}
-        <Image src={image} alt="Event Card Image" fill priority />
+        {/* 추후 바뀔 수도 있음 */}
+        <img src={imageSrc} alt="Event Card Image" />
 
         <Flex justify="space-between" className={styles.eventCardImageOverlay}>
-          <Badge label={badgeLabel || ""} variant="opacity" />
+          <Badge label={d_dayLabel || ""} variant="opacity" />
           <IconButton
             variant="opacity"
             size="large"
@@ -69,7 +85,7 @@ export default function EventCard({ size, event, block }: EventCardProps) {
       <Flex direction="column" gap="1rem" style={{ padding: "0 1rem" }}>
         <Flex direction="column" gap="0.75rem">
           <Flex direction="column" gap="0.25rem">
-            <Badge label={category} />
+            <Badge label={categoryBadgeLabel} />
             {size === "large" || size === "small" ? (
               <Text
                 typography="head3_m_24"
@@ -98,7 +114,7 @@ export default function EventCard({ size, event, block }: EventCardProps) {
                 color="neutral-40"
                 className={styles.eventCardContentBodyDatePlaceItemText}
               >
-                {date}
+                {scheduleText}
               </Text>
             </Flex>
             <Flex align="center" gap="0.5rem">
@@ -108,7 +124,7 @@ export default function EventCard({ size, event, block }: EventCardProps) {
                 color="neutral-40"
                 className={styles.eventCardContentBodyDatePlaceItemText}
               >
-                {place}
+                {locationText}
               </Text>
             </Flex>
           </Flex>
@@ -117,9 +133,9 @@ export default function EventCard({ size, event, block }: EventCardProps) {
           <Flex justify="space-between">
             <Flex align="center" gap="0.5rem">
               <Text typography="sub2_m_18" color="black">
-                {price}
+                {priceText}
               </Text>
-              {price === "0원" && <Badge label="무료" />}
+              {priceText === "0원" && <Badge label="무료" />}
             </Flex>
             {size === "large" && (
               <Button
@@ -128,7 +144,7 @@ export default function EventCard({ size, event, block }: EventCardProps) {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  router.push(url || "/");
+                  router.push(eventUrl);
                 }}
               >
                 자세히 보기

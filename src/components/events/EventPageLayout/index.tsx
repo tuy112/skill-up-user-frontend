@@ -2,7 +2,8 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
+import { useAtom } from "jotai";
 import EventCard from "@/components/common/EventCard";
 import EventEmpty from "@/components/events/EventEmpty";
 import EventPageHeader from "@/components/events/EventPageHeader";
@@ -11,25 +12,35 @@ import Button from "@/components/common/Button";
 import Flex from "@/components/common/Flex";
 import Text from "@/components/common/Text";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
-import { Event } from "@/types/event/event";
+import { Event } from "@/types/event";
 import { usePageFilters } from "@/components/events/filters/hooks/usePageFilters";
 import { ITEMS_PER_PAGE, generatePageOptions } from "@/constants/pagination";
 import styles from "./styles.module.css";
+import { EventSortOption } from "@/constants/event";
+import { useRecommendedEvents } from "@/hooks/useRecommendedEvents";
+import {
+  PAGE_CATEGORY_MAP,
+  pageFilterAtomsMap,
+} from "@/components/events/filters/atoms/pageFilterAtoms";
 
 interface EventPageLayoutProps {
   pageId: "bootcamp" | "conference" | "hackathon" | "mentoring";
   title: string;
   eventList: Event[];
+  total: number;
   FilterView: React.ComponentType;
   emptyUrl: string;
+  isLoadingEventList?: boolean;
 }
 
 export default function EventPageLayout({
   pageId,
   title,
   eventList,
+  total,
   FilterView,
   emptyUrl,
+  isLoadingEventList = false,
 }: EventPageLayoutProps) {
   const {
     selectedRoles,
@@ -46,9 +57,17 @@ export default function EventPageLayout({
     handleReset,
   } = usePageFilters({ pageId });
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useAtom(
+    pageFilterAtomsMap[pageId].currentPageAtom
+  );
 
-  const totalPages = Math.ceil(eventList.length / ITEMS_PER_PAGE);
+  // 추천 이벤트 조회 - 검색 결과가 없을 때만 호출 (로딩 중이 아닐 때)
+  const category = PAGE_CATEGORY_MAP[pageId];
+  const shouldFetchRecommended = !isLoadingEventList && eventList.length === 0;
+  const { data: recommendedEvents, isLoading: isLoadingRecommended } =
+    useRecommendedEvents(category, shouldFetchRecommended);
+
+  const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
   const pageOptions = useMemo(
     () => generatePageOptions(totalPages),
     [totalPages]
@@ -66,10 +85,15 @@ export default function EventPageLayout({
   };
 
   return (
-    <Flex direction="column" align="flex-start" gap={1.25} className={styles.container}>
+    <Flex
+      direction="column"
+      align="flex-start"
+      gap={1.25}
+      className={styles.container}
+    >
       <EventPageHeader
         title={title}
-        count={eventList.length}
+        count={total}
         selectedRoles={selectedRoles}
         onRolesChange={setSelectedRoles}
         onOfflineFilter={onOfflineFilter}
@@ -83,16 +107,25 @@ export default function EventPageLayout({
           setTempFreeFilter(false);
         }}
         sortOption={sortOption}
-        onSortChange={setSortOption}
+        onSortChange={(value) => setSortOption(value as EventSortOption)}
         onApply={handleApply}
         onReset={handleReset}
         FilterView={FilterView}
       />
 
       <Flex direction="column" gap={6.25} style={{ width: "100%" }}>
-        {eventList.length === 0 ? (
+        {total > 0 && eventList.length === 0 ? (
+          // total은 있는데 현재 페이지에 데이터가 없는 경우 (페이지 범위 초과)
           <>
-            <EventEmpty title={title} url={emptyUrl} />
+            <EventEmpty
+              description={
+                <div style={{ textAlign: "center" }}>
+                  조건에 맞는 행사가 없어요. <br /> 조건을 다시 설정해보세요
+                </div>
+              }
+              url={emptyUrl}
+              buttonText="행사 등록하기"
+            />
             <Flex direction="column" gap={1}>
               <Flex align="center" justify="space-between">
                 <Text typography="head3_m_24" color="black" as="h3">
@@ -107,11 +140,66 @@ export default function EventPageLayout({
                 </Button>
               </Flex>
               <div className={styles.cardList}>
-                {/* 추천 행사 데이터는 props로 받을 수 있도록 확장 가능 */}
+                {isLoadingRecommended ? (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천 행사를 불러오는 중...
+                  </Text>
+                ) : recommendedEvents && recommendedEvents.length > 0 ? (
+                  recommendedEvents
+                    .slice(0, 3)
+                    .map((event: Event) => (
+                      <EventCard key={event.id} size="medium" event={event} />
+                    ))
+                ) : (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천할 행사가 없습니다.
+                  </Text>
+                )}
+              </div>
+            </Flex>
+          </>
+        ) : eventList.length === 0 ? (
+          // total도 0이고 데이터도 없는 경우 (실제로 데이터가 없음)
+          <>
+            <EventEmpty
+              description={<>{title}에 등록된 행사가 없어요</>}
+              url={emptyUrl}
+              buttonText="행사 등록하기"
+            />
+            <Flex direction="column" gap={1}>
+              <Flex align="center" justify="space-between">
+                <Text typography="head3_m_24" color="black" as="h3">
+                  이런 행사는 어떠세요?
+                </Text>
+                <Button
+                  variant="textOnly"
+                  icon={<ChevronRightIcon />}
+                  size="medium"
+                >
+                  IT 행사 더보기
+                </Button>
+              </Flex>
+              <div className={styles.cardList}>
+                {isLoadingRecommended ? (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천 행사를 불러오는 중...
+                  </Text>
+                ) : recommendedEvents && recommendedEvents.length > 0 ? (
+                  recommendedEvents
+                    .slice(0, 3)
+                    .map((event: Event) => (
+                      <EventCard key={event.id} size="medium" event={event} />
+                    ))
+                ) : (
+                  <Text typography="body1_r_16" color="neutral-40">
+                    추천할 행사가 없습니다.
+                  </Text>
+                )}
               </div>
             </Flex>
           </>
         ) : (
+          // 데이터가 있는 경우
           <Flex direction="column" gap={6.25} style={{ width: "100%" }}>
             <div className={styles.cardList}>
               {paginatedEvents.map((item) => (

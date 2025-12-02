@@ -1,7 +1,7 @@
 // src/hooks/useUser.ts
 
 import { useQuery } from "@tanstack/react-query";
-import { getUserData } from "@/api/user/user";
+import { getUserData } from "@/api/user";
 import { useAuth } from "./useAuth";
 import { useSetAtom } from "jotai";
 import { userNameAtom } from "@/store/authAtoms";

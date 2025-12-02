@@ -4,7 +4,7 @@
 
 import OnOfflineFilter from "../filterElements/OnOfflineFilter";
 import FreeFilter from "../filterElements/FreeFilter";
-import styles from "./styles.module.css";
+import Flex from "@/components/common/Flex";
 import { usePageFilters } from "../../filters/hooks/usePageFilters";
 
 export default function ConferenceFilterView() {
@@ -15,12 +15,12 @@ export default function ConferenceFilterView() {
     setTempFreeFilter,
   } = usePageFilters({ pageId: "conference" });
   return (
-    <div className={styles.conferenceFilterView}>
+    <Flex direction="column" gap={1.5}>
       <OnOfflineFilter
         onSelect={setTempOnOfflineFilter}
         selected={tempOnOfflineFilter}
       />
       <FreeFilter checked={tempFreeFilter} setChecked={setTempFreeFilter} />
-    </div>
+    </Flex>
   );
 }

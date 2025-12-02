@@ -6,8 +6,9 @@ import SkillUpWhiteLogo from "@/assets/svg/skillUp_white.svg";
 import SkillUpBlackLogo from "@/assets/svg/skillUp_black.svg";
 import Link from "next/link";
 import styles from "./styles.module.css";
-// import Modal from "../Modal";
-// import LoginContent from "@/components/login/LoginContent";
+import Modal from "../Modal";
+import LoginContent, { SocialType } from "@/components/login/LoginContent";
+import TermsAgreementContent from "@/components/login/TermsAgreementContent";
 import EventCategoryTabs from "@/components/common/Header/EventCategoryTabs";
 import Button from "../Button";
 import IconButton from "../IconButton";
@@ -17,17 +18,16 @@ import ProfileModal from "@/components/login/ProfileModal";
 import LogoDefaultImg from "@/assets/images/logoDefaultImg.png";
 import Alert from "../Alert";
 import { useAuth } from "@/hooks/useAuth";
-import { useLogin } from "@/hooks/useLogin";
+import { getSocialLogin } from "@/api/auth";
 
 interface HeaderProps {
   variant: "main" | "sub";
 }
 
 export default function Header({ variant }: HeaderProps) {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const toggleModal = () => setIsModalOpen((prev) => !prev);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen((prev) => !prev);
   const { isAuthenticated, logout } = useAuth();
-  const { mutate: loginMutate, isPending: isLoginPending } = useLogin();
 
   // 클라이언트 마운트 체크 (Hydration 깜빡임 방지)
   const [isMounted, setIsMounted] = useState(false);
@@ -36,21 +36,59 @@ export default function Header({ variant }: HeaderProps) {
     setIsMounted(true);
   }, []);
 
-  // 테스트 로그인 핸들러 : 추후 소셜로 변경필요
-  const handleTestLogin = () => {
-    loginMutate();
-  };
-
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
 
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const toggleAlert = () => setIsAlertOpen((prev) => !prev);
 
+  // 약관 동의 모달 상태
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const [pendingSocialType, setPendingSocialType] = useState<SocialType | null>(
+    null
+  );
+
   const profileBtnRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleSocialLoginClick = (socialType: SocialType) => {
+    setPendingSocialType(socialType);
+    setIsTermsModalOpen(true);
+  };
+
+  const handleTermsConfirm = async () => {
+    if (!pendingSocialType) return;
+
+    try {
+      // 소셜 로그인 URL 가져오기
+      const response = await getSocialLogin(pendingSocialType.toLowerCase());
+
+      // 응답에서 URL 추출 (data 필드에 URL이 포함되어 있음)
+      if (response.code === "SUCCESS" && response.data) {
+        // "SOCIAL_LOGIN_TYPE : https://..." 형식에서 URL만 추출
+        const url = response.data.includes(":")
+          ? response.data.split(": ")[1]
+          : response.data;
+
+        // 소셜 로그인 페이지로 리다이렉트
+        window.location.href = url;
+      }
+
+      // 모달은 닫지 않음 (리다이렉트되면서 페이지가 이동됨)
+    } catch (error) {
+      console.error("소셜 로그인 실패:", error);
+      // 에러 발생 시에만 모달 닫기
+      setIsTermsModalOpen(false);
+      setPendingSocialType(null);
+    }
+  };
+
+  const handleTermsCancel = () => {
+    setIsTermsModalOpen(false);
+    setPendingSocialType(null);
   };
 
   return (
@@ -137,10 +175,9 @@ export default function Header({ variant }: HeaderProps) {
                 <Button
                   variant="secondary"
                   size="large"
-                  onClick={handleTestLogin}
-                  disabled={isLoginPending}
+                  onClick={() => setIsModalOpen(true)}
                 >
-                  {isLoginPending ? "로그인 중..." : "로그인 · 회원가입"}
+                  로그인 · 회원가입
                 </Button>
               ) : (
                 <Button variant="secondary" size="large" onClick={toggleAlert}>
@@ -152,9 +189,18 @@ export default function Header({ variant }: HeaderProps) {
         </div>
       </div>
 
-      {/* <Modal isOpen={isModalOpen} toggle={toggleModal}>
-        <LoginContent />
-      </Modal> */}
+      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+        <LoginContent
+          onSocialLoginClick={handleSocialLoginClick}
+          onLoginSuccess={toggleModal}
+        />
+      </Modal>
+
+      {/* 약관 동의 모달 (로그인 모달과 독립적으로 렌더링) */}
+      <Modal isOpen={isTermsModalOpen} toggle={handleTermsCancel}>
+        <TermsAgreementContent onConfirm={handleTermsConfirm} />
+      </Modal>
+
       <Alert
         isOpen={isAlertOpen}
         toggle={toggleAlert}

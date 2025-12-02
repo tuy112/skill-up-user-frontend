@@ -9,6 +9,7 @@
 }
 
 .dropdownButton {
+  min-width: 7.9375rem;
   width: 100%;
   padding: 0.5rem 1rem;
   border: 1px solid var(--Line-normal);
@@ -18,8 +19,9 @@
   font-weight: 500;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   box-sizing: border-box;
+  gap: 0.25rem;
 }
 
 .dropdownButton:focus {

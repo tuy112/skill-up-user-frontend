@@ -1,16 +1,17 @@
 // src/app/conference/[id]/page.tsx
 
-import ConferenceDetailLayout from "./ConferenceDetailLayout";
-import { eventDetailMock } from "@/mocks/eventDetailMock";
+"use client";
 
-export default async function ConferenceDetailPage({
+import { use } from "react";
+import ConferenceDetailLayout from "./ConferenceDetailLayout";
+
+export default function ConferenceDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const resolvedParams = await params;
-  const eventDetail = eventDetailMock.find(
-    (event) => event.id === resolvedParams.id
-  );
-  return <ConferenceDetailLayout eventDetail={eventDetail!} />;
+  const resolvedParams = use(params);
+  const eventId = Number(resolvedParams.id);
+
+  return <ConferenceDetailLayout eventId={eventId} />;
 }

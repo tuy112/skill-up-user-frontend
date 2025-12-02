@@ -2,6 +2,8 @@
 
 import { useAtom } from "jotai";
 import { pageFilterAtomsMap, PageId } from "../atoms/pageFilterAtoms";
+import { EVENT_SORT_OPTIONS } from "@/constants/event";
+import { useUrlSync } from "./useUrlSync";
 
 interface UsePageFiltersProps {
   pageId: PageId;
@@ -25,6 +27,34 @@ export const usePageFilters = ({ pageId }: UsePageFiltersProps) => {
   const [tempFreeFilter, setTempFreeFilter] = useAtom(atoms.tempFreeFilterAtom);
   const [tempStartDate, setTempStartDate] = useAtom(atoms.tempStartDateAtom);
   const [tempEndDate, setTempEndDate] = useAtom(atoms.tempEndDateAtom);
+  const [currentPage, setCurrentPage] = useAtom(atoms.currentPageAtom);
+
+  // URL 동기화
+  useUrlSync(
+    {
+      selectedRoles,
+      onOfflineFilter,
+      freeFilter,
+      sortOption,
+      startDate,
+      endDate,
+      currentPage,
+    },
+    {
+      setSelectedRoles,
+      setOnOfflineFilter,
+      setFreeFilter,
+      setSortOption,
+      setStartDate,
+      setEndDate,
+      setCurrentPage,
+      setTempOnOfflineFilter,
+      setTempFreeFilter,
+      setTempStartDate,
+      setTempEndDate,
+    },
+    pageId
+  );
 
   // 필터 적용 함수
   const handleApply = () => {
@@ -32,6 +62,7 @@ export const usePageFilters = ({ pageId }: UsePageFiltersProps) => {
     setFreeFilter(tempFreeFilter);
     setStartDate(tempStartDate);
     setEndDate(tempEndDate);
+    setCurrentPage(1); // 필터 적용 시 첫 페이지로
   };
 
   // 필터 초기화 함수
@@ -47,16 +78,20 @@ export const usePageFilters = ({ pageId }: UsePageFiltersProps) => {
     setTempFreeFilter(false);
     setTempStartDate(undefined);
     setTempEndDate(undefined);
+
+    setCurrentPage(1); // 필터 초기화 시 첫 페이지로
   };
 
   // 역할 필터 초기화 함수
   const resetRoleFilter = () => {
     setSelectedRoles(["전체"]);
+    setCurrentPage(1); // 역할 필터 초기화 시 첫 페이지로
   };
 
   // 정렬 옵션 초기화 함수
   const resetSortOption = () => {
-    setSortOption("인기순");
+    setSortOption(EVENT_SORT_OPTIONS.POPULARITY);
+    setCurrentPage(1); // 정렬 옵션 초기화 시 첫 페이지로
   };
 
   // 모든 필터 초기화 함수
@@ -68,6 +103,7 @@ export const usePageFilters = ({ pageId }: UsePageFiltersProps) => {
     setEndDate(undefined);
     setTempStartDate(undefined);
     setTempEndDate(undefined);
+    setCurrentPage(1); // 모든 필터 초기화 시 첫 페이지로
   };
 
   return {
