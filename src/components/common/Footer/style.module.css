@@ -10,12 +10,10 @@
   min-width: 1294px;
   background: #1b1d26;
   color: #fff;
-  position : relative;
-  transform : translateY(-100%);
 }
 
 .inner {
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 54px 100px 54px 100px;
   display: flex;

@@ -19,6 +19,7 @@ interface DropdownProps {
   buttonLabel?: string;
   className?: string;
   block?: boolean;
+  spaceBetween?: boolean;
 }
 
 export default function Dropdown({
@@ -28,6 +29,7 @@ export default function Dropdown({
   buttonLabel,
   className,
   block,
+  spaceBetween,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -54,10 +56,15 @@ export default function Dropdown({
     <div
       className={`${styles.dropdown} ${className || ""} ${
         block ? styles.block : ""
-      }`}
+      } `}
       ref={dropdownRef}
     >
-      <button className={styles.dropdownButton} onClick={toggleOpen}>
+      <button
+        className={`${styles.dropdownButton} ${
+          spaceBetween ? styles.spaceBetween : ""
+        }`}
+        onClick={toggleOpen}
+      >
         <Text typography="body1_r_16" color="neutral-20">
           {buttonLabel || selected.label}
         </Text>
