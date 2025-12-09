@@ -76,7 +76,7 @@ export default function SupportPageLayout({ faqData }: SupportPageLayoutProps) {
             extraButton:
               index === 0 ? (
                 <Button
-                  variant="outlined"
+                  variant="secondary"
                   size="medium"
                   onClick={handleWithdrawalClick}
                 >
