@@ -2,164 +2,65 @@
 
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
 import Text from "@/components/common/Text";
+import Flex from "@/components/common/Flex";
 import ProfileImageUploader from "@/components/myPage/profile/ProfileImageUploader";
-import ProfileImageDefault from "@/assets/images/logoDefaultImg.png";
 import InputField from "@/components/common/InputField";
 import Input from "@/components/common/Input";
-import Dropdown, { DropdownOption } from "@/components/common/Dropdown";
-import RadioGroup, { Option } from "@/components/common/RadioGroup";
+import Dropdown from "@/components/common/Dropdown";
+import RadioGroup from "@/components/common/RadioGroup";
 import { MultiSelectButtonGroup } from "@/components/common/MultiSelectButtonGroup";
 import Button from "@/components/common/Button";
 import MegaPhoneIcon from "@/assets/icons/MegaPhoneIcon";
 import InterestTabBar from "@/components/login/InterestTabBar";
 import Checkbox from "@/components/common/Checkbox";
-import { useUpdateUserProfile, useUserInterests } from "@/hooks/useUser";
 import Skeleton from "@/components/common/Skeleton";
 import { UserProfile } from "@/types/user";
-import { RoleName, ROLE_NAME } from "@/constants/role";
 import Alert from "@/components/common/Alert";
+import { useProfileEditForm } from "@/hooks/useProfileEditForm";
+import {
+  GENDER_OPTIONS,
+  AGE_OPTIONS,
+  JOB_OPTIONS,
+} from "@/constants/profileFormOptions";
 
 export default function ProfileEditPageLayout({
   initialData,
 }: {
   initialData: UserProfile;
 }) {
-  const router = useRouter();
-  const [imageUrl, setImageUrl] = useState<string>(
-    ProfileImageDefault.src.toString() || ""
-  );
-  const [name, setName] = useState<string>(initialData.name);
-  const [selectedGender, setSelectedGender] = useState<string>(
-    initialData.gender
-  );
-  const [selectedAge, setSelectedAge] = useState<string>(initialData.age);
-  const [selectedJob, setSelectedJob] = useState<string>(initialData.role);
-  const [selectedInterests, setSelectedInterests] = useState<string[]>(
-    initialData.interests
-  );
-  const [activeTab, setActiveTab] = useState<RoleName>(ROLE_NAME.PLANNING);
-  const [isMarketingAgreed, setIsMarketingAgreed] = useState<boolean>(
-    initialData.marketingAgreement
-  );
-  const [currentRoleName, setCurrentRoleName] = useState<RoleName>(
-    initialData.role as RoleName
-  );
-  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
-
-  // API로 관심사 조회
-  const { data: apiInterestData, isLoading: isLoadingInterests } =
-    useUserInterests(currentRoleName);
-
-  // 프로필 업데이트 mutation
-  const { mutate: updateProfile, isPending: isUpdating } =
-    useUpdateUserProfile();
-
-  const genderOptions: Option[] = [
-    { label: "남성", value: "M" },
-    { label: "여성", value: "F" },
-  ];
-
-  const ageOptions: Option[] = [
-    { label: "10대", value: "10대" },
-    { label: "20대", value: "20대" },
-    { label: "30대", value: "30대" },
-    { label: "40대", value: "40대" },
-    { label: "50대", value: "50대" },
-    { label: "60대 이상", value: "60대 이상" },
-  ];
-
-  const jobOptions: Option[] = [
-    { label: "기획자", value: "기획자" },
-    { label: "디자이너", value: "디자이너" },
-    { label: "개발자", value: "개발자" },
-    { label: "마케팅", value: "마케팅" },
-  ];
-
-  // API 데이터만 사용 (목업 데이터 제거)
-  const interestOptions =
-    apiInterestData && apiInterestData.length > 0
-      ? apiInterestData.map((item: { name: string }) => ({
-          label: item.name,
-          value: item.name,
-        }))
-      : [];
-
-  const handleChangeImage = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImageUrl(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handleChangeAge = (value: DropdownOption) => {
-    setSelectedAge(value.label);
-  };
-
-  const handleChangeGender = (value: string) => {
-    setSelectedGender(value);
-  };
-
-  const handleChangeJob = (value: DropdownOption) => {
-    setSelectedJob(value.label);
-  };
-
-  const handleChangeInterest = (value: string[]) => {
-    setSelectedInterests(value);
-  };
-
-  const handleTabChange = (tab: string) => {
-    const roleName = tab as RoleName;
-    setActiveTab(roleName);
-    setCurrentRoleName(roleName);
-  };
-
-  const toggleAlert = () => {
-    setIsAlertOpen((prev) => !prev);
-  };
-
-  const handleCancel = () => {
-    setIsAlertOpen(true);
-  };
-
-  const handleConfirmCancel = () => {
-    router.back();
-  };
-
-  const handleSave = () => {
-    const userProfile: UserProfile = {
-      name,
-      profileImageUrl: imageUrl,
-      age: selectedAge,
-      gender: selectedGender,
-      role: selectedJob,
-      interests: selectedInterests,
-      marketingAgreement: isMarketingAgreed,
-    };
-
-    updateProfile(userProfile, {
-      onSuccess: () => {
-        // 추후 토스트 메시지 추가
-        console.log("프로필 업데이트 성공");
-      },
-      onError: (error) => {
-        console.error("프로필 업데이트 실패:", error);
-      },
-    });
-  };
+  const {
+    imageUrl,
+    name,
+    selectedGender,
+    selectedAge,
+    selectedJob,
+    selectedInterests,
+    activeTab,
+    isMarketingAgreed,
+    isAlertOpen,
+    isLoadingInterests,
+    isUpdating,
+    interestOptions,
+    handleChangeImage,
+    handleChangeName,
+    handleChangeAge,
+    handleChangeGender,
+    handleChangeJob,
+    handleChangeInterest,
+    handleTabChange,
+    toggleAlert,
+    handleCancel,
+    handleConfirmCancel,
+    handleSave,
+    setIsMarketingAgreed,
+  } = useProfileEditForm(initialData);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.top}>
-        <div className={styles.header}>
+    <Flex direction="column" gap={2.5} className={styles.container}>
+      <Flex justify="space-between" style={{ width: "100%" }}>
+        <Flex direction="column" gap={1.25} className={styles.header}>
           <Text typography="head2_sb_30" color="black" as="h2">
             프로필 설정
           </Text>
@@ -167,9 +68,9 @@ export default function ProfileEditPageLayout({
             imageUrl={imageUrl}
             onChangeImage={handleChangeImage}
           />
-        </div>
-        <div className={styles.itemGroup}>
-          <div className={styles.item}>
+        </Flex>
+        <Flex direction="column" gap={1.5} className={styles.itemGroup}>
+          <Flex gap={1} align="center">
             <InputField label="이름">
               <Input
                 type="text"
@@ -180,7 +81,7 @@ export default function ProfileEditPageLayout({
             </InputField>
             <InputField label="연령">
               <Dropdown
-                options={ageOptions}
+                options={AGE_OPTIONS}
                 selected={{ label: selectedAge, value: selectedAge }}
                 onSelect={handleChangeAge}
                 block
@@ -188,18 +89,18 @@ export default function ProfileEditPageLayout({
                 spaceBetween
               />
             </InputField>
-          </div>
-          <div className={styles.item}>
+          </Flex>
+          <Flex gap={1} align="center">
             <InputField label="성별">
               <RadioGroup
-                options={genderOptions}
+                options={GENDER_OPTIONS}
                 selectedValue={selectedGender}
                 onChange={handleChangeGender}
               />
             </InputField>
             <InputField label="직무">
               <Dropdown
-                options={jobOptions}
+                options={JOB_OPTIONS}
                 selected={{ label: selectedJob, value: selectedJob }}
                 onSelect={handleChangeJob}
                 block
@@ -207,29 +108,29 @@ export default function ProfileEditPageLayout({
                 spaceBetween
               />
             </InputField>
-          </div>
-          <div className={styles.interestSection}>
-            <div className={styles.fieldWrapper}>
-              <div className={styles.fieldLabel}>
+          </Flex>
+          <Flex direction="column" gap={1}>
+            <Flex justify="space-between" align="center">
+              <Flex direction="column" gap={0.125}>
                 <Text typography="label3_m_14" color="black" as="span">
                   관심사
                 </Text>
                 <Text typography="label4_m_12" color="neutral-70" as="span">
                   주요 관심사를 선택해주세요
                 </Text>
-              </div>
+              </Flex>
               <InterestTabBar
                 activeTab={activeTab}
                 onTabChange={handleTabChange}
               />
-            </div>
+            </Flex>
             {isLoadingInterests ? (
-              <div className={styles.skeletonWrapper}>
+              <Flex wrap="wrap" gap={0.5}>
                 <Skeleton width="7rem" height="2.5rem" />
                 <Skeleton width="7rem" height="2.5rem" />
                 <Skeleton width="7rem" height="2.5rem" />
                 <Skeleton width="7rem" height="2.5rem" />
-              </div>
+              </Flex>
             ) : (
               <MultiSelectButtonGroup
                 options={interestOptions}
@@ -237,37 +138,39 @@ export default function ProfileEditPageLayout({
                 onSelect={handleChangeInterest}
               />
             )}
-          </div>
-        </div>
-      </div>
+          </Flex>
+        </Flex>
+      </Flex>
 
-      <div className={styles.content}>
-        <div
+      <Flex direction="column" gap={2.5}>
+        <Flex
+          justify="space-between"
+          align="center"
           className={`${styles.marketingSection} ${
             isMarketingAgreed ? styles.active : ""
           }`}
         >
-          <div className={styles.marketingText}>
-            <div className={styles.marketingTitle}>
+          <Flex direction="column" gap={0.25}>
+            <Flex align="center" gap={0.375}>
               <MegaPhoneIcon
                 color={isMarketingAgreed ? "var(--Primary-strong)" : "#474747"}
               />
               <Text typography="sub3_m_16" color="black">
                 마케팅 수신 동의
               </Text>
-            </div>
+            </Flex>
 
             <Text typography="body2_r_14" color="neutral-30">
               서비스 소식과 이벤트, 맞춤형 혜택을 빠르게 받아보세요!
             </Text>
-          </div>
+          </Flex>
           <Checkbox
             checked={isMarketingAgreed}
             onChange={setIsMarketingAgreed}
           />
-        </div>
-      </div>
-      <div className={styles.footer}>
+        </Flex>
+      </Flex>
+      <Flex justify="flex-end" gap={0.5} style={{ width: "100%" }}>
         <Button
           variant="outlined"
           size="extraLarge"
@@ -285,7 +188,7 @@ export default function ProfileEditPageLayout({
         >
           {isUpdating ? "저장 중..." : "저장"}
         </Button>
-      </div>
+      </Flex>
 
       <Alert
         isOpen={isAlertOpen}
@@ -299,6 +202,6 @@ export default function ProfileEditPageLayout({
         }
         onConfirm={handleConfirmCancel}
       />
-    </div>
+    </Flex>
   );
 }
