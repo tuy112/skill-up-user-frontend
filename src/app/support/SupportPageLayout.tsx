@@ -11,7 +11,7 @@ import { DropdownOption } from "@/components/common/Dropdown";
 import { CustomerCenterInquiry } from "@/types/user";
 
 // 한 페이지에 몇 개씩 보여줄지
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 10;
 
 interface SupportPageLayoutProps {
   faqData?: CustomerCenterInquiry[];
