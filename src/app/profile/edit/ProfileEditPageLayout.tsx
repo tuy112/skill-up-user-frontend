@@ -21,6 +21,7 @@ import { useUpdateUserProfile, useUserInterests } from "@/hooks/useUser";
 import Skeleton from "@/components/common/Skeleton";
 import { UserProfile } from "@/types/user";
 import { RoleName, ROLE_NAME } from "@/constants/role";
+import Alert from "@/components/common/Alert";
 
 export default function ProfileEditPageLayout({
   initialData,
@@ -47,6 +48,7 @@ export default function ProfileEditPageLayout({
   const [currentRoleName, setCurrentRoleName] = useState<RoleName>(
     initialData.role as RoleName
   );
+  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
 
   // API로 관심사 조회
   const { data: apiInterestData, isLoading: isLoadingInterests } =
@@ -120,7 +122,15 @@ export default function ProfileEditPageLayout({
     setCurrentRoleName(roleName);
   };
 
+  const toggleAlert = () => {
+    setIsAlertOpen((prev) => !prev);
+  };
+
   const handleCancel = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleConfirmCancel = () => {
     router.back();
   };
 
@@ -139,7 +149,6 @@ export default function ProfileEditPageLayout({
       onSuccess: () => {
         // 추후 토스트 메시지 추가
         console.log("프로필 업데이트 성공");
-        
       },
       onError: (error) => {
         console.error("프로필 업데이트 실패:", error);
@@ -277,6 +286,19 @@ export default function ProfileEditPageLayout({
           {isUpdating ? "저장 중..." : "저장"}
         </Button>
       </div>
+
+      <Alert
+        isOpen={isAlertOpen}
+        toggle={toggleAlert}
+        title="변경사항을 저장하지 않고 나갈까요?"
+        message={
+          <>
+            지금까지 수정한 내용이 모두 삭제됩니다. <br /> 정말
+            취소하시겠습니까?
+          </>
+        }
+        onConfirm={handleConfirmCancel}
+      />
     </div>
   );
 }
