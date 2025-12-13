@@ -197,6 +197,10 @@
   color: var(--Fill-strong);
 }
 
+.fill-normal {
+  color: var(--Fill-normal);
+}
+
 .error-normal {
   color: var(--Error-normal);
 }

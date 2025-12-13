@@ -25,7 +25,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
 }
 
 .logoNavMenu {
@@ -42,7 +41,7 @@
 }
 
 .searchWrap {
-  width: 340px;
+  width: 17.5rem;
   height: 40px;
   display: flex;
   justify-content: space-between;
@@ -77,18 +76,6 @@
   justify-content: center;
 }
 
-.loginBtn {
-  padding: 10px 16px 10px 16px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 4px;
-  font-weight: 500;
-  margin-left: 6px;
-  font-size: 14px;
-  line-height: 140%;
-  letter-spacing: -4%;
-}
-
 .profileBtnWrap {
   position: relative;
 }
@@ -98,4 +85,34 @@
   top: 120%;
   right: 0;
   z-index: 1000;
+}
+
+.inquiryBtn {
+  display: flex;
+  padding: 0.625rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  background: var(--Neutral-30);
+}
+
+.loginBtn {
+  display: flex;
+  padding: 0.625rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  background: var(--Common-black);
+}
+
+.profileBtn {
+  display: flex;
+  padding: 0.625rem 1rem 0.625rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  background: var(--Common-black);
+  color: var(--fill-normal);
 }
