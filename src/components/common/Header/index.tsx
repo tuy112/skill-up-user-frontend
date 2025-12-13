@@ -10,19 +10,17 @@ import Modal from "../Modal";
 import LoginContent, { SocialType } from "@/components/login/LoginContent";
 import TermsAgreementContent from "@/components/login/TermsAgreementContent";
 import EventCategoryTabs from "@/components/common/Header/EventCategoryTabs";
-import Button from "../Button";
-import IconButton from "../IconButton";
-import UserIcon from "@/assets/icons/UserIcon";
+
 import SearchIcon from "@/assets/svg/searchIcon.svg";
 import ProfileModal from "@/components/login/ProfileModal";
 import LogoDefaultImg from "@/assets/images/logoDefaultImg.png";
-import Alert from "../Alert";
 import { useAuth } from "@/hooks/useAuth";
 import { getSocialLogin } from "@/api/auth";
 import { useAtomValue } from "jotai";
 import { userNameAtom, userEmailAtom } from "@/store/authAtoms";
 import { useUserEmailAndName } from "@/hooks/useUser";
-import CautionIcon from "@/assets/icons/CautionIcon";
+import Text from "../Text";
+import ChevronDownIcon from "@/assets/icons/ChevronDownIcon";
 
 interface HeaderProps {
   variant: "main" | "sub";
@@ -48,9 +46,6 @@ export default function Header({ variant }: HeaderProps) {
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
-
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const toggleAlert = () => setIsAlertOpen((prev) => !prev);
 
   // 약관 동의 모달 상태
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
@@ -126,11 +121,7 @@ export default function Header({ variant }: HeaderProps) {
               />
             )}
           </Link>
-          {variant === "sub" && (
-            <div className={styles.navMenu}>
-              <EventCategoryTabs />
-            </div>
-          )}
+          {variant === "sub" && <EventCategoryTabs />}
         </div>
 
         {/* 검색창, 로그인, 회원가입 메뉴바 */}
@@ -140,54 +131,54 @@ export default function Header({ variant }: HeaderProps) {
               type="text"
               placeholder="검색어를 입력해주세요."
               className={styles.searchBox}
+              id="searchInput"
             />
             <button className={styles.searchBtn}>
               <Image src={SearchIcon} alt="search" width={20} height={20} />
             </button>
           </div>
-          {isMounted && isAuthenticated && (
-            <div
-              className={styles.profileBtnWrap}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-              ref={profileBtnRef}
-            >
-              <IconButton
-                variant="opacity"
-                size="large"
-                onClick={toggleProfileModal}
-                icon={<UserIcon />}
-              />
-              <div className={styles.profileBtnContent}>
-                <ProfileModal
-                  isOpen={isProfileModalOpen}
-                  toggle={toggleProfileModal}
-                  user={{
-                    name: userName || "",
-                    email: userEmail || "",
-                    profileImage: LogoDefaultImg.src.toString(),
-                  }}
-                  triggerRef={profileBtnRef as RefObject<HTMLDivElement>}
-                />
-              </div>
-            </div>
-          )}
+          <button className={styles.inquiryBtn}>
+            <Text typography="label3_m_14" color="fill-normal">
+              문의하기
+            </Text>
+          </button>
 
           {isMounted && (
             <>
               {!isAuthenticated ? (
-                <Button
-                  variant="secondary"
-                  size="large"
+                <button
+                  className={styles.loginBtn}
                   onClick={() => setIsModalOpen(true)}
                 >
-                  로그인 · 회원가입
-                </Button>
+                  <Text typography="label3_m_14" color="fill-normal">
+                    로그인 · 회원가입
+                  </Text>
+                </button>
               ) : (
-                <Button variant="secondary" size="large" onClick={toggleAlert}>
-                  로그아웃
-                </Button>
+                <div className={styles.profileBtnWrap} ref={profileBtnRef}>
+                  <button
+                    className={styles.profileBtn}
+                    onClick={toggleProfileModal}
+                  >
+                    <Text typography="label3_m_14" color="fill-normal">
+                      {userName}
+                    </Text>
+                    <ChevronDownIcon />
+                  </button>
+                  <div className={styles.profileBtnContent}>
+                    <ProfileModal
+                      isOpen={isProfileModalOpen}
+                      toggle={toggleProfileModal}
+                      user={{
+                        name: userName || "",
+                        email: userEmail || "",
+                        profileImage: LogoDefaultImg.src.toString(),
+                      }}
+                      triggerRef={profileBtnRef as RefObject<HTMLDivElement>}
+                      handleLogout={handleLogout}
+                    />
+                  </div>
+                </div>
               )}
             </>
           )}
@@ -205,15 +196,6 @@ export default function Header({ variant }: HeaderProps) {
       <Modal isOpen={isTermsModalOpen} toggle={handleTermsCancel}>
         <TermsAgreementContent onConfirm={handleTermsConfirm} />
       </Modal>
-
-      <Alert
-        icon={<CautionIcon color="var(--Primary-strong)" />}
-        isOpen={isAlertOpen}
-        toggle={toggleAlert}
-        title="로그아웃 하시겠습니까?"
-        message={<>로그아웃하면 일부 기능을 이용할 수 없습니다.</>}
-        onConfirm={handleLogout}
-      />
     </header>
   );
 }
