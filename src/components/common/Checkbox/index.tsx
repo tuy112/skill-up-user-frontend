@@ -2,6 +2,7 @@
 
 "use client";
 import React from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface CheckboxProps {
@@ -27,7 +28,7 @@ export default function Checkbox({
 
   return (
     <label
-      className={`${styles.checkboxWrapper} ${disabled ? styles.disabled : ""}`}
+      className={clsx(styles.checkboxWrapper, disabled && styles.disabled)}
       htmlFor={id}
     >
       <input
@@ -38,7 +39,7 @@ export default function Checkbox({
         disabled={disabled}
         className={styles.checkboxInput}
       />
-      <span className={`${styles.checkboxCustom} ${styles[size]}`}>
+      <span className={clsx(styles.checkboxCustom, styles[size])}>
         {checked ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"

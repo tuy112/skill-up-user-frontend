@@ -2,6 +2,7 @@
 
 "use client";
 import React from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface RadioProps {
@@ -29,7 +30,7 @@ export default function Radio({
 
   return (
     <label
-      className={`${styles.radioWrapper} ${disabled ? styles.disabled : ""}`}
+      className={clsx(styles.radioWrapper, disabled && styles.disabled)}
       htmlFor={id}
     >
       <input
