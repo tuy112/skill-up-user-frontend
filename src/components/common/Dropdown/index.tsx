@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 import ChevronDownIcon from "@/assets/icons/ChevronDownIcon";
 import Text from "../Text";
@@ -53,15 +54,14 @@ export default function Dropdown({
 
   return (
     <div
-      className={`${styles.dropdown} ${className || ""} ${
-        block ? styles.block : ""
-      } `}
+      className={clsx(styles.dropdown, className, block && styles.block)}
       ref={dropdownRef}
     >
       <button
-        className={`${styles.dropdownButton} ${
-          spaceBetween ? styles.spaceBetween : ""
-        }`}
+        className={clsx(
+          styles.dropdownButton,
+          spaceBetween && styles.spaceBetween
+        )}
         onClick={toggleOpen}
       >
         <Text typography="body1_r_16" color="neutral-20">
@@ -74,9 +74,10 @@ export default function Dropdown({
           {options.map((opt) => (
             <li
               key={opt.value}
-              className={`${styles.dropdownItem} ${
-                opt.value === selected.value ? styles.active : ""
-              }`}
+              className={clsx(
+                styles.dropdownItem,
+                opt.value === selected.value && styles.active
+              )}
               onClick={() => handleSelect(opt)}
             >
               {opt.label}
