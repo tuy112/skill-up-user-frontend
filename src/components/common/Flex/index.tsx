@@ -1,6 +1,7 @@
 // src/components/common/Flex/index.tsx
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface FlexProps {
@@ -52,7 +53,7 @@ export default function Flex({
 
   return (
     <Component
-      className={`${styles.flex} ${className}`}
+      className={clsx(styles.flex, className)}
       style={flexStyle}
       onClick={onClick}
       onMouseEnter={onMouseEnter}

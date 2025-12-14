@@ -2,6 +2,7 @@
 
 "use client";
 import { useState } from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 import Text from "@/components/common/Text";
 import Flex from "@/components/common/Flex";
@@ -27,7 +28,7 @@ export function AccordionItem({
 }: AccordionItemProps) {
   return (
     <div
-      className={`${styles.item} ${isOpen ? styles.open : ""}`}
+      className={clsx(styles.item, isOpen && styles.open)}
       onClick={() => onToggle?.(id)}
     >
       <Flex

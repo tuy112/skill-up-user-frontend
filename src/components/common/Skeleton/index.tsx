@@ -1,5 +1,6 @@
 // src/components/common/Skeleton/index.tsx
 
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface SkeletonProps {
@@ -17,7 +18,7 @@ export default function Skeleton({
 }: SkeletonProps) {
   return (
     <div
-      className={`${styles.skeleton} ${className}`}
+      className={clsx(styles.skeleton, className)}
       style={{
         width,
         height,

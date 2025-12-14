@@ -1,6 +1,7 @@
 // src/components/common/TabBar/index.tsx
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 import Text from "@/components/common/Text";
 import Flex from "@/components/common/Flex";
@@ -27,7 +28,7 @@ export default function TabBar({ tabs, activeIndex, onChange }: TabBarProps) {
             as="button"
             align="center"
             gap={0.5}
-            className={`${styles.tab} ${isActive ? styles.active : ""}`}
+            className={clsx(styles.tab, isActive && styles.active)}
             onClick={() => onChange(index)}
           >
             <Text typography="sub3_m_16" color="black">
