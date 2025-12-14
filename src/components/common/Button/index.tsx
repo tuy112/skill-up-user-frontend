@@ -1,5 +1,6 @@
 // src/components/common/Button/index.tsx
 
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface ButtonProps {
@@ -39,21 +40,14 @@ export default function Button({
 
   return (
     <button
-      className={`${styles.button} ${className || ""} ${
-        variant === "secondary" ? styles.secondary : ""
-      } ${variant === "tertiary" ? styles.tertiary : ""} ${
-        variant === "primary" ? styles.primary : ""
-      } ${size === "small" ? styles.small : ""} ${
-        size === "medium" ? styles.medium : ""
-      } ${size === "large" ? styles.large : ""} ${
-        size === "extraLarge" ? styles.extraLarge : ""
-      } ${variant === "disabled" ? styles.disabled : ""} ${
-        variant === "outlined" ? styles.outlined : ""
-      } ${variant === "textOnly" ? styles.textOnly : ""}
-      } ${variant === "iconOpacity" ? styles.iconOpacity : ""}
-      } ${disabled ? styles.disabled : ""}
-      ${block ? styles.block : ""}
-        `}
+      className={clsx(
+        styles.button,
+        className,
+        variant && styles[variant],
+        size && styles[size],
+        disabled && styles.disabled,
+        block && styles.block
+      )}
       onClick={onClick}
       disabled={disabled}
       style={backgroundStyle}
