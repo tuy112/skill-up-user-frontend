@@ -1,6 +1,6 @@
 // src/components/login/socialLoginButton/index.tsx
 
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 import Image from "next/image";
 
 interface SocialLoginButtonProps {

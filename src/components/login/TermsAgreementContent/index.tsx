@@ -1,7 +1,7 @@
 // src/components/login/TermsAgreementContent/index.tsx
 "use client";
 
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
 import Text from "@/components/common/Text";
 import Flex from "@/components/common/Flex";

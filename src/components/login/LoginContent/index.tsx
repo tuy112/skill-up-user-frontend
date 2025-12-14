@@ -1,7 +1,7 @@
 // src/components/login/LoginContent/index.tsx
 "use client";
 
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 import LoginImage from "@/assets/images/loginImg.png";
 import SkillUpWhite from "@/assets/svg/skillUp_white.svg";
 import SkillUpSymbolBlack from "@/assets/svg/skillUp_symbol_black.svg";
