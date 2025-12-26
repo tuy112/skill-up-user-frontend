@@ -3,18 +3,23 @@
 
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Flex from "@/components/common/Flex";
 import EventCard from "@/components/common/EventCard";
 import styles from "./styles.module.css";
 import TabMenu from "@/components/common/Tab";
 import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
-import { eventListMock } from "@/mocks/eventListMock";
 import Text from "@/components/common/Text";
+import { useFeaturedEvents } from "@/hooks/useHome";
+import { Event } from "@/types/event";
 
 export default function RecommendNow() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("IT 개발");
+
+  // API 데이터 가져오기
+  const { data, isLoading, error } = useFeaturedEvents(selectedTab);
 
   const getCardWidth = () => {
     if (!carouselRef.current) return 0;
@@ -66,25 +71,61 @@ export default function RecommendNow() {
           </Flex>
 
           <TabMenu
-            tabs={["전체", "기획", "디자인", "개발", "AI"]}
+            tabs={["IT 개발", "기획", "디자인", "개발", "AI"]}
             defaultIndex={0}
-            onChange={() => {}}
+            onChange={(selected: string) => {
+              setSelectedTab(selected);
+            }}
             theme="light"
           />
         </Flex>
 
         <div className={styles.carouselWrapper}>
-          <div ref={carouselRef} className={styles.carouselContainer}>
-            {eventListMock.map((item) => (
-              <div key={item.id} className={styles.carouselItem}>
-                <EventCard
-                  size="large"
-                  event={item}
-                  className={styles.carouselItem}
-                />
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <Flex
+              justify="center"
+              align="center"
+              style={{ minHeight: "300px" }}
+            >
+              <Text typography="body1_r_16" color="neutral-70">
+                로딩중...
+              </Text>
+            </Flex>
+          ) : error ? (
+            <Flex
+              justify="center"
+              align="center"
+              style={{ minHeight: "300px" }}
+            >
+              <Text typography="body1_r_16" color="neutral-70">
+                데이터를 불러오는데 실패했습니다.
+              </Text>
+            </Flex>
+          ) : !data ||
+            !data.homeEventResponseList ||
+            data.homeEventResponseList.length === 0 ? (
+            <Flex
+              justify="center"
+              align="center"
+              style={{ minHeight: "300px" }}
+            >
+              <Text typography="body1_r_16" color="neutral-70">
+                표시할 행사가 없습니다.
+              </Text>
+            </Flex>
+          ) : (
+            <div ref={carouselRef} className={styles.carouselContainer}>
+              {data.homeEventResponseList.map((item: Event) => (
+                <div key={item.id} className={styles.carouselItem}>
+                  <EventCard
+                    size="large"
+                    event={item}
+                    className={styles.carouselItem}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <Flex
