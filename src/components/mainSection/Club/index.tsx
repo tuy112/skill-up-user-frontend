@@ -6,26 +6,28 @@ import Button from "@/components/common/Button";
 import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
 import Text from "@/components/common/Text";
-
-type Card = { id: string; title: string; desc: string; img?: string };
-
-const originalCards: Card[] = Array.from({ length: 8 }).map((_, i) => ({
-  id: `club-${i}`,
-  title: "타이틀입니다. 타이틀입니다.",
-  desc: "상세설명이 들어가요 상세설명이 들어가요 상...",
-}));
+import { useCategoryEvents } from "@/hooks/useHome";
+import { EVENT_CATEGORY } from "@/constants/event";
+import { Event } from "@/types/event";
 
 export default function Club() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
 
+  // API 데이터 가져오기 (동아리·해커톤·공모전 카테고리, 8개)
+  const { data, isLoading, error } = useCategoryEvents(
+    EVENT_CATEGORY.COMPETITION_HACKATHON,
+    8,
+    1
+  );
+
   // 무한 캐러셀을 위해 카드를 3번 복제
+  const originalCards = data?.homeEventResponseList || [];
   const cards = [...originalCards, ...originalCards, ...originalCards];
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el) return;
-    
+    if (!el || originalCards.length === 0) return;
 
     // 초기 위치를 중간(원본 카드 세트)으로 설정
     const firstCard = el.querySelector(`.${styles.card}`) as HTMLElement;
@@ -71,7 +73,7 @@ export default function Club() {
     return () => {
       el.removeEventListener("scroll", handleScroll);
     };
-  }, [isScrolling]);
+  }, [isScrolling, originalCards.length]);
 
   const scroll = (dir: "prev" | "next") => {
     const el = trackRef.current;
@@ -128,42 +130,69 @@ export default function Club() {
           </button>
         </Flex>
       </Flex>
-      <div className={styles.trackWrap}>
-        <Flex gap="1.5rem" className={styles.track} as="div">
-          <div ref={trackRef} className={styles.trackInner}>
-            {cards.map((c, idx) => (
-              <article key={`${c.id}-${idx}`} className={styles.card}>
-                <div className={styles.thumb} />
-                <Flex align="flex-end" gap="0.75rem" className={styles.overlay}>
-                  <Flex
-                    direction="column"
-                    gap="0.375rem"
-                    className={styles.texts}
-                  >
-                    <Text
-                      typography="sub1_m_20"
-                      color="white"
-                      className={styles.cardText}
-                    >
-                      {c.title}
-                    </Text>
-                    <Text
-                      typography="body2_r_14"
-                      color="white"
-                      className={styles.cardText}
-                    >
-                      {c.desc}
-                    </Text>
-                  </Flex>
-                  <Button size="small" variant="secondary">
-                    자세히 보기
-                  </Button>
-                </Flex>
-              </article>
-            ))}
-          </div>
+      {isLoading ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            로딩중...
+          </Text>
         </Flex>
-      </div>
+      ) : error ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            데이터를 불러오는데 실패했습니다.
+          </Text>
+        </Flex>
+      ) : originalCards.length === 0 ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            도전 가능한 동아리·해커톤·공모전이 없습니다.
+          </Text>
+        </Flex>
+      ) : (
+        <div className={styles.trackWrap}>
+          <Flex gap="1.5rem" className={styles.track} as="div">
+            <div ref={trackRef} className={styles.trackInner}>
+              {cards.map((event: Event, idx) => (
+                <article key={`${event.id}-${idx}`} className={styles.card}>
+                  <div
+                    className={styles.thumb}
+                    style={{
+                      backgroundImage: `url(${event.thumbnailUrl})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+                  <Flex align="flex-end" gap="0.75rem" className={styles.overlay}>
+                    <Flex
+                      direction="column"
+                      gap="0.375rem"
+                      className={styles.texts}
+                    >
+                      <Text
+                        typography="sub1_m_20"
+                        color="white"
+                        className={styles.cardText}
+                      >
+                        {event.title}
+                      </Text>
+                      <Text
+                        typography="body2_r_14"
+                        color="white"
+                        className={styles.cardText}
+                      >
+                        {event.scheduleText}
+                      </Text>
+                    </Flex>
+                    <Button size="small" variant="secondary">
+                      자세히 보기
+                    </Button>
+                  </Flex>
+                </article>
+              ))}
+            </div>
+          </Flex>
+        </div>
+      )}
     </Flex>
   );
 }
