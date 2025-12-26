@@ -4,24 +4,20 @@ import Flex from "@/components/common/Flex";
 import styles from "./styles.module.css";
 import TabMenu from "@/components/common/Tab";
 import Text from "@/components/common/Text";
-
-type Card = {
-  id: string;
-  title: string;
-  desc: string;
-  tag?: string;
-  date?: string;
-};
-
-const mock: Card[] = Array.from({ length: 5 }).map((_, i) => ({
-  id: `rec-${i}`,
-  title: "메인타이틀",
-  desc: "서브타이틀이 들어가면 좋겠어요 서브타이틀이 들어가면 좋아요",
-  tag: "툴스",
-  date: "2020.01.01",
-}));
+import { useCategoryEvents } from "@/hooks/useHome";
+import { EVENT_CATEGORY } from "@/constants/event";
+import { Event } from "@/types/event";
 
 export default function RecommendedContent() {
+  // API 데이터 가져오기 (아티클 카테고리, 5개)
+  const { data, isLoading, error } = useCategoryEvents(
+    EVENT_CATEGORY.ARTICLE,
+    5,
+    1
+  );
+
+  const events = data?.homeEventResponseList || [];
+
   return (
     <Flex
       as="section"
@@ -46,58 +42,83 @@ export default function RecommendedContent() {
         </Flex>
 
         <TabMenu
-          tabs={["전체", "기획", "디자인", "개발", "AI"]}
+          tabs={["IT 개발", "기획", "디자인", "개발", "AI"]}
           defaultIndex={2}
-          onChange={(tab) => console.log("선택된 탭:", tab)}
+          onChange={() => {}}
           theme="light"
         />
       </Flex>
 
-      <div className={styles.cardList}>
-        {mock.map((card, idx) => (
-          <Flex
-            key={card.id}
-            direction="column"
-            className={`${styles.card} ${idx === 0 ? styles.heroCard : ""}`}
-            as="article"
-            gap="0.75rem"
-          >
-            {/* 추후 이미지로 변경 필요 */}
-            <div
-              className={`${styles.thumb} ${idx === 0 ? styles.heroThumb : ""}`}
-            />
+      {isLoading ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            로딩중...
+          </Text>
+        </Flex>
+      ) : error ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            데이터를 불러오는데 실패했습니다.
+          </Text>
+        </Flex>
+      ) : events.length === 0 ? (
+        <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+          <Text typography="body1_r_16" color="neutral-70">
+            추천 컨텐츠가 없습니다.
+          </Text>
+        </Flex>
+      ) : (
+        <div className={styles.cardList}>
+          {events.map((event: Event, idx: number) => (
+            <Flex
+              key={event.id}
+              direction="column"
+              className={`${styles.card} ${idx === 0 ? styles.heroCard : ""}`}
+              as="article"
+              gap="0.75rem"
+            >
+              <div
+                className={`${styles.thumb} ${
+                  idx === 0 ? styles.heroThumb : ""
+                }`}
+                style={{
+                  backgroundImage: `url(${event.thumbnailUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
 
-            <Flex direction="column">
-              <Flex align="center" justify="space-between">
-                <Text typography="head4_sb_20" color="black">
-                  {card.title}
-                </Text>
-                <Flex align="center" gap="0.5rem">
-                  {/* 추후 뱃지 컴포넌트 생기면 변경 */}
-                  <div className={styles.badge}>
-                    <Text typography="label3_m_14" color="neutral-60">
-                      {card.tag}
-                    </Text>
-                  </div>
-                  <div className={styles.badge}>
-                    <Text typography="label3_m_14" color="neutral-60">
-                      {card.date}
-                    </Text>
-                  </div>
+              <Flex direction="column">
+                <Flex align="center" justify="space-between">
+                  <Text typography="head4_sb_20" color="black">
+                    {event.title}
+                  </Text>
+                  <Flex align="center" gap="0.5rem">
+                    <div className={styles.badge}>
+                      <Text typography="label3_m_14" color="neutral-60">
+                        {event.locationText}
+                      </Text>
+                    </div>
+                    <div className={styles.badge}>
+                      <Text typography="label3_m_14" color="neutral-60">
+                        {event.scheduleText}
+                      </Text>
+                    </div>
+                  </Flex>
                 </Flex>
-              </Flex>
 
-              <Text
-                typography="body1_r_16"
-                color="neutral-60"
-                className={styles.cardDesc}
-              >
-                {card.desc}
-              </Text>
+                <Text
+                  typography="body1_r_16"
+                  color="neutral-60"
+                  className={styles.cardDesc}
+                >
+                  {event.priceText}
+                </Text>
+              </Flex>
             </Flex>
-          </Flex>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <Flex justify="center">
         {/* 추후 컴포넌트로 교체 */}
