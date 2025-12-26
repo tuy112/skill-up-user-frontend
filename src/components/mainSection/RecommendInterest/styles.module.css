@@ -47,19 +47,6 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.bookmarkBtn svg {
-  width: 0.95rem;
-  height: 1.15rem;
-  color: #fff;
 }
 
 .textBox {

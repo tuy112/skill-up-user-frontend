@@ -2,14 +2,36 @@
 
 // 관심있어하실 행사
 "use client";
+import { useState } from "react";
 import Flex from "@/components/common/Flex";
 import styles from "./styles.module.css";
-import { FaRegBookmark } from "react-icons/fa";
-import Button from "@/components/common/Button";
+import { BookmarkIcon } from "@/assets/icons/BookmarkIcon";
+import IconButton from "@/components/common/IconButton";
 import Text from "@/components/common/Text";
 import LoginImage from "@/assets/images/loginImg.png";
 
 export default function RecommendInterest() {
+  const [bookmarkedCards, setBookmarkedCards] = useState<Set<number>>(
+    new Set()
+  );
+
+  const handleBookmarkClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setBookmarkedCards((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
   const keywords = [
     "#기획",
     "#디자인",
@@ -63,35 +85,46 @@ export default function RecommendInterest() {
         </Flex>
 
         <div className={styles.cardGrid}>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Flex key={i} direction="column" gap="0.5rem">
-              <div className={styles.imgBox}>
-                <img src={LoginImage.src.toString()} alt="Login Image" />
-                <Button
-                  variant="secondary"
-                  opacity={0.6}
-                  icon={<FaRegBookmark />}
-                  className={styles.bookmarkBtn}
-                />
-              </div>
-              <Flex direction="column">
-                <Text
-                  typography="head4_sb_20"
-                  color="white"
-                  className={styles.metaText}
-                >
-                  메인타이틀
-                </Text>
-                <Text
-                  typography="body1_r_16"
-                  color="neutral-95"
-                  className={styles.metaText}
-                >
-                  서브타이틀이 들어가면 좋겠어요
-                </Text>
+          {Array.from({ length: 4 }).map((_, i) => {
+            const isBookmarked = bookmarkedCards.has(i);
+            return (
+              <Flex key={i} direction="column" gap="0.5rem">
+                <div className={styles.imgBox}>
+                  <img src={LoginImage.src.toString()} alt="Login Image" />
+                  <IconButton
+                    variant="opacity"
+                    size="large"
+                    icon={
+                      <BookmarkIcon
+                        fillColor={isBookmarked ? "var(--Common-white)" : "none"}
+                        strokeColor={
+                          isBookmarked ? "none" : "var(--Common-white)"
+                        }
+                      />
+                    }
+                    onClick={(e) => handleBookmarkClick(e, i)}
+                    className={styles.bookmarkBtn}
+                  />
+                </div>
+                <Flex direction="column">
+                  <Text
+                    typography="head4_sb_20"
+                    color="white"
+                    className={styles.metaText}
+                  >
+                    메인타이틀
+                  </Text>
+                  <Text
+                    typography="body1_r_16"
+                    color="neutral-95"
+                    className={styles.metaText}
+                  >
+                    서브타이틀이 들어가면 좋겠어요
+                  </Text>
+                </Flex>
               </Flex>
-            </Flex>
-          ))}
+            );
+          })}
         </div>
       </Flex>
     </section>
