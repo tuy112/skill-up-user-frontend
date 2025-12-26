@@ -5,13 +5,17 @@ import { useRef } from "react";
 import Flex from "@/components/common/Flex";
 import styles from "./styles.module.css";
 import EventCard from "@/components/common/EventCard";
-import { eventListMock } from "@/mocks/eventListMock";
 import Text from "@/components/common/Text";
 import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
+import { useRecentEvents } from "@/hooks/useHome";
+import { Event } from "@/types/event";
 
 export default function RecentEvent() {
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  // API 데이터 가져오기
+  const { data, isLoading, error } = useRecentEvents();
 
   const getCardWidth = () => {
     if (!carouselRef.current) return 0;
@@ -67,13 +71,33 @@ export default function RecentEvent() {
       </Flex>
 
       <div className={styles.carouselWrapper}>
-        <div ref={carouselRef} className={styles.carouselContainer}>
-          {eventListMock.map((item) => (
-            <div key={item.id} className={styles.carouselItem}>
-              <EventCard size="large" event={item} />
-            </div>
-          ))}
-        </div>
+        {isLoading ? (
+          <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+            <Text typography="body1_r_16" color="neutral-70">
+              로딩중...
+            </Text>
+          </Flex>
+        ) : error ? (
+          <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+            <Text typography="body1_r_16" color="neutral-70">
+              데이터를 불러오는데 실패했습니다.
+            </Text>
+          </Flex>
+        ) : !data || !data.homeEventResponseList || data.homeEventResponseList.length === 0 ? (
+          <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
+            <Text typography="body1_r_16" color="neutral-70">
+              최근 본 행사가 없습니다.
+            </Text>
+          </Flex>
+        ) : (
+          <div ref={carouselRef} className={styles.carouselContainer}>
+            {data.homeEventResponseList.map((item: Event) => (
+              <div key={item.id} className={styles.carouselItem}>
+                <EventCard size="large" event={item} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <Flex
