@@ -2,6 +2,7 @@
 .footer {
   width: 100%;
   min-width: 80.875rem;
+  height: 186px;
   background: var(--Primary-heavy);
   color: var(--Common-white);
 }
