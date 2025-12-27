@@ -62,7 +62,15 @@ export default function BookmarkPageLayout() {
   if (error) {
     return (
       <Flex gap={1} className={styles.container}>
-        {renderEmptyState()}
+        <ProfileCard
+          name={bookmarkData?.name || ""}
+          email={bookmarkData?.email || ""}
+          job={bookmarkData?.role || ""}
+          bookmarkCount={bookmarkData?.bookmarkCount || 0}
+        />
+        <Flex direction="column" gap={6.25} className={styles.cardListContainer}>
+          {renderEmptyState()}
+        </Flex>
       </Flex>
     );
   }
@@ -75,6 +83,7 @@ export default function BookmarkPageLayout() {
         job={bookmarkData?.role || ""}
         bookmarkCount={bookmarkData?.bookmarkCount || 0}
       />
+
       <Flex direction="column" gap={6.25} className={styles.cardListContainer}>
         <Flex direction="column" gap={1.25}>
           <Flex align="center" justify="space-between">
