@@ -3,7 +3,12 @@
 import { EventCategory } from "@/constants/event";
 import tokenInstance from "./tokenInstance";
 import instance from "./instance";
-import { Event, EventSearchParams, EventListResponse } from "@/types/event";
+import {
+  Event,
+  EventSearchParams,
+  EventListResponse,
+  EventSearchRequest,
+} from "@/types/event";
 
 // 행사 등록 API (인증 필요)
 // TODO : Event 타입 맞지 않아서 추후 변경 필요
@@ -71,6 +76,18 @@ export const getRecommendedEvents = async (category: EventCategory) => {
   const response = await instance.get("/events/category-page/recommended", {
     params: {
       category,
+    },
+  });
+  return response.data.data;
+};
+
+// 행사 검색
+export const searchEvents = async (searchParams: EventSearchRequest) => {
+  const response = await instance.get("/events/search/home", {
+    params: {
+      request: {
+        ...searchParams,
+      },
     },
   });
   return response.data.data;
