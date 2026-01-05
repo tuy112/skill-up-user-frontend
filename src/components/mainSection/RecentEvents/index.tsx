@@ -83,7 +83,9 @@ export default function RecentEvent() {
               데이터를 불러오는데 실패했습니다.
             </Text>
           </Flex>
-        ) : !data || !data.homeEventResponseList || data.homeEventResponseList.length === 0 ? (
+        ) : !data ||
+          !data.homeEventResponseList ||
+          data.homeEventResponseList.length === 0 ? (
           <Flex justify="center" align="center" style={{ minHeight: "300px" }}>
             <Text typography="body1_r_16" color="neutral-70">
               최근 본 행사가 없습니다.
@@ -100,11 +102,7 @@ export default function RecentEvent() {
         )}
       </div>
 
-      <Flex
-        align="center"
-        justify="space-between"
-        className={styles.bottomRow}
-      >
+      <Flex align="center" justify="space-between" className={styles.bottomRow}>
         <Flex align="center" gap="1.25rem">
           <button
             type="button"
@@ -122,10 +120,6 @@ export default function RecentEvent() {
           >
             <ChevronRightIcon color="#fff" />
           </button>
-        </Flex>
-
-        <Flex justify="center">
-          <button className={styles.moreBtn}>최근 본 행사 더보기</button>
         </Flex>
       </Flex>
     </Flex>

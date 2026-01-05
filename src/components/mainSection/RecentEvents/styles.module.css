@@ -32,17 +32,6 @@
   stroke: var(--Common-white);
 }
 
-.moreBtn {
-  font-size: 1rem;
-  color: var(--Neutral-60);
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--Neutral-60);
-  padding-bottom: 0.125rem;
-  line-height: 1.4;
-  cursor: pointer;
-}
-
 .carouselWrapper {
   overflow-x: clip;
   overflow-y: visible;
