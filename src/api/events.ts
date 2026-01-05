@@ -82,22 +82,15 @@ export const getRecommendedEvents = async (category: EventCategory) => {
 };
 
 // 행사 검색
-// TODO: 백엔드 API를 GET → POST로 변경 필요
-// 현재: GET /events/search/home?request.searchString=...&request.sort=...
-// 변경 후: POST /events/search/home with body { searchString, sort, ... }
-// 백엔드 변경 후 아래 코드를 다음과 같이 수정:
-// const response = await instance.post("/events/search/home", searchParams);
-export const searchEvents = async (searchParams: EventSearchRequest) => {
-  // params를 평탄화하여 전송 (request.searchString, request.sort 형태로)
-  const flatParams: Record<string, string | number | boolean> = {};
-  Object.entries(searchParams).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      flatParams[`request.${key}`] = value;
-    }
-  });
+export const searchEvents = async (
+  searchParams: EventSearchRequest
+): Promise<EventListResponse> => {
+  const response = await instance.post("/events/search/home", searchParams);
+  return response.data.data;
+};
 
-  const response = await instance.get("/events/search/home", {
-    params: flatParams,
-  });
+// 행사 북마크 토글
+export const toggleEventBookmark = async (eventId: number) => {
+  const response = await tokenInstance.patch(`/events/${eventId}/bookmarked`);
   return response.data.data;
 };

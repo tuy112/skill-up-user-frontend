@@ -15,6 +15,7 @@ import Button from "@/components/common/Button";
 import Flex from "@/components/common/Flex";
 import { Event } from "@/types/event";
 import { EVENT_CATEGORY_LABEL } from "@/constants/event";
+import { useToggleEventBookmark } from "@/hooks/useEventDetail";
 
 interface EventCardProps {
   size: "small" | "medium" | "large" | "block";
@@ -42,10 +43,22 @@ export default function EventCard({
   } = event;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const router = useRouter();
+  const { mutate: toggleBookmark, isPending } = useToggleEventBookmark();
+
   const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // 낙관적 업데이트 (즉시 UI 변경)
     setIsBookmarked(!isBookmarked);
+
+    // API 호출
+    toggleBookmark(id, {
+      onError: () => {
+        // 에러 발생 시 원래 상태로 되돌림
+        setIsBookmarked(isBookmarked);
+      },
+    });
   };
 
   // 이미지 URL이 없으면 placeholder 사용
