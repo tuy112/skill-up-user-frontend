@@ -10,12 +10,15 @@ import ChevronLeftIcon from "@/assets/icons/ChevronLeftIcon";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import CloseIcon from "@/assets/icons/CloseIcon";
 import { useRecentSearches } from "@/hooks/useRecentSearches";
+import DeleteIcon from "@/assets/icons/DeleteIcon";
 
 interface SearchModalContentProps {
   onClose: () => void;
 }
 
-export default function SearchModalContent({ onClose }: SearchModalContentProps) {
+export default function SearchModalContent({
+  onClose,
+}: SearchModalContentProps) {
   const [inputValue, setInputValue] = useState("");
   const { searches, addSearch, removeSearch, clearAll } = useRecentSearches();
   const router = useRouter();
@@ -48,12 +51,18 @@ export default function SearchModalContent({ onClose }: SearchModalContentProps)
       className={styles.searchModalContent}
     >
       <Flex direction="column" gap={0.75} block>
-        <Flex align="center" gap={0.25}>
-          <ChevronLeftIcon />
-          <Text typography="head4_sb_20" color="black">
-            어떤 행사를 찾아볼까요?
-          </Text>
+        <Flex justify="space-between">
+          <Flex align="center" gap={0.25}>
+            <ChevronLeftIcon />
+            <Text typography="head4_sb_20" color="black">
+              어떤 행사를 찾아볼까요?
+            </Text>
+          </Flex>
+          <button type="button" onClick={onClose}>
+            <DeleteIcon />
+          </button>
         </Flex>
+
         <form onSubmit={handleSearch} style={{ width: "100%" }}>
           <Flex gap={0.75} className={styles.searchModalContentInput}>
             <input
