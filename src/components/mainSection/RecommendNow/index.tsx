@@ -13,13 +13,21 @@ import ChevronRightIcon from "@/assets/icons/ChevronRightIcon";
 import Text from "@/components/common/Text";
 import { useFeaturedEvents } from "@/hooks/useHome";
 import { Event } from "@/types/event";
+import {
+  JobCategory,
+  JOB_CATEGORY,
+  JOB_CATEGORY_TABS,
+  getJobCategoryByLabel,
+} from "@/constants/category";
 
 export default function RecommendNow() {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [selectedTab, setSelectedTab] = useState<string>("전체");
+  const [selectedCategory, setSelectedCategory] = useState<JobCategory>(
+    JOB_CATEGORY.ALL
+  );
 
   // API 데이터 가져오기
-  const { data, isLoading, error } = useFeaturedEvents(selectedTab);
+  const { data, isLoading, error } = useFeaturedEvents(selectedCategory);
 
   const getCardWidth = () => {
     if (!carouselRef.current) return 0;
@@ -71,10 +79,11 @@ export default function RecommendNow() {
           </Flex>
 
           <TabMenu
-            tabs={["전체", "기획", "디자인", "개발", "AI"]}
+            tabs={JOB_CATEGORY_TABS}
             defaultIndex={0}
             onChange={(selected: string) => {
-              setSelectedTab(selected);
+              const category = getJobCategoryByLabel(selected);
+              setSelectedCategory(category);
             }}
             theme="light"
           />

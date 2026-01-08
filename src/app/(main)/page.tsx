@@ -11,6 +11,7 @@ import {
   getBanners,
 } from "@/api/home";
 import { EVENT_CATEGORY } from "@/constants/event";
+import { JOB_CATEGORY } from "@/constants/category";
 import MainVisual from "@/components/mainSection/MainVisual";
 import RecommendNow from "@/components/mainSection/RecommendNow";
 import RecommendInterest from "@/components/mainSection/RecommendInterest";
@@ -37,8 +38,12 @@ export default async function Home() {
 
     // 인기/추천 행사 (지금 주목받고 있어요) - 전체 탭만 prefetch
     queryClient.prefetchQuery({
-      queryKey: ["home", "featured", { tab: "전체", size: undefined }],
-      queryFn: () => getFeaturedEvents("전체"),
+      queryKey: [
+        "home",
+        "featured",
+        { category: JOB_CATEGORY.ALL, size: undefined },
+      ],
+      queryFn: () => getFeaturedEvents(JOB_CATEGORY.ALL),
     }),
 
     // 곧 종료되는 행사 (신청 마감 행사)
@@ -77,8 +82,7 @@ export default async function Home() {
     // 추천 아티클
     queryClient.prefetchQuery({
       queryKey: ["home", "recommendedArticles", { tab: ARTICLE_TAB.ALL }],
-      queryFn: () =>
-        getArticleList(ARTICLE_TAB.ALL as unknown as typeof ARTICLE_TAB),
+      queryFn: () => getArticleList(JOB_CATEGORY.ALL),
     }),
   ]);
 

@@ -3,6 +3,7 @@
 import instance from "./instance";
 import tokenInstance from "./tokenInstance";
 import { EventCategory } from "@/constants/event";
+import { JobCategory } from "@/constants/category";
 import { BannersResponse } from "@/types/home";
 
 // 해시태그 기반 추천
@@ -19,10 +20,13 @@ export const getRecentEvents = async (isAuthenticated: boolean) => {
 };
 
 // 추천/인기 행사 리스트
-export const getFeaturedEvents = async (tab?: string, size?: number) => {
+export const getFeaturedEvents = async (
+  category?: JobCategory,
+  size?: number
+) => {
   const response = await instance.get("/events/home/featured", {
     params: {
-      ...(tab && { tab }),
+      ...(category && { category }),
       ...(size !== undefined && { size }),
     },
   });

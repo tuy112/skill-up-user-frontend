@@ -1,7 +1,7 @@
 // src/api/article.ts
 
 import instance from "./instance";
-import { ARTICLE_TAB } from "@/constants/article";
+import { JobCategory } from "@/constants/category";
 
 // UI 역할명을 API 역할명으로 변환하는 맵
 const ROLE_TO_API_MAP: Record<string, string> = {
@@ -12,7 +12,7 @@ const ROLE_TO_API_MAP: Record<string, string> = {
 };
 
 // 아티클 목록 조회 API (홈화면)
-export const getArticleList = async (tab?: typeof ARTICLE_TAB) => {
+export const getArticleList = async (tab?: JobCategory) => {
   const response = await instance.get("/articles", {
     params: {
       ...(tab && { tab }),

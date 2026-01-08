@@ -2,10 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getArticleList, searchArticles } from "@/api/article";
-import { ARTICLE_TAB } from "@/constants/article";
+import { JobCategory } from "@/constants/category";
 
 // 홈화면 추천 아티클 목록 조회
-export const useRecommendedArticles = (tab?: typeof ARTICLE_TAB) => {
+export const useRecommendedArticles = (tab?: JobCategory) => {
   return useQuery({
     queryKey: ["home", "recommendedArticles", tab],
     queryFn: () => getArticleList(tab),

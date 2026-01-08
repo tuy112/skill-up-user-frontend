@@ -10,6 +10,7 @@ import {
   getBanners,
 } from "@/api/home";
 import { EventCategory, EVENT_CATEGORY } from "@/constants/event";
+import { JobCategory } from "@/constants/category";
 import { useAuth } from "./useAuth";
 
 // 해시태그 기반 추천 행사
@@ -38,13 +39,13 @@ export const useRecentEvents = (enabled = true) => {
 
 // 추천/인기 행사 리스트
 export const useFeaturedEvents = (
-  tab?: string,
+  category?: JobCategory,
   size?: number,
   enabled = true
 ) => {
   return useQuery({
-    queryKey: ["home", "featured", { tab, size }],
-    queryFn: () => getFeaturedEvents(tab, size),
+    queryKey: ["home", "featured", { category, size }],
+    queryFn: () => getFeaturedEvents(category, size),
     staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
     enabled,
   });
