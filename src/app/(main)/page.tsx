@@ -57,9 +57,15 @@ export default async function Home() {
       queryKey: [
         "home",
         "category",
-        { category: EVENT_CATEGORY.BOOTCAMP_CLUB, size: 8, page: 1 },
+        {
+          category: EVENT_CATEGORY.BOOTCAMP_CLUB,
+          tab: JOB_CATEGORY.ALL,
+          size: 8,
+          page: 1,
+        },
       ],
-      queryFn: () => getCategoryEvents(EVENT_CATEGORY.BOOTCAMP_CLUB, 8, 1),
+      queryFn: () =>
+        getCategoryEvents(EVENT_CATEGORY.BOOTCAMP_CLUB, JOB_CATEGORY.ALL, 8, 1),
     }),
 
     // 동아리·해커톤·공모전 카테고리
@@ -67,10 +73,20 @@ export default async function Home() {
       queryKey: [
         "home",
         "category",
-        { category: EVENT_CATEGORY.COMPETITION_HACKATHON, size: 8, page: 1 },
+        {
+          category: EVENT_CATEGORY.COMPETITION_HACKATHON,
+          tab: undefined,
+          size: 8,
+          page: 0,
+        },
       ],
       queryFn: () =>
-        getCategoryEvents(EVENT_CATEGORY.COMPETITION_HACKATHON, 8, 1),
+        getCategoryEvents(
+          EVENT_CATEGORY.COMPETITION_HACKATHON,
+          undefined,
+          8,
+          0
+        ),
     }),
 
     // 배너

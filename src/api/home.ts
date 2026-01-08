@@ -46,12 +46,14 @@ export const getEndingSoonEvents = async (size?: number) => {
 // 카테고리별 홈 리스트
 export const getCategoryEvents = async (
   category?: Exclude<EventCategory, "ARTICLE">,
+  tab?: JobCategory,
   size?: number,
   page?: number
 ) => {
   const response = await instance.get("/events/home/category", {
     params: {
       ...(category && { category }),
+      ...(tab !== undefined && { tab }),
       ...(size !== undefined && { size }),
       ...(page !== undefined && { page }),
     },

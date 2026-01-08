@@ -9,11 +9,22 @@ import Text from "@/components/common/Text";
 import { useCategoryEvents } from "@/hooks/useHome";
 import { EVENT_CATEGORY } from "@/constants/event";
 import { Event } from "@/types/event";
-
+import {
+  JOB_CATEGORY,
+  JOB_CATEGORY_TABS,
+  getJobCategoryByLabel,
+  getJobCategoryLabel,
+} from "@/constants/category";
+import { useState } from "react";
+import { JobCategory } from "@/constants/category";
 export default function Bootcamp() {
+  const [selectedCategory, setSelectedCategory] = useState<JobCategory>(
+    JOB_CATEGORY.ALL
+  );
   // API 데이터 가져오기 (부트캠프 카테고리, 4개)
   const { data, isLoading, error } = useCategoryEvents(
     EVENT_CATEGORY.BOOTCAMP_CLUB,
+    selectedCategory,
     4,
     1
   );
@@ -41,9 +52,14 @@ export default function Bootcamp() {
           </Flex>
 
           <TabMenu
-            tabs={["전체", "기획", "디자인", "개발", "AI"]}
-            defaultIndex={0}
-            onChange={() => {}}
+            tabs={JOB_CATEGORY_TABS}
+            defaultIndex={JOB_CATEGORY_TABS.indexOf(
+              getJobCategoryLabel(selectedCategory)
+            )}
+            onChange={(selected: string) => {
+              const category = getJobCategoryByLabel(selected);
+              setSelectedCategory(category);
+            }}
             theme="dark"
           />
         </Flex>

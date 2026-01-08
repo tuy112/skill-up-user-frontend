@@ -64,15 +64,17 @@ export const useEndingSoonEvents = (size?: number) => {
 // 카테고리별 홈 리스트
 export const useCategoryEvents = (
   category?: EventCategory,
+  tab?: JobCategory,
   size?: number,
   page?: number,
   enabled = true
 ) => {
   return useQuery({
-    queryKey: ["home", "category", { category, size, page }],
+    queryKey: ["home", "category", { category, tab, size, page }],
     queryFn: () =>
       getCategoryEvents(
         category as Exclude<EventCategory, typeof EVENT_CATEGORY.ARTICLE>,
+        tab,
         size,
         page
       ),
