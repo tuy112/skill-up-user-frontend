@@ -9,16 +9,20 @@ import Text from "@/components/common/Text";
 import { useCategoryEvents } from "@/hooks/useHome";
 import { EVENT_CATEGORY } from "@/constants/event";
 import { Event } from "@/types/event";
+import { useRouter } from "next/navigation";
+import LoginImage from "@/assets/images/loginImg.png";
 
 export default function Club() {
+  const router = useRouter();
   const trackRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
 
   // API 데이터 가져오기 (동아리·해커톤·공모전 카테고리, 8개)
   const { data, isLoading, error } = useCategoryEvents(
     EVENT_CATEGORY.COMPETITION_HACKATHON,
+    undefined,
     8,
-    1
+    0
   );
 
   // 무한 캐러셀을 위해 카드를 3번 복제
@@ -49,20 +53,20 @@ export default function Club() {
       // 오른쪽 끝에 도달하면 중간으로 순간이동
       if (scrollLeft >= oneSetWidth * 1.9) {
         setIsScrolling(true);
-        el.style.scrollBehavior = "auto"; // 부드러운 전환 끄기
+        el.style.scrollBehavior = "auto";
         el.scrollLeft = oneSetWidth;
         setTimeout(() => {
-          el.style.scrollBehavior = "smooth"; // 다시 켜기
+          el.style.scrollBehavior = "smooth";
           setIsScrolling(false);
         }, 50);
       }
       // 왼쪽 끝에 도달하면 중간으로 순간이동
       else if (scrollLeft <= oneSetWidth * 0.1) {
         setIsScrolling(true);
-        el.style.scrollBehavior = "auto"; // 부드러운 전환 끄기
+        el.style.scrollBehavior = "auto";
         el.scrollLeft = oneSetWidth;
         setTimeout(() => {
-          el.style.scrollBehavior = "smooth"; // 다시 켜기
+          el.style.scrollBehavior = "smooth";
           setIsScrolling(false);
         }, 50);
       }
@@ -153,16 +157,26 @@ export default function Club() {
           <Flex gap="1.5rem" className={styles.track} as="div">
             <div ref={trackRef} className={styles.trackInner}>
               {cards.map((event: Event, idx) => (
-                <article key={`${event.id}-${idx}`} className={styles.card}>
+                <article
+                  key={`${event.id}-${idx}`}
+                  className={styles.card}
+                  onClick={() => router.push(`/hackathon/${event.id}`)}
+                >
                   <div
                     className={styles.thumb}
                     style={{
-                      backgroundImage: `url(${event.thumbnailUrl})`,
+                      backgroundImage: `url(${
+                        event.thumbnailUrl || LoginImage.src.toString()
+                      })`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   />
-                  <Flex align="flex-end" gap="0.75rem" className={styles.overlay}>
+                  <Flex
+                    align="flex-end"
+                    gap="0.75rem"
+                    className={styles.overlay}
+                  >
                     <Flex
                       direction="column"
                       gap="0.375rem"
