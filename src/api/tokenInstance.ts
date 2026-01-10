@@ -40,8 +40,10 @@ tokenInstance.interceptors.response.use(
       const store = getDefaultStore();
       store.set(tokenAtom, null);
 
-      // 메인 페이지로 리다이렉트
-      window.location.href = "/";
+      // 이벤트 발생 (AuthEventListener가 감지하여 라우팅 처리)
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+      }
     }
 
     return Promise.reject(error);
